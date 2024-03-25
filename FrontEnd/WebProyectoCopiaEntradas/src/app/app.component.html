@@ -1,1 +1,5 @@
-<app-auth-button></app-auth-button>
+@if (usuario) {
+<h1>¡Hola, {{usuario.name}}!</h1>
+} @else {
+<h1>No has iniciado sesión</h1>
+}
