@@ -3,7 +3,7 @@
         'name' => 'symfony/skeleton',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '54f44a5c7ec88df7c5df7a403be91cb5493d1e48',
+        'reference' => '8f7b5f19d787606e582013da1056721fca419b3f',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -1085,6 +1085,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'symfony/scheduler' => array(
+            'pretty_version' => 'v6.4.4',
+            'version' => '6.4.4.0',
+            'reference' => '3aeb5042ab9d57a4e099702fac66599341a76276',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/scheduler',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'symfony/security-bundle' => array(
             'pretty_version' => 'v6.4.5',
             'version' => '6.4.5.0',
@@ -1148,7 +1157,7 @@
         'symfony/skeleton' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '54f44a5c7ec88df7c5df7a403be91cb5493d1e48',
+            'reference' => '8f7b5f19d787606e582013da1056721fca419b3f',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
