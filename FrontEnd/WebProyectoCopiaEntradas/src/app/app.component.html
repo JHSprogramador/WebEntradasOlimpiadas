@@ -1,8 +1,5 @@
-@if (auth.isAuthenticated$ | async) {
-<ul *ngIf="auth.user$ | async as user">
-    <li>{{ user.name }}</li>
-    <li>{{ user.email }}</li>
-</ul>
-} @else {
-<h1>No has iniciado sesión</h1>
-}
+<ng-container *ngIf="auth.isAuthenticated$ | async;">
+    <button (click)="auth.logout()">
+        Log out
+    </button>
+</ng-container>

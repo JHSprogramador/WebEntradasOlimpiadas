@@ -12,17 +12,19 @@ import { AuthService, User } from '@auth0/auth0-angular';
 })
 export class AppComponent {
   isLogged = false;
-  usuario: User | null = null;
+  user: User | null = null;
+
   constructor(public auth: AuthService) {
-    this.openLoginPage();
+    this.initialize();
+  }
 
-    this.auth.user$.subscribe((user) => {
-      this.usuario = user !== undefined ? user : null;
-      this.isLogged = user ? true : false;
-    });
-  };
+  async initialize() {
+    if (!(await this.auth.isAuthenticated$)) {
+      this.openLoginPage();
+    }
+  }
 
-  openLoginPage() {
+  async openLoginPage() {
     this.auth.loginWithRedirect();
   }
 }
