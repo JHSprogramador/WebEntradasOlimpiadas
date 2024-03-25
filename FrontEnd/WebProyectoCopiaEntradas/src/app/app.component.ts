@@ -11,20 +11,5 @@ import { AuthService, User } from '@auth0/auth0-angular';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  isLogged = false;
-  user: User | null = null;
-
-  constructor(public auth: AuthService) {
-    this.initialize();
-  }
-
-  async initialize() {
-    if (!(await this.auth.isAuthenticated$)) {
-      this.openLoginPage();
-    }
-  }
-
-  async openLoginPage() {
-    this.auth.loginWithRedirect();
-  }
+  constructor(public auth: AuthService) {}
 }
