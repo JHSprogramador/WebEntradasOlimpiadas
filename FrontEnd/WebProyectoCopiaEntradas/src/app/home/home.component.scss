@@ -1,0 +1,36 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+$text-color: white;
+$primary-color: #007bff;
+$secondary-color: #ffc107;
+
+body {
+  font-family: sans-serif;
+}
+
+h1, h2 {
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1024px;
+}
+
+.my-4 {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+header {
+  background: linear-gradient(to right, $primary-color, $secondary-color);
+  color: $text-color;
+  padding: 1rem;
+}
+
+footer {
+  background-color: #f8f9fa;
+  text-align: center;
+  padding: 1rem;
+}
