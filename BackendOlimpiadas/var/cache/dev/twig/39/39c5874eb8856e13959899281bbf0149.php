@@ -214,6 +214,6 @@ class __TwigTemplate_3bba9bf498240acda51b8030731c35d7 extends Template
         {% block body %}{% endblock %}
     </body>
 </html>
-", "base.html.twig", "C:\\proyectoWEB\\WebEntradasOlimpiadas\\Backend\\templates\\base.html.twig");
+", "base.html.twig", "C:\\proyectoWEB\\WebEntradasOlimpiadas\\BackendOlimpiadas\\templates\\base.html.twig");
     }
 }
