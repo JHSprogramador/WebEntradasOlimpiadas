@@ -1,6 +1,9 @@
 <?php
 
 namespace EventDispatchers\Events;
+
+use App\Entity\Usuario;
+use App\Entity\UsuariosMeses;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class DemoEvent extends Event
@@ -15,8 +18,15 @@ class DemoEvent extends Event
     {
         return $this->foo;
     }
-    public function doSorteo(){
-            //Logiga del sorteo
-            
-    }
+    public function doSorteo(Usuario $usuarios){
+        $usuarioMeses = [];
+        $usuarioMes = new UsuariosMeses;
+        $len = count(array($usuarios));
+        $maxUsersWeek = $len / 4;
+        foreach ($usuarios as $usuario) {
+        
+        }
+        return $usuarioMeses;
+
+           }
 }
