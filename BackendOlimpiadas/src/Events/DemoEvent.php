@@ -17,6 +17,6 @@ class DemoEvent extends Event
     }
     public function doSorteo(){
             //Logiga del sorteo
-
+            
     }
 }
