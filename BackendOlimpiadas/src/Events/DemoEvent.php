@@ -5,7 +5,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class DemoEvent extends Event
 {
-    const NAME = 'demo.event';
+    public const NAME = 'demo.event';
     protected $foo;
     public function __construct()
     {
