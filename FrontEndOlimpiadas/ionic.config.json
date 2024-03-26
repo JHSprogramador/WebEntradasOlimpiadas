@@ -1,0 +1,7 @@
+{
+  "name": "WebEntradasOlimpiadas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
