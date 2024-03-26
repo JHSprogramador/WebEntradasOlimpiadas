@@ -15,4 +15,8 @@ class DemoEvent extends Event
     {
         return $this->foo;
     }
+    public function doSorteo(){
+            //Logiga del sorteo
+
+    }
 }
