@@ -130,7 +130,6 @@ class ComposerStaticInitb222cfc02c1556a0101cd34314af439d
         ),
         'E' => 
         array (
-            'EventDispatchers\\' => 17,
             'Egulias\\EmailValidator\\' => 23,
         ),
         'D' => 
@@ -509,10 +508,6 @@ class ComposerStaticInitb222cfc02c1556a0101cd34314af439d
         'Masterminds\\' => 
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
-        ),
-        'EventDispatchers\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
         ),
         'Egulias\\EmailValidator\\' => 
         array (

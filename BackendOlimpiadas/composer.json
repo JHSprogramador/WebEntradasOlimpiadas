@@ -61,10 +61,9 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
-            "EventDispatchers\\": "src"
-        },
-        "classmap": ["src"]
+            "App\\": "src/"
+        }
+        
     },
     "autoload-dev": {
         "psr-4": {
