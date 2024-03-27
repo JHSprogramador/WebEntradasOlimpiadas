@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonNav, IonButton } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Tab3Page } from '../tab3/tab3.page';
+import { AuthButtonComponent } from '../auth-button/auth-button.component';
 
 
 
@@ -10,7 +11,7 @@ import { Tab3Page } from '../tab3/tab3.page';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, IonNav, IonButton]
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, IonNav, IonButton, AuthButtonComponent]
 })
 export class Tab1Page {
   constructor() {}

@@ -2,7 +2,7 @@ import { enableProdMode } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
-
+import { provideAuth0 } from '@auth0/auth0-angular';
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
@@ -16,6 +16,14 @@ bootstrapApplication(AppComponent, {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes),
+    provideAuth0({
+      domain: 'dev-vmmc04zcoyxqm1c2.us.auth0.com',
+      clientId: 'blklvfY1Px003rJTtFWnSAHH6ZQ6ruCK',
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+
+    })
   ],
 });
 
