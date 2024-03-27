@@ -12,7 +12,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 })
 export class AuthButtonComponent  implements OnInit {
 
-  constructor(public auth: AuthService, @Inject(DOCUMENT) public document: Document) { }
+  constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) { }
 
   ngOnInit() {}
 

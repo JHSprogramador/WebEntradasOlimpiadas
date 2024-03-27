@@ -1,26 +1,108 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="false">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Tab 1</ion-title>
     </ion-toolbar>
   </ion-header>
   <app-explore-container name=""></app-explore-container>
-  <ion-row></ion-row>
-  <h1>Bienvenido a los juego olimpicos de Paris 2024</h1>
-  
-  <h3>Descripccion de el sorteo</h3>
-  <p>Para realizar la compra de entradas, por favor inicie sesion</p>
-  <p>
-    El sorteo de el palazo de compra de las entradas re realizara de la
-    siguiente manera.
-  </p>
-  <p>
-    Al iniciar sesion a ustes se le asignaran 2 semanas una en marzo y otra en
-    abril, si a usted por ejemplo e ha tocado la primara semana de marzo y la
-    primera de abril, usted podra comprar las entras en esas fechas, si por lo
-    que sea no pudo realizar en la primra fecha que se le asigno tendra otra
-    oprtunidad en esa segunda fecha.
-  </p>
-  <p>¡BUENA SUERTE!</p>
-  <app-auth-button></app-auth-button>
+
+  <div class="container-fluid">
+    <div
+      class="row justify-content-center align-items-center pb-5"
+      style="height: 100vh"
+    >
+      <div class="col-6 text-center">
+        <div>
+          <img src="../../assets/logo.png" alt="juegos olimpicos" />
+          <p>Bienvenidos a los Juegos Olimpicos Paris 2024</p>
+        </div>
+        <app-auth-button></app-auth-button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="container-fluid " >
+      <div
+        class="row justify-content-center align-items-center pb-5"
+        style="height: 100vh"
+      >
+        <div class="col-6 text-center mb-5">
+          <div>
+            <h2>Pasos del Sorteo</h2>
+            <ion-row>
+              <ion-col size="6">
+                <div class="card mt-4" style="width: 18rem">
+                  <div class="card-body">
+                    <h4 class="card-title">Paso 1</h4>
+                    <h5>periodo de compra</h5>
+                    <p class="card-text">
+                      Logeate en la aplicación par apoder entrar al sorteo de compra de entradas
+                    </p>
+                  </div>
+                </div></ion-col>
+              <ion-col size="6"></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6"></ion-col>
+              <ion-col size="6">
+                <div class="card" style="width: 18rem">
+                  <div class="card-body">
+                    <h4 class="card-title">Paso 2</h4>
+                    <h5>periodo de compra</h5>
+                    <p class="card-text">
+                      El sorteo te habra mandado a tu correo 2 fechas una en el mes de marzo y otra en el mes de abril 
+                    </p>
+                  </div>
+                </div></ion-col>
+              <ion-row>
+                <ion-col size="6">
+                  <div class="card" style="width: 18rem">
+                    <div class="card-body">
+                      <h4 class="card-title">Paso 3</h4>
+                      <h5>periodo de compra</h5>
+                      <p class="card-text">
+                        En esas fechas que te has llegao al correo son las fechan en las que podras comprar las entradas
+                      </p>
+                    </div>
+                  </div></ion-col>
+                <ion-col size="6"></ion-col>
+              </ion-row>
+
+              
+              
+            </ion-row>
+            <ion-row>
+              <ion-col size="6"></ion-col>
+              <ion-col size="6">
+                <div class="card" style="width: 18rem">
+                  <div class="card-body">
+                    <h4 class="card-title">Paso 3</h4>
+                    <h5>periodo de compra</h5>
+                    <p class="card-text">
+                      En esas fechas que te has llegao al correo son las fechan en las que podras comprar las entradas
+                    </p>
+                  </div>
+                </div></ion-col>
+              
+            </ion-row>
+            <ion-row>
+              
+              <ion-col size="6">
+                <div class="card mb-5" style="width: 18rem">
+                  <div class="card-body">
+                    <h4 class="card-title">Paso 3</h4>
+                    <h5>periodo de compra</h5>
+                    <p class="card-text">
+                      En esas fechas que te has llegao al correo son las fechan en las que podras comprar las entradas
+                    </p>
+                  </div>
+                </div></ion-col>
+                <ion-col size="6"></ion-col>
+              
+            </ion-row>
+          </div>
+        </div>
+      </div>
+    </div >
+</div>
 </ion-content>
