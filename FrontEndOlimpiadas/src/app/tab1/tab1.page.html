@@ -9,33 +9,25 @@
   <div class="container-fluid">
     <div class="row justify-content-center align-items-center pb-5" style="height: 100vh;">
       <div class="col-6 text-center">
-        <div >
+        <div>
           <img src="../../assets/logo.png" alt="juegos olimpicos">
           <p>Bienvenidos a los Juegos Olimpicos Paris 2024</p>
         </div>
-        @if(auth.user$){
-          <h1></h1>
-        } @else {
-          <button type="button" (click)="auth.loginWithRedirect()" class="btn btn-primary">Entra al sorteo!</button>
-        }
+        <app-auth-button></app-auth-button>
       </div>
     </div>
   </div>
-  <div><h1>Juegos Olimpicos Paris 2024</h1></div>
-  
-  
-  <p>Para realizar la compra de entradas, por favor inicie sesion</p>
+  <div>
+    <h1>Juegos Olimpicos Paris 2024</h1>
+  </div>
+  <p>Para comprar tus entradas, inicia sesión.</p>
   <p>
-    El sorteo de el palazo de compra de las entradas re realizara de la
-    siguiente manera.
+    El proceso de selección del premio mayor para la compra de boletos se realizará así:
   </p>
   <p>
-    Al iniciar sesion a ustes se le asignaran 2 semanas una en marzo y otra en
-    abril, si a usted por ejemplo e ha tocado la primara semana de marzo y la
-    primera de abril, usted podra comprar las entras en esas fechas, si por lo
-    que sea no pudo realizar en la primra fecha que se le asigno tendra otra
-    oprtunidad en esa segunda fecha.
+    Al iniciar sesión, se te asignarán dos períodos, uno en marzo y otro en abril. Por ejemplo, si te toca la primera
+    semana de marzo y la primera de abril, podrás comprar durante esas fechas. Si no puedes hacerlo en la primera fecha
+    asignada, tendrás otra oportunidad en la segunda fecha.
   </p>
-  <p>¡BUENA SUERTE!</p>
-  <app-auth-button></app-auth-button>
+  <p>¡Buena suerte!</p>
 </ion-content>
