@@ -7,16 +7,21 @@
   <app-explore-container name=""></app-explore-container>
 
   <div class="container-fluid">
-    <div class="row justify-content-center align-items-center" style="height: 100vh;">
+    <div class="row justify-content-center align-items-center pb-5" style="height: 100vh;">
       <div class="col-6 text-center">
-        <div class="">
-          <h1>¡Div centrado en la pantalla!</h1>
-          <p>Este div está centrado vertical y horizontalmente en la pantalla.</p>
+        <div >
+          <img src="../../assets/logo.png" alt="juegos olimpicos">
+          <p>Bienvenidos a los Juegos Olimpicos Paris 2024</p>
         </div>
+        @if(auth.user$){
+          <h1></h1>
+        } @else {
+          <button type="button" (click)="auth.loginWithRedirect()" class="btn btn-primary">Entra al sorteo!</button>
+        }
       </div>
     </div>
   </div>
-  <div class=""><h1>Juegos Olimpicos Paris 2024</h1></div>
+  <div><h1>Juegos Olimpicos Paris 2024</h1></div>
   
   
   <p>Para realizar la compra de entradas, por favor inicie sesion</p>
