@@ -1,7 +1,7 @@
 import { AuthService } from '@auth0/auth0-angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { IonButton } from '@ionic/angular/standalone';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-auth-button',
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AuthButtonComponent  implements OnInit {
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService, @Inject(DOCUMENT) public document: Document) { }
 
   ngOnInit() {}
 
