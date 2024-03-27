@@ -1,9 +1,9 @@
 <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-  <button (click)="auth.logout({ logoutParams: { returnTo: document.location.origin } })">
+  <ion-button (click)="auth.logout({ logoutParams: { returnTo: document.location.origin } })">
     Log out
-  </button>
+  </ion-button>
 </ng-container>
 
 <ng-template #loggedOut>
-  <button (click)="auth.loginWithRedirect()">Log in</button>
+  <ion-button (click)="auth.loginWithRedirect()">Log in</ion-button>
 </ng-template>
