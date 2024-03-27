@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita0e1177b02ebf14987ae329b665730e8
+class ComposerStaticInitdc181f678ec87f3cf26bebf756aaaa9f
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -545,9 +545,13 @@ class ComposerStaticInita0e1177b02ebf14987ae329b665730e8
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
-        'EventDispatchers\\' => 
+        'League\\MimeTypeDetection\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/..' . '/league/mime-type-detection/src',
+        ),
+        'League\\Flysystem\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/flysystem/src',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
@@ -636,7 +640,6 @@ class ComposerStaticInita0e1177b02ebf14987ae329b665730e8
     );
 
     public static $classMap = array (
-        'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
         'Collator' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/Resources/stubs/Collator.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
@@ -1283,16 +1286,16 @@ class ComposerStaticInita0e1177b02ebf14987ae329b665730e8
         'TheSeer\\Tokenizer\\TokenCollectionException' => __DIR__ . '/..' . '/theseer/tokenizer/src/TokenCollectionException.php',
         'TheSeer\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/theseer/tokenizer/src/Tokenizer.php',
         'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
-        'ï¿½' => __DIR__ . '/..' . '/symfony/cache/Traits/ValueWrapper.php',
+        '©' => __DIR__ . '/..' . '/symfony/cache/Traits/ValueWrapper.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita0e1177b02ebf14987ae329b665730e8::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita0e1177b02ebf14987ae329b665730e8::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr0 = ComposerStaticInita0e1177b02ebf14987ae329b665730e8::$fallbackDirsPsr0;
-            $loader->classMap = ComposerStaticInita0e1177b02ebf14987ae329b665730e8::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitdc181f678ec87f3cf26bebf756aaaa9f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitdc181f678ec87f3cf26bebf756aaaa9f::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr0 = ComposerStaticInitdc181f678ec87f3cf26bebf756aaaa9f::$fallbackDirsPsr0;
+            $loader->classMap = ComposerStaticInitdc181f678ec87f3cf26bebf756aaaa9f::$classMap;
 
         }, null, ClassLoader::class);
     }
