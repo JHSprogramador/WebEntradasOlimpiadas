@@ -22,8 +22,9 @@ class DemoEvent extends Event
     
     public function doSorteo(array $usuarios){
         if(date("d")==31 && date("m")==03 && date("Y")==2024){
+            $turnos = 4;
             $len = count($usuarios);
-            $count = $len / 4;
+            $count = $len / $turnos;
             $pos = 0;
             $numeros_repetidos = [];
             for ($i = 0; $i < $count; $i++) {
@@ -36,7 +37,7 @@ class DemoEvent extends Event
                 $nuevoUsuarioMeses = new UsuariosMeses;
                 $nuevoUsuarioMeses->setIdUsuario($usuario->getId());
                 $nuevoUsuarioMeses->setMes1($numeros_repetidos[$pos]);
-                $nuevoUsuarioMeses->setMes2($numeros_repetidos[$pos]);
+                $nuevoUsuarioMeses->setMes2($numeros_repetidos[$pos]+$turnos);
                 array_push($usuarioMeses,$nuevoUsuarioMeses);
                 $pos++;
             }
