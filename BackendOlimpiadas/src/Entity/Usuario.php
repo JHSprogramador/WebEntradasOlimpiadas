@@ -14,7 +14,7 @@ class Usuario
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::BIGINT)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $idAuth0 = null;
 
     #[ORM\Column(length: 255)]

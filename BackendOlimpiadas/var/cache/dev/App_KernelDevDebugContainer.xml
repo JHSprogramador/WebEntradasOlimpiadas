@@ -350,6 +350,12 @@
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
+    <service id="App\Events\DemoEvent" class="App\Events\DemoEvent" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="The autoloader expected class &quot;App\Events\DemoEvent&quot; to be defined in file &quot;C:\Users\hsjua\OneDrive\Escritorio\ProyecctoFinal\WebEntradasOlimpiadas\BackendOlimpiadas\vendor\composer/../../src\Events\DemoEvent.php&quot;. The file was found but the class was not in it, the class name or namespace probably has a typo."/>
+    </service>
+    <service id="App\Listeners\DemoListener" class="App\Listeners\DemoListener" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="The autoloader expected class &quot;App\Listeners\DemoListener&quot; to be defined in file &quot;C:\Users\hsjua\OneDrive\Escritorio\ProyecctoFinal\WebEntradasOlimpiadas\BackendOlimpiadas\vendor\composer/../../src\Listeners\DemoListener.php&quot;. The file was found but the class was not in it, the class name or namespace probably has a typo."/>
+    </service>
     <service id="App\Repository\UsuarioRepository" class="App\Repository\UsuarioRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
