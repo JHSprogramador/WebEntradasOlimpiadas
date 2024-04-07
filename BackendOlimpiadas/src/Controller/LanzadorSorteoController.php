@@ -13,14 +13,20 @@ use App\Entity\UsuariosMeses;
 class LanzadorSorteoController extends AbstractController
 {
     #[Route('/lanzador/sorteo', name: 'get_sorteo', methods: ['GET'])]
-    public function getAll(EntityManagerInterface $entityManager): JsonResponse
+    public function doSorteo(EntityManagerInterface $entityManager): JsonResponse
     {
         $usuariosMesesRepository = $entityManager->getRepository(UsuariosMeses::class);
         $listaUsuarios = $usuariosMesesRepository->findAll();
         
-        $usuariosTratardos = $this->HacerSorteo($listaUsuarios);
+        //if(date("d")==31 && date("m")==03 && date("Y")==2024){
+        $usuariosTratados = $this->HacerSorteo($listaUsuarios);
+        //}
+        foreach ($usuariosTratados as $usuarioTratado) {
+            $entityManager->persist($usuarioTratado);
+        }
+        $entityManager->flush();
 
-        return new JsonResponse(['usuarios_meses_mezclados' => $usuariosTratardos]);
+        return new JsonResponse(['usuarios_meses_mezclados' => $usuariosTratados]);
     }
 
     public function HacerSorteo(array $listaUsuarios): array {
