@@ -12,8 +12,15 @@ import { home, ellipse, person } from 'ionicons/icons';
 })
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
-
+  public isLogued: boolean = true;
   constructor() {
     addIcons({ home, ellipse, person });
   }
+
+  // islogued(event: Event){
+  //   if(!this.isLogued){
+  //     event.preventDefault();
+  //     alert("Debes loaguarte primero para ver tu perfil");
+  //   }
+  // }
 }
