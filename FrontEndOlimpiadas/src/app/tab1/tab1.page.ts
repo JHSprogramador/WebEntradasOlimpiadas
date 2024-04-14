@@ -6,6 +6,7 @@ import { AuthButtonComponent } from '../auth-button/auth-button.component';
 
 
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
