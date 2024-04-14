@@ -11,9 +11,11 @@ import { CommonModule, DOCUMENT } from '@angular/common';
   imports:[IonButton, CommonModule]
 })
 export class AuthButtonComponent  implements OnInit {
+  isAuthenticated$ = this.auth.isAuthenticated$
 
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) { }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit() {}
 
 }
