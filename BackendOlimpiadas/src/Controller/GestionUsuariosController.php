@@ -30,46 +30,36 @@ class GestionUsuariosController extends AbstractController
     // }
 
     
-    #[Route('/Usuario/Register', name: 'register_usuario', methods: ['POST'])]
+    #[Route('/usuario/register', name: 'register_usuario', methods: ['POST'])]
     public function register(EntityManagerInterface $entityManager): JsonResponse
     {
         $data = json_decode(file_get_contents('php://input'), true);
         $usuario = new Usuario();
         $usuario->setIdAuth0($data['idAuth0']);
+        $usuario->setName($data['name']);
+        $usuario->setMail($data['mail']);
+        //comprrueba que el usuario no exista
+        $usuarioExistente = $entityManager->getRepository(Usuario::class)->findOneBy(['idAuth0' => $usuario->getIdAuth0()]);
+        if ($usuarioExistente) {
+            return new JsonResponse(['error' => 'Usuario ya registrado'], 409);
+        }
         $entityManager->persist($usuario);
 
         // Crear una nueva entidad UsuariosMeses y asignarle las semanas
         $usuariosMeses = new UsuariosMeses();
         $usuariosMeses->setIdUsuario($usuario);
-
-        // Obtener todas las entidades UsuariosMeses existentes
-        $allUsuariosMeses = $entityManager->getRepository(UsuariosMeses::class)->findAll();
-
-        // Contar cuántos usuarios hay en cada semana de cada mes
-        $counts = [];
-        for ($i = 1; $i <= 4; $i++) {
-            $counts['mes1'][$i] = 0;
-            $counts['mes2'][$i] = 0;
-        }
-        foreach ($allUsuariosMeses as $um) {
-            $counts['mes1'][$um->getMes1()]++;
-            $counts['mes2'][$um->getMes2()]++;
-        }
-
-        // Asignar las semanas de manera que se minimice el desbalance
-        $semanaMes1 = array_search(min($counts['mes1']), $counts['mes1']);
-        $semanaMes2 = array_search(min($counts['mes2']), $counts['mes2']);
-        $usuariosMeses->setMes1($semanaMes1);
-        $usuariosMeses->setMes2($semanaMes2);
+        
+        $usuariosMeses->setMes1(0);
+        $usuariosMeses->setMes2(0);
         $entityManager->persist($usuariosMeses);
 
         $entityManager->flush();
 
-        return new JsonResponse(['status' => 'Usuario registrado', 'semanaMes1' => $semanaMes1, 'semanaMes2' => $semanaMes2], 201);
+        return new JsonResponse(['status' => 'Usuario registrado'], 201);
     }
 
     //devolvemos al usuario con el id y sus semanas 
-    #[Route('/Usuario/{id}', name: 'get_usuario', methods: ['GET'])]
+    #[Route('/usuario/{id}', name: 'get_usuario', methods: ['GET'])]
     public function getOne(int $id, EntityManagerInterface $entityManager): JsonResponse
     {
         $usuario = $entityManager->getRepository(Usuario::class)->find($id);
