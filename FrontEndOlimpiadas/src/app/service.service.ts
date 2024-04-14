@@ -13,7 +13,7 @@ const apiURL = 'http://localhost:8000';
 export class ServiceService {
   auth0User = this.auth.user$;
   constructor(public auth: AuthService) {
-    this.pushUser();
+   
   }
 
   public pushUser() {
@@ -29,7 +29,7 @@ export class ServiceService {
       })
     });
     $.post(apiURL + "/usuario/register", body, (data: any) => {
-      console.log(data);
+      alert(data);
     });
   }
 }
