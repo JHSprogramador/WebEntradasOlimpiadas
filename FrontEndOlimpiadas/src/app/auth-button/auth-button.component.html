@@ -1,5 +1,12 @@
 <ng-container *ngIf="(auth.user$ | async) !== null; else loggedOut">
-  Aqui el usuario está logueado
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>¡Felicidades!</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Acabas de entrar a un sorteo. Por favor, espera hasta el día <strong>31 de marzo de 2024</strong>.</p>
+    </ion-card-content>
+  </ion-card>
 </ng-container>
 
 <ng-template #loggedOut>
