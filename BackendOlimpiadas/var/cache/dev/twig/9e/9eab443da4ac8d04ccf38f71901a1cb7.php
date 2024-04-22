@@ -252,6 +252,6 @@ class __TwigTemplate_16aee2c86fbfad57203a7d042b3abab5 extends Template
         </div>
     </div>
 {% endblock %}
-", "@WebProfiler/Profiler/toolbar_redirect.html.twig", "C:\\proyectoWEB\\WebEntradasOlimpiadas\\Backend\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\toolbar_redirect.html.twig");
+", "@WebProfiler/Profiler/toolbar_redirect.html.twig", "C:\\proyectoWEB\\WebEntradasOlimpiadas\\BackendOlimpiadas\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\toolbar_redirect.html.twig");
     }
 }

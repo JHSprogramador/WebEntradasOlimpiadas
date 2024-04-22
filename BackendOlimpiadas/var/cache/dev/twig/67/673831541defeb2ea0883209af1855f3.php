@@ -1847,6 +1847,6 @@ class __TwigTemplate_c9963694c0ab6a47437b653a3d123b91 extends Template
         </tbody>
     </table>
 {% endmacro %}
-", "@Doctrine/Collector/db.html.twig", "C:\\proyectoWEB\\WebEntradasOlimpiadas\\Backend\\vendor\\doctrine\\doctrine-bundle\\templates\\Collector\\db.html.twig");
+", "@Doctrine/Collector/db.html.twig", "C:\\proyectoWEB\\WebEntradasOlimpiadas\\BackendOlimpiadas\\vendor\\doctrine\\doctrine-bundle\\templates\\Collector\\db.html.twig");
     }
 }

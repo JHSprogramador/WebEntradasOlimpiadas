@@ -1,0 +1,18 @@
+{
+	"info": {
+		"_postman_id": "f0777a64-a7fc-4c3c-859d-0e3be6a0d4d3",
+		"name": "EntradasOlimpiadas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25768968"
+	},
+	"item": [
+		{
+			"name": "hacer sorteo",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

@@ -361,6 +361,6 @@ class __TwigTemplate_d4b321af80054b385fbc36765a4dc341 extends Template
         </div>
     </form>
 </div>
-", "@WebProfiler/Profiler/search.html.twig", "C:\\proyectoWEB\\WebEntradasOlimpiadas\\Backend\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\search.html.twig");
+", "@WebProfiler/Profiler/search.html.twig", "C:\\proyectoWEB\\WebEntradasOlimpiadas\\BackendOlimpiadas\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\search.html.twig");
     }
 }

@@ -3,6 +3,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonNav, IonButton, IonRow,
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Tab3Page } from '../tab3/tab3.page';
 import { AuthButtonComponent } from '../auth-button/auth-button.component';
+import { ServiceService } from '../service.service';
 
 
 
@@ -15,6 +16,8 @@ import { AuthButtonComponent } from '../auth-button/auth-button.component';
   imports: [IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonGrid, IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, IonNav, IonButton, AuthButtonComponent, IonRow, IonCol]
 })
 export class Tab1Page {
-  constructor() {}
+  constructor() {
+
+  }
   component = Tab3Page;
 }
