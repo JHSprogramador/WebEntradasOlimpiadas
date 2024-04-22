@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Usuario;
 use App\Entity\UsuariosMeses;
 
-
+#[Route('/api', name: 'api')]
 class LanzadorSorteoController extends AbstractController
 {
     #[Route('/lanzador/sorteo', name: 'get_sorteo', methods: ['GET'])]
@@ -18,7 +18,7 @@ class LanzadorSorteoController extends AbstractController
     {
         $usuariosMesesRepository = $entityManager->getRepository(UsuariosMeses::class);
         $listaUsuarios = $usuariosMesesRepository->findAll();
-        
+
         //if(date("d")==31 && date("m")==03 && date("Y")==2024){
         $usuariosTratados = $this->HacerSorteo($listaUsuarios);
         //}
@@ -27,34 +27,35 @@ class LanzadorSorteoController extends AbstractController
         }
         $entityManager->flush();
 
-        return new JsonResponse(['usuarios_meses_mezclados' => $usuariosTratados]);
+        return new JsonResponse(['status' => '200']);
     }
 
-    public function HacerSorteo(array $listaUsuarios): array {
+    public function HacerSorteo(array $listaUsuarios): array
+    {
         // Código del método
         $contador = 0;
         $CantidadPorParte = intval(count($listaUsuarios) / 4);
-        
-       
+
+
         $usuariosMesMezclados1 = $listaUsuarios;
         shuffle($usuariosMesMezclados1);
         //primera parte
-        for($contador; $contador < $CantidadPorParte; $contador ++){
+        for ($contador; $contador < $CantidadPorParte; $contador++) {
             $usuarioATratar = $usuariosMesMezclados1[$contador];
             $usuarioATratar->setMes1(1);
         }
         //segunda parte
-        for($contador; $contador < $CantidadPorParte * 2; $contador ++){
+        for ($contador; $contador < $CantidadPorParte * 2; $contador++) {
             $usuarioATratar = $usuariosMesMezclados1[$contador];
             $usuarioATratar->setMes1(2);
         }
         //tercera parte
-        for($contador; $contador < $CantidadPorParte * 3; $contador ++){
+        for ($contador; $contador < $CantidadPorParte * 3; $contador++) {
             $usuarioATratar = $usuariosMesMezclados1[$contador];
             $usuarioATratar->setMes1(3);
         }
         //cuarta parte
-        for($contador; $contador < count($listaUsuarios); $contador ++){
+        for ($contador; $contador < count($listaUsuarios); $contador++) {
             $usuarioATratar = $usuariosMesMezclados1[$contador];
             $usuarioATratar->setMes1(4);
         }
@@ -64,22 +65,22 @@ class LanzadorSorteoController extends AbstractController
 
         $contador = 0;
         //primera parte para segundo mes
-        for($contador; $contador < $CantidadPorParte; $contador ++){
+        for ($contador; $contador < $CantidadPorParte; $contador++) {
             $usuarioATratar = $usuariosMesMezclados2[$contador];
             $usuarioATratar->setMes2(5);
         }
         //segunda parte para segundo mes
-        for($contador; $contador < $CantidadPorParte * 2; $contador ++){
+        for ($contador; $contador < $CantidadPorParte * 2; $contador++) {
             $usuarioATratar = $usuariosMesMezclados2[$contador];
             $usuarioATratar->setMes2(6);
         }
         //tercera parte para segundo mes
-        for($contador; $contador < $CantidadPorParte * 3; $contador ++){
+        for ($contador; $contador < $CantidadPorParte * 3; $contador++) {
             $usuarioATratar = $usuariosMesMezclados2[$contador];
             $usuarioATratar->setMes2(7);
         }
         //cuarta parte para segundo mes
-        for($contador; $contador < count($listaUsuarios); $contador ++){
+        for ($contador; $contador < count($listaUsuarios); $contador++) {
             $usuarioATratar = $usuariosMesMezclados2[$contador];
             $usuarioATratar->setMes2(8);
         }
