@@ -14,7 +14,9 @@ return [
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/xdebug' => [[['_route' => '_profiler_xdebug', '_controller' => 'web_profiler.controller.profiler::xdebugAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/gestion/entradas' => [[['_route' => 'app_gestion_entradas', '_controller' => 'App\\Controller\\GestionEntradasController::index'], null, null, null, false, false, null]],
         '/usuario/register' => [[['_route' => 'register_usuario', '_controller' => 'App\\Controller\\GestionUsuariosController::register'], null, ['POST' => 0], null, false, false, null]],
+        '/gestion/ventas/compras' => [[['_route' => 'app_gestion_ventas_compras', '_controller' => 'App\\Controller\\GestionVentasComprasController::index'], null, null, null, false, false, null]],
         '/lanzador/sorteo' => [[['_route' => 'get_sorteo', '_controller' => 'App\\Controller\\LanzadorSorteoController::doSorteo'], null, ['GET' => 0], null, false, false, null]],
     ],
     [ // $regexpList
