@@ -17,4 +17,10 @@ return [
     '_profiler_router' => [['token'], ['_controller' => 'web_profiler.controller.router::panelAction'], [], [['text', '/router'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
+    'register_usuario' => [[], ['_controller' => 'App\\Controller\\GestionUsuariosController::register'], [], [['text', '/usuario/register']], [], [], []],
+    'get_usuario' => [['id'], ['_controller' => 'App\\Controller\\GestionUsuariosController::getOne'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/usuario']], [], [], []],
+    'get_sorteo' => [[], ['_controller' => 'App\\Controller\\LanzadorSorteoController::doSorteo'], [], [['text', '/lanzador/sorteo']], [], [], []],
+    'App\Controller\GestionUsuariosController::register' => [[], ['_controller' => 'App\\Controller\\GestionUsuariosController::register'], [], [['text', '/usuario/register']], [], [], []],
+    'App\Controller\GestionUsuariosController::getOne' => [['id'], ['_controller' => 'App\\Controller\\GestionUsuariosController::getOne'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/usuario']], [], [], []],
+    'App\Controller\LanzadorSorteoController::doSorteo' => [[], ['_controller' => 'App\\Controller\\LanzadorSorteoController::doSorteo'], [], [['text', '/lanzador/sorteo']], [], [], []],
 ];
