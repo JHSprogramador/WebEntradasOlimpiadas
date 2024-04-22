@@ -13,6 +13,7 @@ const mydate: string = '2024/03/31';
   standalone: true,
   imports: [CommonModule, IonicModule, EventsComponent],
 })
+
 export class AuthButtonComponent  implements OnInit {
   isAuthenticated$ = this.auth.isAuthenticated$
   service!: ServiceService;
@@ -24,13 +25,9 @@ export class AuthButtonComponent  implements OnInit {
     if ((this.auth.user$) !== null) {
       // Llama a tu función aquí
      
-      this.service.pushUser();
+      //this.service.pushUser();
     }
   }
-
-  
-
-  
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit() {}
   

@@ -16,22 +16,22 @@ export class ServiceService {
    
   }
 
-  public pushUser() {
-    const body = JSON.stringify({
-      idAuth0: this.auth0User.subscribe((user) => {
-        return user?.sub;
-      }),
-      name: this.auth0User.subscribe((user) => {
-        return user?.name;
-      }),
-      mail: this.auth0User.subscribe((user) => {
-        return user?.email;
-      })
-    });
-    $.post(apiURL + "/usuario/register", body, (data: any) => {
-      alert(data);
-    });
-  }
+  // public pushUser() {
+  //   const body = JSON.stringify({
+  //     idAuth0: this.auth0User.subscribe((user) => {
+  //       return user?.sub;
+  //     }),
+  //     name: this.auth0User.subscribe((user) => {
+  //       return user?.name;
+  //     }),
+  //     mail: this.auth0User.subscribe((user) => {
+  //       return user?.email;
+  //     })
+  //   });
+  //   $.post(apiURL + "/usuario/register", body, (data: any) => {
+  //     alert(data);
+  //   });
+  // }
 }
 
 
