@@ -15,8 +15,8 @@ class SeccionEvento
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'secciones')]
-    private ?secciones $id_seccion = null;
+    #[ORM\ManyToOne(inversedBy: 'Secciones')]
+    private ?Secciones $id_seccion = null;
 
     #[ORM\ManyToOne(inversedBy: 'Eventos')]
     private ?Eventos $id_evento = null;
@@ -24,7 +24,7 @@ class SeccionEvento
     #[ORM\Column]
     private ?float $Precio = null;
 
-    #[ORM\OneToMany(targetEntity: Entrada::class, mappedBy: 'id_seccionEvento')]
+    #[ORM\OneToMany(targetEntity: Entrada::class, mappedBy: 'id_SeccionEvento')]
     private Collection $seccionesEventos;
 
     public function __construct()
@@ -37,12 +37,12 @@ class SeccionEvento
         return $this->id;
     }
 
-    public function getIdSeccion(): ?secciones
+    public function getIdSeccion(): ?Secciones
     {
         return $this->id_seccion;
     }
 
-    public function setIdSeccion(?secciones $id_seccion): static
+    public function setIdSeccion(?Secciones $id_seccion): static
     {
         $this->id_seccion = $id_seccion;
 

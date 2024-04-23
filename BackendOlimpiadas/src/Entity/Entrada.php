@@ -16,7 +16,7 @@ class Entrada
     #[ORM\ManyToOne(inversedBy: 'entradas')]
     private ?Usuario $id_usuario = null;
 
-    #[ORM\ManyToOne(inversedBy: 'seccionesEventos')]
+    #[ORM\ManyToOne(inversedBy: 'SeccionesEventos')]
     private ?SeccionEvento $id_seccionEvento = null;
 
     #[ORM\ManyToOne]
