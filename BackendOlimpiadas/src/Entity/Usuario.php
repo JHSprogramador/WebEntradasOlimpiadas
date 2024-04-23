@@ -23,9 +23,6 @@ class Usuario
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $foto = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -63,18 +60,6 @@ class Usuario
     public function setName(string $name): static
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getFoto(): ?string
-    {
-        return $this->foto;
-    }
-
-    public function setFoto(string $foto): static
-    {
-        $this->foto = $foto;
 
         return $this;
     }
