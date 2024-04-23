@@ -1,27 +1,26 @@
 
 ###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
-/var/
-/vendor/
+/BackendOlimpiadas/.env.local
+/BackendOlimpiadas/.env.local.php
+/BackendOlimpiadas/.env.*.local
+/BackendOlimpiadas/config/secrets/prod/prod.decrypt.private.php
+/BackendOlimpiadas/public/bundles/
+/BackendOlimpiadas/var/
+/BackendOlimpiadas/vendor/
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
+/BackendOlimpiadas/phpunit.xml
+/BackendOlimpiadas/.phpunit.result.cache
 ###< phpunit/phpunit ###
 
 ###> symfony/phpunit-bridge ###
-.phpunit.result.cache
-/phpunit.xml
+/BackendOlimpiadas/.phpunit.result.cache
+/BackendOlimpiadas/phpunit.xml
 ###< symfony/phpunit-bridge ###
 
 ###> symfony/asset-mapper ###
-/public/assets/
-/assets/vendor/
+/BackendOlimpiadas/public/assets/
+/BackendOlimpiadas/assets/vendor/
 ###< symfony/asset-mapper ###
-/BackendOlimpiadas/vendor
 /FrontEnd/vendor

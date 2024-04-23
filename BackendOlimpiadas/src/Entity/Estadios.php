@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\EstadioRepository;
+use App\Repository\EstadiosRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: EstadioRepository::class)]
-class Estadio
+#[ORM\Entity(repositoryClass: EstadiosRepository::class)]
+class Estadios
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,7 +14,7 @@ class Estadio
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $NombreEstadio = null;
+    private ?string $nombreEstadio = null;
 
     public function getId(): ?int
     {
@@ -23,12 +23,12 @@ class Estadio
 
     public function getNombreEstadio(): ?string
     {
-        return $this->NombreEstadio;
+        return $this->nombreEstadio;
     }
 
-    public function setNombreEstadio(string $NombreEstadio): static
+    public function setNombreEstadio(string $nombreEstadio): static
     {
-        $this->NombreEstadio = $NombreEstadio;
+        $this->nombreEstadio = $nombreEstadio;
 
         return $this;
     }
