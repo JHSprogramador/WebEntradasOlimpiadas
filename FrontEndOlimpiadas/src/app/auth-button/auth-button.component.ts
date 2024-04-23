@@ -24,7 +24,7 @@ export class AuthButtonComponent  implements OnInit {
     if ((this.auth.user$) !== null) {
       // Llama a tu función aquí
      
-      this.service.pushUser();
+      //this.service.pushUser();
     }
   }
 
