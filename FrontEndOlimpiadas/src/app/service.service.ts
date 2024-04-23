@@ -1,7 +1,7 @@
 import { AuthService } from '@auth0/auth0-angular';
 // import jquery from assets/jquery.min.js
 import * as $ from 'jquery';
-import { take } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 // User
 export interface User {
   id: number;
@@ -16,26 +16,21 @@ export class ServiceService {
   constructor(public auth: AuthService) {
   }
 
-  public async pushUser() {
+  async pushUser() {
+    const idAuth0 = await firstValueFrom(this.auth0User.pipe(map(user => user?.sub)));
+    const name = await firstValueFrom(this.auth0User.pipe(map(user => user?.name)));
+    const email = await firstValueFrom(this.auth0User.pipe(map(user => user?.email)));
+
     const body = JSON.stringify({
-      idAuth0: await this.auth0User.subscribe((user) => {
-        return user?.sub;
-      }),
-      name: await this.auth0User.subscribe((user) => {
-        return user?.name;
-      }),
-      email: await this.auth0User.subscribe((user) => {
-        return user?.email;
-      }),
+      idAuth0,
+      name,
+      email
     });
 
     try {
       await $.post(apiURL + '/usuario/register', body);
       alert("User registered successfully!");
     } catch (error: any) {
-      // if (error.status === 200) {
-      //   console.log("User already registered!");
-      // }
       if (error.status === 400) {
         console.error("An error occurred while registering the user.");
       } else if (error.status === 409) {
