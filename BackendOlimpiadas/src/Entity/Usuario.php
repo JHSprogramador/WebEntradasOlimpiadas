@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsuarioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +24,14 @@ class Usuario
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
+
+    #[ORM\OneToMany(targetEntity: Entrada::class, mappedBy: 'id_usuario')]
+    private Collection $entradas;
+
+    public function __construct()
+    {
+        $this->entradas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +70,36 @@ class Usuario
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Entrada>
+     */
+    public function getEntradas(): Collection
+    {
+        return $this->entradas;
+    }
+
+    public function addEntrada(Entrada $entrada): static
+    {
+        if (!$this->entradas->contains($entrada)) {
+            $this->entradas->add($entrada);
+            $entrada->setIdUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEntrada(Entrada $entrada): static
+    {
+        if ($this->entradas->removeElement($entrada)) {
+            // set the owning side to null (unless already changed)
+            if ($entrada->getIdUsuario() === $this) {
+                $entrada->setIdUsuario(null);
+            }
+        }
 
         return $this;
     }
