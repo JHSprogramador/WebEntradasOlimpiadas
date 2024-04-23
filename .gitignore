@@ -25,3 +25,31 @@
 ###< symfony/asset-mapper ###
 /BackendOlimpiadas/vendor
 /FrontEnd/vendor
+
+
+###> symfony/framework-bundle ###
+/BackendOlimpiadas/.env.local
+/BackendOlimpiadas/.env.local.php
+/BackendOlimpiadas/.env.*.local
+/BackendOlimpiadas/config/secrets/prod/prod.decrypt.private.php
+/BackendOlimpiadas/public/bundles/
+/BackendOlimpiadas/var/
+/BackendOlimpiadas/vendor/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/BackendOlimpiadas/phpunit.xml
+/BackendOlimpiadas/.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> symfony/phpunit-bridge ###
+/BackendOlimpiadas/.phpunit.result.cache
+/BackendOlimpiadas/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/asset-mapper ###
+/BackendOlimpiadas/public/assets/
+/BackendOlimpiadas/assets/vendor/
+###< symfony/asset-mapper ###
+/FrontEnd/vendor
+
