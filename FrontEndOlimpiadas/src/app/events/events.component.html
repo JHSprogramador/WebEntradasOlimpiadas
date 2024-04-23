@@ -1,0 +1,11 @@
+@for (item of listaDeEventos; track item.id;){
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{item.id}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{item.description}}</p>
+  </ion-card-content>
+  <ion-button (click)="buy()">Compra manin</ion-button>
+</ion-card>
+}
