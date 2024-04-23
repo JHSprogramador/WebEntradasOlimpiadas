@@ -17,23 +17,24 @@ export class AuthButtonComponent  implements OnInit {
   isAuthenticated$ = this.auth.isAuthenticated$
   service!: ServiceService;
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) { }
- 
+
   ngAfterViewInit() {
     this.service = new ServiceService(this.auth);
     // Verifica si el ng-container se ha renderizado
-    if ((this.auth.user$) !== null) {
-      // Llama a tu función aquí
-     
-      //this.service.pushUser();
-    }
+    // if ((this.auth.user$) !== null) {
+    //   // Llama a tu función aquí
+
+    // }
+    // Meter en el if de arriba
+    this.service.pushUser();
   }
 
-  
 
-  
+
+
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit() {}
-  
+
   currentDate: Date = new Date();
   fechaLimite: Date = new Date(2024, 2, 30);
   dateCompare() {
