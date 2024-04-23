@@ -14,3 +14,4 @@ a92449,::1,POST,http://localhost:8000/api/usuario/register,1713869781,,409,reque
 619777,::1,POST,http://localhost:8000/api/usuario/register,1713869794,,409,request
 235fd7,::1,POST,http://localhost:8000/api/usuario/register,1713869890,,409,request
 3e79cf,::1,POST,http://localhost:8000/api/usuario/register,1713869903,,409,request
+ab3143,::1,POST,http://localhost:8000/api/usuario/register,1713870063,,409,request
