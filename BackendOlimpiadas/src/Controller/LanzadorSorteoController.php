@@ -32,32 +32,32 @@ class LanzadorSorteoController extends AbstractController
 
     public function HacerSorteo(array $listaUsuarios): array
     {
-        // Código del método
         $contador = 0;
-        $CantidadPorParte = intval(count($listaUsuarios) / 4);
+        $cantidadPorParte = intval(count($listaUsuarios) / 4);
+        $cantidadPorParteSegundoMes = intval(count($listaUsuarios) / 5);
 
 
         $usuariosMesMezclados1 = $listaUsuarios;
         shuffle($usuariosMesMezclados1);
         //primera parte
-        for ($contador; $contador < $CantidadPorParte; $contador++) {
+        for ($contador; $contador < $cantidadPorParte; $contador++) {
             $usuarioATratar = $usuariosMesMezclados1[$contador];
-            $usuarioATratar->setMes1(1);
+            $usuarioATratar->setMes1(14);
         }
         //segunda parte
-        for ($contador; $contador < $CantidadPorParte * 2; $contador++) {
+        for ($contador; $contador < $cantidadPorParte * 2; $contador++) {
             $usuarioATratar = $usuariosMesMezclados1[$contador];
-            $usuarioATratar->setMes1(2);
+            $usuarioATratar->setMes1(15);
         }
         //tercera parte
-        for ($contador; $contador < $CantidadPorParte * 3; $contador++) {
+        for ($contador; $contador < $cantidadPorParte * 3; $contador++) {
             $usuarioATratar = $usuariosMesMezclados1[$contador];
-            $usuarioATratar->setMes1(3);
+            $usuarioATratar->setMes1(16);
         }
         //cuarta parte
         for ($contador; $contador < count($listaUsuarios); $contador++) {
             $usuarioATratar = $usuariosMesMezclados1[$contador];
-            $usuarioATratar->setMes1(4);
+            $usuarioATratar->setMes1(17);
         }
 
         $usuariosMesMezclados2 = $usuariosMesMezclados1;
@@ -65,24 +65,29 @@ class LanzadorSorteoController extends AbstractController
 
         $contador = 0;
         //primera parte para segundo mes
-        for ($contador; $contador < $CantidadPorParte; $contador++) {
+        for ($contador; $contador < $cantidadPorParteSegundoMes; $contador++) {
             $usuarioATratar = $usuariosMesMezclados2[$contador];
-            $usuarioATratar->setMes2(5);
+            $usuarioATratar->setMes2(18);
         }
         //segunda parte para segundo mes
-        for ($contador; $contador < $CantidadPorParte * 2; $contador++) {
+        for ($contador; $contador < $cantidadPorParteSegundoMes * 2; $contador++) {
             $usuarioATratar = $usuariosMesMezclados2[$contador];
-            $usuarioATratar->setMes2(6);
+            $usuarioATratar->setMes2(19);
         }
         //tercera parte para segundo mes
-        for ($contador; $contador < $CantidadPorParte * 3; $contador++) {
+        for ($contador; $contador < $cantidadPorParteSegundoMes * 3; $contador++) {
             $usuarioATratar = $usuariosMesMezclados2[$contador];
-            $usuarioATratar->setMes2(7);
+            $usuarioATratar->setMes2(20);
         }
         //cuarta parte para segundo mes
+        for ($contador; $contador < $cantidadPorParteSegundoMes * 4; $contador++) {
+            $usuarioATratar = $usuariosMesMezclados2[$contador];
+            $usuarioATratar->setMes2(21);
+        }
+        //quinta parte para segundo mes
         for ($contador; $contador < count($listaUsuarios); $contador++) {
             $usuarioATratar = $usuariosMesMezclados2[$contador];
-            $usuarioATratar->setMes2(8);
+            $usuarioATratar->setMes2(22);
         }
 
         return $usuariosMesMezclados2;
