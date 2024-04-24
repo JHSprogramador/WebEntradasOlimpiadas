@@ -44,11 +44,14 @@ class GestionEntradasController extends AbstractController
     }
     //Metodo Comprobar el periodo actual
     public function ComprobarPeriodo(): int{
+        $fecha_actual = new \DateTime();
+        
+        return $fecha_actual->format("W");
 
-        return 0;
     }
     //Metodo Recivo una id de usuario, compruebo si la semana actual es correcta para el usuario
     public function ComprobarSemana(UsuariosMeses $usuario): bool{
+
 
         return false;
     }
