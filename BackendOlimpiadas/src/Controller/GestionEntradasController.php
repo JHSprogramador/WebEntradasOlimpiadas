@@ -46,7 +46,15 @@ class GestionEntradasController extends AbstractController
     public function ComprobarPeriodo(): int{
         $fecha_actual = new \DateTime();
         
-        return $fecha_actual->format("W");
+        $numero_semana = $fecha_actual->format("W");
+
+        if($numero_semana >= 18 && $numero_semana <= 22){
+            return 1;
+        } elseif($numero_semana >= 23 && $numero_semana <= 26){
+            return 2;
+        } else {
+            return 0;
+        }
 
     }
     //Metodo Recivo una id de usuario, compruebo si la semana actual es correcta para el usuario
