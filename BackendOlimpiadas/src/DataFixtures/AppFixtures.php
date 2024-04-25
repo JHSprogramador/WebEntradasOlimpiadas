@@ -99,7 +99,7 @@ class AppFixtures extends Fixture
             $indicesAleatorios = array_rand($eventos, 3);
             $eventosAleatorios = [];
             foreach ($indicesAleatorios as $indice) {
-                $eventosAleatorios[] = $deportes[$indice];
+                $eventosAleatorios[] = $eventos[$indice]; //array de eventos
             }
 
             foreach($eventosAleatorios as $eventoAleatorio){
