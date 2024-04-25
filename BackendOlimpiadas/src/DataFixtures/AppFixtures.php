@@ -133,9 +133,7 @@ class AppFixtures extends Fixture
             
             $deporteId = $deporte->getId();
             $deportesEventos = $manager->getRepository(DeportesEventos::class)->findBy(['id_deporte' => $deporteId]);
-            //$deportesEventos = $deporte->getDeportes();
-            $x = count($deportesEventos);
-            echo "$x";
+           
             foreach ($deportesEventos as $deporteEvento) {
                 foreach ($secciones as $seccion) {
                     $seccionEvento = new SeccionEvento();
