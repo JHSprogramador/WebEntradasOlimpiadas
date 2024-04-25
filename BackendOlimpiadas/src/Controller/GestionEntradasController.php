@@ -43,8 +43,29 @@ class GestionEntradasController extends AbstractController
     #[Route('/deporte', name: 'get_deportes', methods: ['GET'])]
     public function getDeportes(EntityManagerInterface $entityManager): JsonResponse
     {
+<<<<<<< HEAD
 
         
+=======
+        $periodo = $this->ComprobarPeriodo();
+        if ($periodo == 0) {
+            return new JsonResponse(['error' => 'No hay deportes en este periodo'], Response::HTTP_NOT_FOUND);
+        }
+
+        // Devuelve los deportes que coincidan con el periodo
+        $deporteCoincidePeriodo = $entityManager->getRepository('App\Entity\Deportes')->findBy(['periodo' => $periodo]);
+
+        $data = [];
+        foreach ($deporteCoincidePeriodo as $deporte) {
+            $data[] = [
+                'id' => $deporte->getId(),
+                'nombre' => $deporte->getNombre(),
+                'periodo' => $deporte->getPeriodo()
+            ];
+        }
+
+        return new JsonResponse($data, Response::HTTP_OK);
+>>>>>>> 04f0f54f5611bc0db35a633ce72a3eecd6d72c99
     }
     //GET ENTRA URL(CON PARAMETRO ID AUTH0) Get_ de todo (Evento, deporte, seccion, estadio)
     //segun una id solo si la semana es la del usuario y
