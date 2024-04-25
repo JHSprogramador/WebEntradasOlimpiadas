@@ -5,6 +5,7 @@ import { ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { NgModel } from '@angular/forms';
+import { text } from 'ionicons/icons';
 
 type Evento = {
   id: string;
@@ -92,4 +93,9 @@ export class EventsComponent implements OnInit {
     this.id = item
     this.isModalOpen = isOpen;
   }
+  public alertButtons = ['OK'];
+  public alertInputs = [
+    (<HTMLSelectElement>document.getElementById('zona'))
+  ];
 }
+  

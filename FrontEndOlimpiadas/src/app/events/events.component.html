@@ -32,8 +32,44 @@
               <ion-card-content>
                 Here's a small text description for the card content. Nothing more, nothing less.
               </ion-card-content>
-            
-              <ion-button fill="clear">Comprar</ion-button>
+              <ion-accordion-group>
+                <ion-accordion value="first">
+                  <ion-item slot="header" color="light">
+                    <ion-label>Comprar</ion-label>
+                  </ion-item>
+                  <div class="ion-padding" slot="content">
+                  <ion-range id="cantidad"
+                    labelPlacement="start" label="Cantidad de entradas"
+                    aria-label="Custom range"
+                    [min]="1"
+                    [max]="15"
+                    [value]="5"
+                    [pin]="true"
+                    [ticks]="true"
+                    [snaps]="true"
+                  >
+                  </ion-range>
+                  <ion-list>
+                    <ion-item>
+                      <ion-select id="zona" label="Selecciona la zona" label-placement="floating">
+                        <ion-select-option value="norte">Norte</ion-select-option>
+                        <ion-select-option value="sur">Sur</ion-select-option>
+                        <ion-select-option value="oeste">Oeste</ion-select-option>
+                        <ion-select-option value="este">Este</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-list>
+                    <ion-button id="Comprar{{eventos.id}}" fill="clear">Comprar</ion-button>
+                  </div>
+                  
+                </ion-accordion>
+              </ion-accordion-group>
+              <ion-alert
+              trigger="Comprar{{eventos.id}}"
+              header="Please enter your info"
+              [buttons]="alertButtons"
+              [header]="alertInputs"
+            ></ion-alert>
             </ion-card>          
         }
       </ion-content>
@@ -42,61 +78,3 @@
   }  
 </ion-content>
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
