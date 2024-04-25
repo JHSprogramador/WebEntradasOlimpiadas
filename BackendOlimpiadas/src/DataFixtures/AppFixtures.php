@@ -103,7 +103,10 @@ class AppFixtures extends Fixture
 
             foreach($eventosAleatorios as $eventoAleatorio){
                 //nuevos Deportes_Eventos
-                new DeportesEventos();
+                $deporteEvento =  new DeportesEventos();
+                $deporteEvento->setIdDeporte($deporte);
+                $deporteEvento->setIdEvento($eventoAleatorio);
+                
             }
 
         }
@@ -121,11 +124,11 @@ class AppFixtures extends Fixture
             $estadioAleatorio = $estadios[array_rand($estadios)];// Obtener un estadio aleatorio
 
             $secciones = $estadioAleatorio->getSecciones();// Obtener todas las secciones del estadio aleatorio
-            $eventos = $deporte->getEventos();
-            foreach ($eventos as $evento) {
+            $deportesEventos = $deporte->getDeportes();
+            foreach ($deportesEventos as $deporteEvento) {
                 foreach ($secciones as $seccion) {
                     $seccionEvento = new SeccionEvento();
-                    //$seccionEvento->setIdEvento($evento);
+                    $seccionEvento->setIdDeporteEvento($deporteEvento);
                     $seccionEvento->setIdSeccion($seccion);
                     $seccionEvento->setPrecio(mt_rand(100, 1000) / 10); //precio random entre 10 y 100 con un decimal
                     $manager->persist($seccionEvento);
