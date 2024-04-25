@@ -73,10 +73,11 @@ class GestionUsuariosController extends AbstractController
     }
 
     //devolvemos al usuario con el id y sus semanas 
-    #[Route('/usuario/{id}', name: 'get_usuario', methods: ['GET'])]
-    public function getOne(int $id, EntityManagerInterface $entityManager): JsonResponse
+   
+    #[Route('/usuario/auth0/{idAuth0}', name: 'get_usuario_by_auth0', methods: ['GET'])]
+    public function getByAuth0(string $idAuth0, EntityManagerInterface $entityManager): JsonResponse
     {
-        $usuario = $entityManager->getRepository(Usuario::class)->find($id);
+        $usuario = $entityManager->getRepository(Usuario::class)->findOneBy(['idAuth0' => $idAuth0]);
         if (!$usuario) {
             return new JsonResponse(['error' => 'Usuario no encontrado'], 404);
         }
@@ -87,10 +88,11 @@ class GestionUsuariosController extends AbstractController
             'idAuth0' => $usuario->getIdAuth0(),
             'mail' => $usuario->getMail(),
             'name' => $usuario->getName(),
-            'mes1' => $usuariosMeses->getMes1(),
-            'mes2' => $usuariosMeses->getMes2(),
+            'mes1' => $usuariosMeses ? $usuariosMeses->getMes1() : null,
+            'mes2' => $usuariosMeses ? $usuariosMeses->getMes2() : null,
         ];
 
         return new JsonResponse($data, 200);
     }
+    
 }
