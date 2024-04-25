@@ -70,13 +70,19 @@ export class ServiceService {
       return undefined;
     }
   }
-  async getDeportes() {
+   async getDeportes() {
     try {
       const response = await $.get(apiURL + '/olimpiadas/deporte');
       console.log(response);
       return response;
-    } catch (error: any) {}
+    } catch (error) {
+      console.error('Error al obtener los deportes:', error);
+      throw error;
+    }
   }
+  
+  // Llamada a la función getDeportes
+  
 }
 
 

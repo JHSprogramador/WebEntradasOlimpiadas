@@ -22,8 +22,10 @@ type Evento = {
   imports: [CommonModule, IonicModule, EventsComponent],
 })
 export class EventsComponent implements OnInit {
-  service!: ServiceService;
+  
   constructor() {}
+  auth!: AuthService;
+  service = new ServiceService(this.auth);
   listadeportes: any;
   ngOnInit() {
     this.deportes();
@@ -39,8 +41,16 @@ export class EventsComponent implements OnInit {
     this.modal.dismiss(null, 'cancel');
   }
 
-  deportes() {
-    this.listadeportes = this.service.getDeportes();
+  async deportes() {
+    try {
+      const deportes = await this.service.getDeportes();
+      // Verifica la estructura de los datos devueltos
+      console.log(deportes);
+      // Realiza operaciones con los datos
+      // Por ejemplo, itera sobre los datos
+    } catch (error) {
+      console.error('Error al obtener o procesar los deportes:', error);
+    }
   }
   confirm() {
     this.modal.dismiss(this.name, 'confirm');
