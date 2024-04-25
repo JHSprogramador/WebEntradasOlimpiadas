@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\DeportesEventos;
 use App\Entity\Eventos;
 use App\Entity\UsuariosMeses;
 use phpDocumentor\Reflection\Types\Integer;
@@ -74,26 +75,46 @@ class GestionEntradasController extends AbstractController
 
 
 
+        //nos pasan un id deporte
+        //tambien nos pasan una id evento
+        //necesitamos saber las secciones y toda su informacion y el estdio al que pertenece donde en deportes eventos coincidan la id deporte y la id evento
+        //recibimos la id del deporte y la id del evento por un json
 
 
-    //GET ENTRA URL(CON PARAMETRO ID AUTH0) Get_ de todo (Evento, deporte, seccion, estadio)
-    //segun una id solo si la semana es la del usuario y
-    // solo se regresan las del periodo correcto
-    //RUTA: /actividades
-    #[Route('/actividades', name: 'get_actividades', methods: ['GET'])]
-    public function getActividades(EntityManagerInterface $entityManager): JsonResponse //TODO Por hacer
-    {
-        return new JsonResponse(['message' => 'Implement GET method'], Response::HTTP_OK);
+
+        
+        
+    #[Route('/actividades/{deporteId}/{eventoId}', name: 'get_actividades', methods: ['GET'])]
+    public function getActividades($deporteId,$eventoId,EntityManagerInterface $entityManager): JsonResponse {
+
+        // $deporteId = $deporte->getId();
+        // $deportesEventos = $manager->getRepository(DeportesEventos::class)->findBy(['id_deporte' => $deporteId]);
+        //nos pasan un id deporte
+        //tambien nos pasan una id evento
+        //necesitamos saber las secciones y toda su informacion y el estdio al que pertenece donde en deportes eventos coincidan la id deporte y la id evento
+
+        //devolvemos la secioneevento con toda la info de la seccion
+
+        //recibimos la id del deporte y la id del evento  y buscamos con eso el idDeporteEvento correspondiente y de ahi sacamos todas us secionevento,de cada seccion evento sus secciones y de cada seccion su estadio y la devolvemos en un json
+        $deporteId = $deporteId;
+        $eventoId = $eventoId;
+        $deportesEventos = $entityManager->getRepository(DeportesEventos::class)->findBy(['id_deporte' => $deporteId, 'id_evento' => $eventoId]);
+        $data = [];
+        foreach ($deportesEventos as $deporteEvento) {
+            $seccionesEvento = $entityManager->getRepository('App\Entity\SeccionesEvento')->findBy(['id_deporte_evento' => $deporteEvento->getId()]);
+            foreach ($seccionesEvento as $seccionEvento) {
+                $seccion = $entityManager->getRepository('App\Entity\Secciones')->findBy(['id' => $seccionEvento->getIdSeccion()]);
+                $estadio = $entityManager->getRepository('App\Entity\Estadios')->findBy(['id' => $seccionEvento->getIdEstadio()]);
+                $data[] = [
+                    'id' => $seccionEvento->getId(),
+                    'nombre' => $seccion[0]->getNombre(),
+                    'precio' => $seccionEvento->getPrecio(),
+                    'estadio' => $estadio[0]->getNombre(),
+                ];
+            }
+        }
+        return new JsonResponse($data, 200);
     }
-
-
-
-
-
-
-
-
-
 
 
 
