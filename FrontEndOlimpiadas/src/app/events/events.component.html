@@ -59,10 +59,9 @@
                       label="Selecciona la zona"
                       label-placement="floating"
                     >
-                      <ion-select-option value="norte">Norte</ion-select-option>
-                      <ion-select-option value="sur">Sur</ion-select-option>
-                      <ion-select-option value="oeste">Oeste</ion-select-option>
-                      <ion-select-option value="este">Este</ion-select-option>
+                    @for (seccion of listadeportes; track seccion.id;){
+                      <ion-select-option value="{{seccion.nombre}}">{{seccion.nombre}}</ion-select-option>
+                    }
                     </ion-select>
                   </ion-item>
                 </ion-list>

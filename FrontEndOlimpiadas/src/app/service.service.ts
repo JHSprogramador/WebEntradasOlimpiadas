@@ -93,7 +93,7 @@ export class ServiceService {
 
   async getSecciones(id_deporte:string, id_evento:string) {
     try {
-      const response = await $.get(apiURL + '/olimpiadas/secciones/'+id_deporte+'/'+id_evento);
+      const response = await $.get(apiURL + '/olimpiadas/actividades/'+id_deporte+'/'+id_evento);
       console.log(response);
       return response;
     } catch (error) {
