@@ -59,8 +59,8 @@
                       label="Selecciona la zona"
                       label-placement="floating"
                     >
-                    @for (seccion of listadeportes; track seccion.id;){
-                      <ion-select-option value="{{seccion.nombre}}">{{seccion.nombre}}</ion-select-option>
+                    @for (seccion of listasecciones; track seccion.id;){
+                      <ion-select-option value="{{seccion.seccion}}">{{seccion.seccion}}</ion-select-option>
                     }
                     </ion-select>
                   </ion-item>

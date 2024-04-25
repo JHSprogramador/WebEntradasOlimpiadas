@@ -33,7 +33,7 @@ export class EventsComponent implements OnInit {
   listasecciones: any;
   id_deporte:any;
   id_evento:any;
-  
+
   ngOnInit() {
     this.deportes();
   }
@@ -92,7 +92,7 @@ export class EventsComponent implements OnInit {
 
   public alertInputs: string[] | undefined;
   confirmar(id:string) {
-    this.secciones(id)
+    this.secciones(id);
     var a = document.getElementById('zona') as HTMLSelectElement;
     var b = document.getElementById('cantidad') as HTMLIonRangeElement;
     console.log(a.value);
@@ -139,8 +139,8 @@ export class EventsComponent implements OnInit {
       this.id_deporte = this.location.path().split("/").pop();
       this.id_evento = id;
       this.listasecciones = await this.service.getSecciones(this.id_deporte, this.id_evento);
+      alert(this.listasecciones);
       // Verifica la estructura de los datos devueltos
-      console.log(this.listaeventos);
       // Realiza operaciones con los datos
       // Por ejemplo, itera sobre los datos
     } catch (error) {
