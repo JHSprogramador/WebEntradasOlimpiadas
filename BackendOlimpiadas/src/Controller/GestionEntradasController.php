@@ -16,7 +16,7 @@ class GestionEntradasController extends AbstractController
 {
     //GET ENTRA URL(SIN PARAMETRO)   Deportes en periodo correcto    Sale JSON
     //RUTA: /api/olimpiadas/evento
-    
+
     #[Route('/eventosPorIdDeporte/{id}', name: 'get_eventos', methods: ['GET'])]
     public function getEventos(EntityManagerInterface $entityManager): JsonResponse
     {
@@ -28,14 +28,12 @@ class GestionEntradasController extends AbstractController
 
         foreach ($eventos as $evento) {
             $data[] = [
-            'id' => $evento->getId(),
-            'nombre' => $evento->getNombreDeporte(),
+                'id' => $evento->getId(),
+                'nombre' => $evento->getNombreDeporte(),
             ];
         }
 
         return new JsonResponse($data, 200);
-        
-
     }
 
     //GET ENTRA URL(CON PARAMETRO ID DEPORTE)    de eventos por id deporte    Sale JSON
@@ -56,13 +54,12 @@ class GestionEntradasController extends AbstractController
         foreach ($deporteCoincidePeriodo as $deporte) {
             $data[] = [
                 'id' => $deporte->getId(),
-                'nombre' => $deporte->getNombre(),
+                'nombre' => $deporte->getNombreDeporte(),
                 'periodo' => $deporte->getPeriodo()
             ];
         }
 
         return new JsonResponse($data, Response::HTTP_OK);
-
     }
     //GET ENTRA URL(CON PARAMETRO ID AUTH0) Get_ de todo (Evento, deporte, seccion, estadio)
     //segun una id solo si la semana es la del usuario y
@@ -73,8 +70,6 @@ class GestionEntradasController extends AbstractController
     {
 
         return new JsonResponse(['message' => 'Implement GET method'], Response::HTTP_OK);
-
-
     }
     //Metodo Comprobar el periodo actual
     public function ComprobarPeriodo(): int
