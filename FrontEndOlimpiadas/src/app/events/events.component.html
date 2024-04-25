@@ -1,102 +1,94 @@
 @for (item of listaDeEventos; track item.id;){
 <ion-card>
   <ion-card-header>
-    <ion-card-title>{{ item.description}}</ion-card-title>
+    <ion-card-title>{{ item.description }}</ion-card-title>
   </ion-card-header>
   <ion-card-content>
     <p>{{ item.id }}</p>
   </ion-card-content>
-  <ion-button id="open-modal" expand="block" (click)="setOpen(true,item.id)">Compra manin</ion-button
+  <ion-button id="open-modal" expand="block" (click)="setOpen(true, item.id)"
+    >Compra manin</ion-button
   >
 </ion-card>
 <ion-content class="ion-padding">
   @if(id == item.id){
-    <ion-modal [isOpen]="isModalOpen">
-      <ng-template>
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>Modal</ion-title>
-            <ion-buttons slot="end">
-              <ion-button (click)="setOpen(false, item.id)">Close</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content class="ion-padding">
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Modal</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false, item.id)">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
         @for (eventos of item.eventos; track eventos.id) {
-            <ion-card>
-              <ion-card-header>
-                <ion-card-title>{{eventos.ronda}}</ion-card-title>
-                <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-              </ion-card-header>
-            
-              <ion-card-content>
-                Here's a small text description for the card content. Nothing more, nothing less.
-              </ion-card-content>
-            
-              <ion-button fill="clear">Comprar</ion-button>
-            </ion-card>          
+        <ion-card class="ion-padding">
+          <ion-card-header>
+            <ion-card-title>{{ eventos.ronda }}</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more,
+            nothing less.
+          </ion-card-content>
+          <ion-accordion-group>
+            <ion-accordion value="first">
+              <ion-item slot="header" color="light">
+                <ion-label>Comprar</ion-label>
+              </ion-item>
+              <div class="ion-padding" slot="content">
+                <ion-range
+                  id="cantidad"
+                  labelPlacement="start"
+                  label="Cantidad de entradas"
+                  aria-label="Custom range"
+                  [min]="1"
+                  [max]="5"
+                  [value]="2"
+                  [pin]="true"
+                  [ticks]="true"
+                  [snaps]="true"
+                >
+                </ion-range>
+                <ion-list>
+                  <ion-item>
+                    <ion-select
+                      id="zona"
+                      label="Selecciona la zona"
+                      label-placement="floating"
+                    >
+                      <ion-select-option value="norte">Norte</ion-select-option>
+                      <ion-select-option value="sur">Sur</ion-select-option>
+                      <ion-select-option value="oeste">Oeste</ion-select-option>
+                      <ion-select-option value="este">Este</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-list>
+                <div class="ion-padding">
+                  <ion-button id="Comprar{{ eventos.id }}" (click)="confirmar()"
+                    >Comprar</ion-button
+                  >
+                </div>
+              </div>
+            </ion-accordion>
+          </ion-accordion-group>
+          <div class="ion-padding">
+            <ion-alert
+              trigger="Comprar{{ eventos.id }}"
+              header="Confirmación"
+              [message]="alertInputs"
+              [buttons]="alertButtons"
+            >
+            </ion-alert>
+          </div>
+        </ion-card>
         }
       </ion-content>
-      </ng-template>
-    </ion-modal>
-  }  
+    </ng-template>
+  </ion-modal>
+  }
 </ion-content>
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
