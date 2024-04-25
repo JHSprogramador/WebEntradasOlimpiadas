@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Deportes;
+use App\Entity\DeportesEventos;
 use App\Entity\Estadios;
 use App\Entity\Secciones;
 use App\Entity\Eventos;
@@ -56,7 +57,7 @@ class AppFixtures extends Fixture
 
         $nombresEventos = ['Final femenina', 'Final masculina', 'Semifinal femenina', 'Semifinal masculina', 'Encuentro femenino', 'Encuentro masculino'];
         
-
+        
 
         // Crear y persistir eventos para cada deporte
         foreach ($nombresEventos as $nombreEvento) {
@@ -102,7 +103,7 @@ class AppFixtures extends Fixture
 
             foreach($eventosAleatorios as $eventoAleatorio){
                 //nuevos Deportes_Eventos
-                
+                new DeportesEventos();
             }
 
         }
