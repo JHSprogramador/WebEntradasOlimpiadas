@@ -33,6 +33,7 @@ export class EventsComponent implements OnInit {
   listasecciones: any;
   id_deporte:any;
   id_evento:any;
+  
   ngOnInit() {
     this.deportes();
   }
@@ -64,7 +65,7 @@ export class EventsComponent implements OnInit {
   setOpen(isOpen: boolean, item: string) {
     if(isOpen ===false){
     }else{
-      this.location.replaceState(this.location.path()+"/" +item);
+      this.location.go(this.location.path()+"/" +item);
       this.eventos();
     }
     console.log(item);
@@ -91,7 +92,7 @@ export class EventsComponent implements OnInit {
 
   public alertInputs: string[] | undefined;
   confirmar(id:string) {
-    this.eventos(id)
+    this.secciones(id)
     var a = document.getElementById('zona') as HTMLSelectElement;
     var b = document.getElementById('cantidad') as HTMLIonRangeElement;
     console.log(a.value);
@@ -118,6 +119,7 @@ export class EventsComponent implements OnInit {
       console.error('Error al obtener o procesar los deportes:', error);
     }
   }
+
   async eventos() {
     try {
       this.id_deporte = this.location.path().split("/").pop();
