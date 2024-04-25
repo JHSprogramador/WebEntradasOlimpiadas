@@ -27,7 +27,6 @@ export class AuthButtonComponent  implements OnInit {
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
 ngOnInit() {
-  this.service = new ServiceService(this.auth);
   this.auth.isAuthenticated$.subscribe(isAuthenticated => {
     if (isAuthenticated) {
       // Llama a tu función aquí
