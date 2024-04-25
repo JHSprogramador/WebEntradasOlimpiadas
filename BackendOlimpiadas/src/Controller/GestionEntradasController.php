@@ -9,12 +9,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
-
+#[Route('/api', name: 'api')]
 class GestionEntradasController extends AbstractController
 {
     //GET ENTRA URL(SIN PARAMETRO)   Deportes en periodo correcto    Sale JSON
     //RUTA: /api/olimpiadas/evento
-    #[Route('/api/olimpiadas/evento', name: 'get_eventos', methods: ['GET'])]
+    #[Route('/olimpiadas/evento', name: 'get_eventos', methods: ['GET'])]
     public function getEvento(EntityManagerInterface $entityManager): JsonResponse
     {
         $periodo = $this->ComprobarPeriodo();
@@ -42,7 +42,7 @@ class GestionEntradasController extends AbstractController
 
     //GET ENTRA URL(CON PARAMETRO ID DEPORTE)    de eventos por id deporte    Sale JSON
     //RUTA: /api/olimpiadas/deporte
-    #[Route('/api/olimpiadas/deporte', name: 'get_deportes', methods: ['GET'])]
+    #[Route('/olimpiadas/deporte', name: 'get_deportes', methods: ['GET'])]
     public function getDeportes(EntityManagerInterface $entityManager): JsonResponse
     {
         //saamos los posibles deportes para el ecento actual
@@ -67,7 +67,7 @@ class GestionEntradasController extends AbstractController
     //segun una id solo si la semana es la del usuario y
     // solo se regresan las del periodo correcto
     //RUTA: /api/olimpiadas/actividades
-    #[Route('/api/olimpiadas/actividades', name: 'get_actividades', methods: ['GET'])]
+    #[Route('/olimpiadas/actividades', name: 'get_actividades', methods: ['GET'])]
     public function getActividades(EntityManagerInterface $entityManager): JsonResponse
     {
         //sacamos el periodo actual

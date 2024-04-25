@@ -29,6 +29,14 @@ export class ServiceService {
       }
     }
   }
+
+  async getDeportes(){
+    try {
+      await $.get(apiURL + '/usuario/register');
+    } catch (error: any) {
+      
+    }
+  }
 }
 
 
