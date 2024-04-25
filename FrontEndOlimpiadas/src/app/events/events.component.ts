@@ -6,6 +6,8 @@ import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { NgModel } from '@angular/forms';
 import { text } from 'ionicons/icons';
+import { AuthService } from '@auth0/auth0-angular';
+import { ServiceService } from '../service.service';
 
 type Evento = {
   id: string;
@@ -21,11 +23,10 @@ type Evento = {
 })
 export class EventsComponent implements OnInit {
 
-  ngOnInit() {
-    
-  }
-
   constructor() {}
+  listadeportes:any;
+  ngOnInit() {
+  }
   @ViewChild(IonModal)
   modal!: IonModal;
 
@@ -48,45 +49,45 @@ export class EventsComponent implements OnInit {
       this.message = `Hello, ${ev.detail.data}!`;
     }
   }
-  listaDeEventos: Evento[] = [
-    {
-      id: '1',
-      description: 'La Kinli',
-      eventos: 
-        [
-          {
-            id: '1',
-            ronda: 'Final'
-          },
-          {
-            id: '2',
-            ronda: 'Semifinal-1'
-          },
-          {
-            id: '3',
-            ronda: 'Semifinal-2'
-          },
-          {
-            id: '4',
-            ronda: 'Cuartos de final'
-          }
-        ]
-    },
-    {
-      id: '2',
-      description: 'Baloncesto',
-      eventos: {
+  // listaDeEventos: Evento[] = [
+    // {
+      // id: '1',
+      // description: 'La Kinli',
+      // eventos: 
+        // [
+          // {
+            // id: '1',
+            // ronda: 'Final'
+          // },
+          // {
+            // id: '2',
+            // ronda: 'Semifinal-1'
+          // },
+          // {
+            // id: '3',
+            // ronda: 'Semifinal-2'
+          // },
+          // {
+            // id: '4',
+            // ronda: 'Cuartos de final'
+          // }
+        // ]
+    // },
+    // {
+      // id: '2',
+      // description: 'Baloncesto',
+      // eventos: {
 
-      }
-    },
-    {
-      id: '3',
-      description: 'Hokey',
-      eventos: {
+      // }
+    // },
+    // {
+      // id: '3',
+      // description: 'Hokey',
+      // eventos: {
 
-      }
-    },
-  ];
+      // }
+    // },
+  // ];
   buy() {}
 
   

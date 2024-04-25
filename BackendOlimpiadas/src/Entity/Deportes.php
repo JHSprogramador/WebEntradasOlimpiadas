@@ -19,7 +19,7 @@ class Deportes
     private ?string $nombreDeporte = null;
 
     #[ORM\Column]
-    private ?int $Periodo = null;
+    private ?int $periodo = null;
 
     #[ORM\OneToMany(targetEntity: DeportesEventos::class, mappedBy: 'id_deporte')]
     private Collection $deportes;
@@ -48,12 +48,12 @@ class Deportes
 
     public function getPeriodo(): ?int
     {
-        return $this->Periodo;
+        return $this->periodo;
     }
 
-    public function setPeriodo(int $Periodo): static
+    public function setPeriodo(int $periodo): static
     {
-        $this->Periodo = $Periodo;
+        $this->periodo = $periodo;
 
         return $this;
     }

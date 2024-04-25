@@ -56,7 +56,7 @@ class GestionEntradasController extends AbstractController
         foreach ($deporteCoincidePeriodo as $deporte) {
             $data[] = [
                 'id' => $deporte->getId(),
-                'nombre' => $deporte->getNombre(),
+                'nombre' => $deporte->getNombreDeporte(),
                 'periodo' => $deporte->getPeriodo()
             ];
         }
@@ -83,7 +83,7 @@ class GestionEntradasController extends AbstractController
 
         $numero_semana = $fecha_actual->format("W");
 
-        if ($numero_semana >= 18 && $numero_semana <= 22) {
+        if ($numero_semana >= 17 && $numero_semana <= 22) {
             return 1;
         } elseif ($numero_semana >= 23 && $numero_semana <= 26) {
             return 2;
