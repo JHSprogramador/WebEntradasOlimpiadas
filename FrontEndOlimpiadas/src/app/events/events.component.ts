@@ -9,6 +9,7 @@ import { NgModel } from '@angular/forms';
 type Evento = {
   id: string;
   description: string;
+  eventos: any;
 };
 @Component({
   selector: 'app-events',
@@ -44,23 +45,51 @@ export class EventsComponent implements OnInit {
   listaDeEventos: Evento[] = [
     {
       id: '1',
-      description: 'Descripción del evento 1',
+      description: 'La Kinli',
+      eventos: 
+        [
+          {
+            id: '1',
+            ronda: 'Final'
+          },
+          {
+            id: '2',
+            ronda: 'Semifinal-1'
+          },
+          {
+            id: '3',
+            ronda: 'Semifinal-2'
+          },
+          {
+            id: '4',
+            ronda: 'Cuartos de final'
+          }
+        ]
     },
     {
       id: '2',
-      description: 'Descripción del evento 2',
+      description: 'Baloncesto',
+      eventos: {
+
+      }
     },
     {
       id: '3',
-      description: 'Descripción del evento 3',
+      description: 'Hokey',
+      eventos: {
+
+      }
     },
   ];
   buy() {}
 
   ngOnInit() {}
   isModalOpen = false;
+  id:string | undefined;
 
-  setOpen(isOpen: boolean) {
+  setOpen(isOpen: boolean, item:string) {
+    console.log(item)
+    this.id = item
     this.isModalOpen = isOpen;
   }
 }
