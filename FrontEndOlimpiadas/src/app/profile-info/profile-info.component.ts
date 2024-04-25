@@ -2,6 +2,7 @@ import { DOCUMENT, CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { IonicModule } from '@ionic/angular';
+import { ServiceService, User } from '../service.service';
 
 @Component({
   selector: 'app-profile-info',
@@ -13,8 +14,18 @@ import { IonicModule } from '@ionic/angular';
 export class ProfileInfoComponent  implements OnInit {
 
   isAuthenticated$ = this.auth.isAuthenticated$;
-  constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) {}
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngOnInit() {}
+
+  user!: User;
+
+  constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService, private service: ServiceService) { }
+
+  ngOnInit() {
+    // Mostrar usuario obtenido
+    this.service.getUser().then(user => {
+      if (user) {
+        this.user = user;
+      }
+    });
+  }
 
 }

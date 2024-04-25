@@ -1,10 +1,11 @@
 <ion-content color="light">
   <ion-card color="light">
     <ion-card-content>
-      <ion-list *ngIf="auth.user$ | async as user">
+      <ion-list *ngIf="this.user">
         <ion-item>
           <ion-avatar slot="start">
-            <img [src]="user.picture">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaFvXOFfkVzj3M89ismUTHVVPEZqUUquje-g46gt6Orw&s">
           </ion-avatar>
           <ion-label>
             <h2>{{ user.name }}</h2>
@@ -13,24 +14,18 @@
         </ion-item>
         <ion-item>
           <ion-label>ID</ion-label>
-          <ion-note slot="end">{{ user.sub }}</ion-note>
+          <ion-note slot="end">{{ user.idAuth0 }}</ion-note>
         </ion-item>
-        <ion-item>
-          <ion-label>Given Name</ion-label>
-          <ion-note slot="end">{{ user.given_name }}</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Family Name</ion-label>
-          <ion-note slot="end">{{ user.family_name }}</ion-note>
-        </ion-item>
+        @if (this.user.mes1 !== 0 && this.user.mes2 !== 0) {
         <ion-item>
           <ion-label>Semana 1</ion-label>
-          <ion-note slot="end">{{ user.locale }}</ion-note>
+          <ion-note slot="end">{{ user.mes1 }}</ion-note>
         </ion-item>
         <ion-item>
           <ion-label>Semana 2</ion-label>
-          <ion-note slot="end">{{ user.locale }}</ion-note>
+          <ion-note slot="end">{{ user.mes2 }}</ion-note>
         </ion-item>
+        }
       </ion-list>
       <ion-button expand="full" color="danger"
         (click)="auth.logout({ logoutParams: { returnTo: document.location.origin } })">

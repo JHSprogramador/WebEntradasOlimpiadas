@@ -9,8 +9,8 @@ export interface User {
   idAuth0: string;
   name: string;
   email: string;
-  semana1: number;
-  semana2: number;
+  mes1: number;
+  mes2: number;
 }
 
 @Injectable({
