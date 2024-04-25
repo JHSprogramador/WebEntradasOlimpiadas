@@ -22,10 +22,11 @@ type Evento = {
   imports: [CommonModule, IonicModule, EventsComponent],
 })
 export class EventsComponent implements OnInit {
-
+  service!: ServiceService;
   constructor() {}
-  listadeportes:any;
+  listadeportes: any;
   ngOnInit() {
+    this.deportes();
   }
   @ViewChild(IonModal)
   modal!: IonModal;
@@ -38,6 +39,9 @@ export class EventsComponent implements OnInit {
     this.modal.dismiss(null, 'cancel');
   }
 
+  deportes() {
+    this.listadeportes = this.service.getDeportes();
+  }
   confirm() {
     this.modal.dismiss(this.name, 'confirm');
   }
@@ -45,87 +49,88 @@ export class EventsComponent implements OnInit {
   onWillDismiss(event: Event) {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
     if (ev.detail.role === 'confirm') {
-      
       this.message = `Hello, ${ev.detail.data}!`;
     }
   }
   // listaDeEventos: Evento[] = [
-    // {
-      // id: '1',
-      // description: 'La Kinli',
-      // eventos: 
-        // [
-          // {
-            // id: '1',
-            // ronda: 'Final'
-          // },
-          // {
-            // id: '2',
-            // ronda: 'Semifinal-1'
-          // },
-          // {
-            // id: '3',
-            // ronda: 'Semifinal-2'
-          // },
-          // {
-            // id: '4',
-            // ronda: 'Cuartos de final'
-          // }
-        // ]
-    // },
-    // {
-      // id: '2',
-      // description: 'Baloncesto',
-      // eventos: {
+  // {
+  // id: '1',
+  // description: 'La Kinli',
+  // eventos:
+  // [
+  // {
+  // id: '1',
+  // ronda: 'Final'
+  // },
+  // {
+  // id: '2',
+  // ronda: 'Semifinal-1'
+  // },
+  // {
+  // id: '3',
+  // ronda: 'Semifinal-2'
+  // },
+  // {
+  // id: '4',
+  // ronda: 'Cuartos de final'
+  // }
+  // ]
+  // },
+  // {
+  // id: '2',
+  // description: 'Baloncesto',
+  // eventos: {
 
-      // }
-    // },
-    // {
-      // id: '3',
-      // description: 'Hokey',
-      // eventos: {
+  // }
+  // },
+  // {
+  // id: '3',
+  // description: 'Hokey',
+  // eventos: {
 
-      // }
-    // },
+  // }
+  // },
   // ];
   buy() {}
 
-  
   isModalOpen = false;
-  id:string | undefined;
+  id: string | undefined;
 
-  setOpen(isOpen: boolean, item:string) {
-    console.log(item)
-    this.id = item
+  setOpen(isOpen: boolean, item: string) {
+    console.log(item);
+    this.id = item;
     this.isModalOpen = isOpen;
   }
-  public alertButtons = [{
-    text: 'Cancel',
-    role: 'cancel',
-    handler: () => {
-      console.log('Alert canceled');
+  public alertButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Alert canceled');
+      },
     },
-  },
-  {
-    text: 'OK',
-    role: 'confirm',
-    handler: () => {
-      console.log('Alert confirmed');
+    {
+      text: 'OK',
+      role: 'confirm',
+      handler: () => {
+        console.log('Alert confirmed');
+      },
     },
-  },
-];
+  ];
   public alertInputs: string[] | undefined;
-  confirmar(){
-    var a = document.getElementById('zona') as HTMLSelectElement
-    var b = document.getElementById('cantidad') as HTMLIonRangeElement
-    console.log(a.value)
-    console.log(b.value)
-    if(parseInt(b.value.toString())>1){
-      this.alertInputs = ["Confirmas la compra de " + b.value + " entradas en la zona " + a.value];
-    }else{
-      this.alertInputs = ["Confirmas la compra de " + b.value + " entrada en la zona " + a.value];
+  confirmar() {
+    var a = document.getElementById('zona') as HTMLSelectElement;
+    var b = document.getElementById('cantidad') as HTMLIonRangeElement;
+    console.log(a.value);
+    console.log(b.value);
+    if (parseInt(b.value.toString()) > 1) {
+      this.alertInputs = [
+        'Confirmas la compra de ' + b.value + ' entradas en la zona ' + a.value,
+      ];
+    } else {
+      this.alertInputs = [
+        'Confirmas la compra de ' + b.value + ' entrada en la zona ' + a.value,
+      ];
     }
-    
   }
 }
-  

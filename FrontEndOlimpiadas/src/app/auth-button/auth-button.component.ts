@@ -21,10 +21,6 @@ export class AuthButtonComponent  implements OnInit {
   ngAfterViewInit() {
 
   }
-
-
-
-
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
 ngOnInit() {
   this.service = new ServiceService(this.auth);
