@@ -16,17 +16,30 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+
+        //DEPORTES
         // Crear y persistir algunos deportes de ejemplo
         $deportesNombres = ['Fútbol', 'Baloncesto', 'Tenis', 'Golf', 'Natación', 'Atletismo', 'Ciclismo', 'Voleibol'];
+        $cantidadMitad = count($deportesNombres)/2;
+        $contador = 0;
 
         foreach ($deportesNombres as $nombre) {
             $deporte = new Deportes();
             $deporte->setNombreDeporte($nombre);
+            if($contador < $cantidadMitad){
+                $deporte->setPeriodo(1);
+                $contador++;
+            } else {
+                $deporte->setPeriodo(2);
+            }
+            
             $manager->persist($deporte);
         }
 
-        $manager->flush();
+        $manager->flush(); //cambiar lo de los periodos
+        //END DEPORTES
 
+        //ESTADIOS
         $estadiosNombres = ['Estadio A', 'Estadio B', 'Estadio C', 'Estadio D'];
 
         foreach ($estadiosNombres as $nombre) {
@@ -35,9 +48,28 @@ class AppFixtures extends Fixture
             $manager->persist($estadio);
         }
 
-        $manager->flush();
+        $manager->flush(); //correcto
+        //END ESTADIOS
+
+        //EVENTOS
+        $deportes = $manager->getRepository(Deportes::class)->findAll();
+
+        $nombresEventos = ['Final femenina', 'Final masculina', 'Semifinal femenina', 'Semifinal masculina', 'Encuentro femenino', 'Encuentro masculino'];
+        
 
 
+        // Crear y persistir eventos para cada deporte
+        foreach ($nombresEventos as $nombreEvento) {
+            $eventos = new Eventos();
+            $eventos->setNombreEvento($nombreEvento);
+        }
+
+        $manager->flush(); //correcto
+
+        //END EVENTOS
+
+
+        //SECCIONES
         $estadios = $manager->getRepository(Estadios::class)->findAll();
 
         // Crear y persistir secciones para cada estadio
@@ -52,96 +84,36 @@ class AppFixtures extends Fixture
         }
 
 
-        $manager->flush();
+        $manager->flush(); //correcto
 
-        $deportes = $manager->getRepository(Deportes::class)->findAll();
+        //END SECCIONES
 
-        $nombresEventos = ['Final femenina', 'Final masculina', 'Semifinal femenina', 'Semifinal masculina', 'Encuentro femenino', 'Encuentro masculino'];
-        
-
-
-        // Crear y persistir eventos para cada deporte
-        foreach ($deportes as $deporte) {
-            $indicesAleatorios = array_rand($nombresEventos, 3);
-            $elementosAleatorios = [];
-            foreach ($indicesAleatorios as $indice) {
-                $elementosAleatorios[] = $nombresEventos[$indice];
-            }
-
-            for ($i = 1; $i <= 3; $i++) {
-                $evento = new Eventos();
-                $nombreAleatorio = $elementosAleatorios[$i - 1];
-                $evento->setNombreEvento($nombreAleatorio);
-                $evento->setPeriodo(0); // Periodo como 0, luego se setea
-                $evento->addIdDeporte($deporte);
-                $manager->persist($evento);
-            }
-        }
-
-        $manager->flush();
-
-        //setear los periodos
-        $deportes = $manager->getRepository(Deportes::class)->findAll();
+        //DEPORTES_EVENTOS
         $eventos = $manager->getRepository(Eventos::class)->findAll();
+        $deportes = $manager->getRepository(Deportes::class)->findAll();
 
-        $mitadesDeportes = array_chunk($deportes, ceil(count($deportes) / 2));
-
-        // Obtener la primera mitad de los deportes
-        $primerMitadDeportes = $mitadesDeportes[0];
-
-        // Obtener la segunda mitad de los deportes
-        $segundaMitadDeportes = $mitadesDeportes[1];
-
-        // Obtener los IDs de los deportes de la primera mitad
-         $idsPrimerMitadDeportes = array_map(fn($deporte) => $deporte->getId(), $primerMitadDeportes);
-
-        //Para guardar loseventos de la primera mitad de deportes
-        $eventosPrimerMitad = [];
-        foreach ($eventos as $evento) {
-            if (in_array($evento->getIdDeporte(), $idsPrimerMitadDeportes)) {
-                $eventosPrimerMitad[] = $evento;
-
+        foreach($deportes as $deporte){
+            //sacar tres eventos aleatorios
+            $indicesAleatorios = array_rand($eventos, 3);
+            $eventosAleatorios = [];
+            foreach ($indicesAleatorios as $indice) {
+                $eventosAleatorios[] = $deportes[$indice];
             }
-        }
-        //seteamos la primera mitad de los eventos su periodo en 1
-        foreach ($eventosPrimerMitad as $evento) {
-            $evento->setPeriodo(1);
-            $manager->persist($evento);
-        }
 
-
-
-        $manager->flush();
-
-
-        // Obtener los IDs de los deportes de la segunda mitad
-        $idSegundaMitadDeportes = array_map(fn($deporte) => $deporte->getId(), $segundaMitadDeportes);
-
-        //Para guardar los eventos de la segunda mitad de deportes
-        $eventosSegundaMitad = [];
-        foreach ($eventos as $evento) {
-            if (in_array($evento->getIdDeporte(), $idSegundaMitadDeportes)) {
-                $eventosSegundaMitad[] = $evento;
-
+            foreach($eventosAleatorios as $eventoAleatorio){
+                //nuevos Deportes_Eventos
+                
             }
-        }
-        //seteamos la segunda mitad de los eventos su periodo en 1
-        foreach ($eventosSegundaMitad as $evento) {
-            $evento->setPeriodo(2);
-            $manager->persist($evento);
+
         }
 
-        $manager->flush();
-        
+        //END DEPORTES_EVENTOS
 
+
+        //SECCION_EVENTO
         // Obtener todos los eventos y secciones
         $estadios = $manager->getRepository(Estadios::class)->findAll();
         $deportes = $manager->getRepository(Deportes::class)->findAll();
-
-        
-        
-
-
         // Iterar sobre cada deporte y asignar sus eventos a todas las secciones del estadio aleatorio
         foreach ($deportes as $deporte) {
             
@@ -154,7 +126,6 @@ class AppFixtures extends Fixture
                     $seccionEvento = new SeccionEvento();
                     $seccionEvento->setIdEvento($evento);
                     $seccionEvento->setIdSeccion($seccion);
-                    //asignar un precio aleatorio si lo deseas
                     $seccionEvento->setPrecio(mt_rand(100, 1000) / 10); //precio random entre 10 y 100 con un decimal
                     $manager->persist($seccionEvento);
                 }
@@ -162,6 +133,8 @@ class AppFixtures extends Fixture
         }
 
 
-        $manager->flush();
+        $manager->flush(); //cambiar, ahora se unen con Deportes_Eventos, no con eventos
+
+        //END SECCION_EVENTO
     }
 }
