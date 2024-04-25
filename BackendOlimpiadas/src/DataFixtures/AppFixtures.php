@@ -63,6 +63,7 @@ class AppFixtures extends Fixture
         foreach ($nombresEventos as $nombreEvento) {
             $eventos = new Eventos();
             $eventos->setNombreEvento($nombreEvento);
+            $manager->persist($eventos);
         }
 
         $manager->flush(); //correcto
