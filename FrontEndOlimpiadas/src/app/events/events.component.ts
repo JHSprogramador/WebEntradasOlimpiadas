@@ -30,6 +30,9 @@ export class EventsComponent implements OnInit {
   service = new ServiceService(this.auth);
   listadeportes: any;
   listaeventos: any;
+  listasecciones: any;
+  id_deporte:any;
+  id_evento:any;
   ngOnInit() {
     this.deportes();
   }
@@ -43,39 +46,16 @@ export class EventsComponent implements OnInit {
   cancel() {
     this.modal.dismiss(null, 'cancel');
   }
-
-  async deportes() {
-    try {
-      this.listadeportes = await this.service.getDeportes();
-      // Verifica la estructura de los datos devueltos
-      console.log(this.listadeportes);
-      // Realiza operaciones con los datos
-      // Por ejemplo, itera sobre los datos
-    } catch (error) {
-      console.error('Error al obtener o procesar los deportes:', error);
-    }
-  }
-  async eventos(id:string) {
-    try {
-      this.listadeportes = await this.service.getEventosPorIdDeporte(id);
-      // Verifica la estructura de los datos devueltos
-      console.log(this.listadeportes);
-      // Realiza operaciones con los datos
-      // Por ejemplo, itera sobre los datos
-    } catch (error) {
-      console.error('Error al obtener o procesar los deportes:', error);
-    }
-  }
   confirm() {
     this.modal.dismiss(this.name, 'confirm');
   }
-
   onWillDismiss(event: Event) {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
     if (ev.detail.role === 'confirm') {
       this.message = `Hello, ${ev.detail.data}!`;
     }
   }
+
   buy() {}
 
   isModalOpen = false;
@@ -85,11 +65,13 @@ export class EventsComponent implements OnInit {
     if(isOpen ===false){
     }else{
       this.location.replaceState(this.location.path()+"/" +item);
+      this.eventos();
     }
     console.log(item);
     this.id = item;
     this.isModalOpen = isOpen;
   }
+
   public alertButtons = [
     {
       text: 'Cancel',
@@ -106,8 +88,10 @@ export class EventsComponent implements OnInit {
       },
     },
   ];
+
   public alertInputs: string[] | undefined;
-  confirmar() {
+  confirmar(id:string) {
+    this.eventos(id)
     var a = document.getElementById('zona') as HTMLSelectElement;
     var b = document.getElementById('cantidad') as HTMLIonRangeElement;
     console.log(a.value);
@@ -120,6 +104,45 @@ export class EventsComponent implements OnInit {
       this.alertInputs = [
         'Confirmas la compra de ' + b.value + ' entrada en la zona ' + a.value,
       ];
+    }
+  }
+
+  async deportes() {
+    try {
+      this.listadeportes = await this.service.getDeportes();
+      // Verifica la estructura de los datos devueltos
+      console.log(this.listadeportes);
+      // Realiza operaciones con los datos
+      // Por ejemplo, itera sobre los datos
+    } catch (error) {
+      console.error('Error al obtener o procesar los deportes:', error);
+    }
+  }
+  async eventos() {
+    try {
+      this.id_deporte = this.location.path().split("/").pop();
+      alert(this.id_deporte);
+      this.listaeventos = await this.service.getEventosPorIdDeporte(this.id_deporte);
+      // Verifica la estructura de los datos devueltos
+      console.log(this.listaeventos);
+      // Realiza operaciones con los datos
+      // Por ejemplo, itera sobre los datos
+    } catch (error) {
+      console.error('Error al obtener o procesar los deportes:', error);
+    }
+  }
+
+  async secciones(id:string) {
+    try {
+      this.id_deporte = this.location.path().split("/").pop();
+      this.id_evento = id;
+      this.listasecciones = await this.service.getSecciones(this.id_deporte, this.id_evento);
+      // Verifica la estructura de los datos devueltos
+      console.log(this.listaeventos);
+      // Realiza operaciones con los datos
+      // Por ejemplo, itera sobre los datos
+    } catch (error) {
+      console.error('Error al obtener o procesar los deportes:', error);
     }
   }
 }

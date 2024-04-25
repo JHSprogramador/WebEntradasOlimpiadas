@@ -82,7 +82,18 @@ export class ServiceService {
   }
   async getEventosPorIdDeporte(id:string) {
     try {
-      const response = await $.get(apiURL + '/eventosPorIdDeporte/'+id);
+      const response = await $.get(apiURL + '/olimpiadas/eventosPorIdDeporte/'+id);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error('Error al obtener los eventos:', error);
+      throw error;
+    }
+  }
+
+  async getSecciones(id_deporte:string, id_evento:string) {
+    try {
+      const response = await $.get(apiURL + '/olimpiadas/secciones/'+id_deporte+'/'+id_evento);
       console.log(response);
       return response;
     } catch (error) {
