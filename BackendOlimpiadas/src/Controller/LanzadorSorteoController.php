@@ -13,7 +13,7 @@ use App\Entity\UsuariosMeses;
 #[Route('/api', name: 'api')]
 class LanzadorSorteoController extends AbstractController
 {
-    #[Route('/lanzador/sorteo', name: 'get_sorteo', methods: ['GET'])]
+    #[Route('/lanzador/sorteo', name: 'get_sorteo', methods: ['POST'])]
     public function doSorteo(EntityManagerInterface $entityManager): JsonResponse
     {
         $usuariosMesesRepository = $entityManager->getRepository(UsuariosMeses::class);
