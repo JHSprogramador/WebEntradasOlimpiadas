@@ -11,8 +11,7 @@
     "test": "ng test",
     "lint": "ng lint"
   },
-
-  "config":{
+  "config": {
     "ionic_sass": "./sass.config.js"
   },
   "private": true,
@@ -20,12 +19,15 @@
     "@angular/animations": "^17.0.2",
     "@angular/common": "^17.0.2",
     "@angular/compiler": "^17.0.2",
-    "@angular/core": "^17.0.2",
+    "@angular/core": "^17.3.1",
     "@angular/forms": "^17.0.2",
+    "@angular/material": "^17.3.4",
     "@angular/platform-browser": "^17.0.2",
     "@angular/platform-browser-dynamic": "^17.0.2",
     "@angular/router": "^17.0.2",
+    "@auth0/angular-jwt": "^5.2.0",
     "@auth0/auth0-angular": "^2.2.3",
+    "@azure/storage-blob": "^12.17.0",
     "@capacitor/android": "5.7.4",
     "@capacitor/app": "5.0.7",
     "@capacitor/camera": "^5.0.9",
@@ -37,8 +39,11 @@
     "@capacitor/status-bar": "5.0.7",
     "@ionic/angular": "^7.5.0",
     "@ionic/pwa-elements": "^3.2.2",
+    "angular-jwt": "^0.1.11",
     "bootstrap": "^5.3.3",
     "ionicons": "^7.2.1",
+    "jquery": "^3.7.1",
+    "luxon": "^3.4.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
@@ -56,6 +61,7 @@
     "@capacitor/cli": "5.7.4",
     "@ionic/angular-toolkit": "^9.0.0",
     "@types/jasmine": "~5.1.0",
+    "@types/jquery": "^3.5.29",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^7.26.0",

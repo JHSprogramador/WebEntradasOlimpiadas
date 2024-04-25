@@ -1,0 +1,19 @@
+<?php
+
+
+
+//require_once '././vendor/autoload.php';
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use EventDispatchers\Events\DemoEvent;
+use EventDispatchers\Listeners\DemoListener;
+// init event dispatcher 
+$dispatcher = new EventDispatcher();
+// register listener for the 'demo.event' event 
+$listener = new DemoListener();
+$demoEvent = new DemoEvent(); // Instancia DemoEvent
+$dispatcher->addListener('demo.event', array($listener, 'onDemoEvent'));
+
+
+
+// dispatch $DemoEvent
+$dispatcher->dispatch($DemoEvent, DemoEvent::NAME);

@@ -1,0 +1,91 @@
+openapi: 3.0.3
+info:
+  title: API de Gestión de Usuarios y Sorteo 1.0
+  description: |
+    API Specification for GestionUsuariosController and LanzadorSorteoController.
+    The purpose is to manage users and perform a lottery.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+tags:
+  - name: usuarios
+    description: Operaciones relacionadas con usuarios
+  - name: sorteo
+    description: Operaciones relacionadas con el sorteo
+paths:
+  /api/usuario/register:
+    post:
+      tags:
+        - usuarios
+      summary: Registrar un nuevo usuario
+      operationId: registerUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idAuth0:
+                  type: string
+                name:
+                  type: string
+                mail:
+                  type: string
+      responses:
+        '201':
+          description: Usuario registrado correctamente
+        '400':
+          description: Datos de usuario inválidos
+        '409':
+          description: Usuario ya registrado
+  /api/usuario/{id}:
+    get:
+      tags:
+        - usuarios
+      summary: Obtener información de un usuario
+      operationId: getUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del usuario a obtener
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Información del usuario obtenida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioResponse'
+        '404':
+          description: Usuario no encontrado
+  /api/lanzador/sorteo:
+    get:
+      tags:
+        - sorteo
+      summary: Realizar sorteo
+      operationId: doSorteo
+      responses:
+        '200':
+          description: Sorteo realizado con éxito
+components:
+  schemas:
+    UsuarioResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        idAuth0:
+          type: string
+        mail:
+          type: string
+        name:
+          type: string
+        mes1:
+          type: integer
+        mes2:
+          type: integer

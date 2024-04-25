@@ -1,9 +1,22 @@
-<ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-  <ion-button (click)="auth.logout({ logoutParams: { returnTo: document.location.origin } })">
-    Log out
-  </ion-button>
+<ng-container *ngIf="(auth.user$ | async) !== null; else loggedOut">
+  @if (dateCompare()) {
+  <app-events></app-events>
+  }@else {
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-title>¡Felicidades!</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        Acabas de entrar a un sorteo. Por favor, espera hasta el día
+        <strong>31 de marzo de 2024</strong>.
+      </p>
+    </ion-card-content>
+  </ion-card>
+  }
 </ng-container>
 
 <ng-template #loggedOut>
-  <ion-button (click)="auth.loginWithRedirect()">Log in</ion-button>
+  <ion-button (click)="auth.loginWithPopup()">Log in</ion-button>
 </ng-template>
