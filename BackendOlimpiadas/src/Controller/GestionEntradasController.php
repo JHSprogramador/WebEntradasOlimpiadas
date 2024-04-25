@@ -46,7 +46,8 @@ class GestionEntradasController extends AbstractController
     #[Route('/deporte', name: 'get_deportes', methods: ['GET'])]
     public function getDeportes(EntityManagerInterface $entityManager): JsonResponse
     {
-        
+        // TODO: Implementar este método
+        return new JsonResponse(['error' => 'No hay eventos en este periodo'], Response::HTTP_NOT_FOUND);
     }
     //GET ENTRA URL(CON PARAMETRO ID AUTH0) Get_ de todo (Evento, deporte, seccion, estadio)
     //segun una id solo si la semana es la del usuario y
@@ -55,7 +56,8 @@ class GestionEntradasController extends AbstractController
     #[Route('/actividades', name: 'get_actividades', methods: ['GET'])]
     public function getActividades(EntityManagerInterface $entityManager): JsonResponse
     {
-        
+        // TODO: Implementar este método
+        return new JsonResponse(['error' => 'No hay eventos en este periodo'], Response::HTTP_NOT_FOUND);
     }
     //Metodo Comprobar el periodo actual
     public function ComprobarPeriodo(): int
