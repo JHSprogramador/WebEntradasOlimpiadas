@@ -78,6 +78,8 @@ class AppFixtures extends Fixture
             }
         }
 
+        $manager->flush();
+
         //setear los periodos
         $deportes = $manager->getRepository(Deportes::class)->findAll();
         $eventos = $manager->getRepository(Eventos::class)->findAll();
@@ -109,7 +111,7 @@ class AppFixtures extends Fixture
 
 
 
-
+        $manager->flush();
 
 
         // Obtener los IDs de los deportes de la segunda mitad
