@@ -94,30 +94,4 @@ class GestionUsuariosController extends AbstractController
 
         return new JsonResponse($data, 200);
     }
-<<<<<<< HEAD
-    
 }
-=======
-
-    #[Route('/usuario/auth0/{idAuth0}', name: 'get_usuario_by_auth0', methods: ['GET'])]
-    public function getByAuth0(string $idAuth0, EntityManagerInterface $entityManager): JsonResponse
-    {
-        $usuario = $entityManager->getRepository(Usuario::class)->findOneBy(['idAuth0' => $idAuth0]);
-        if (!$usuario) {
-            return new JsonResponse(['error' => 'Usuario no encontrado'], 404);
-        }
-
-        $usuariosMeses = $entityManager->getRepository(UsuariosMeses::class)->findOneBy(['idUsuario' => $usuario]);
-        $data = [
-            'id' => $usuario->getId(),
-            'idAuth0' => $usuario->getIdAuth0(),
-            'mail' => $usuario->getMail(),
-            'name' => $usuario->getName(),
-            'mes1' => $usuariosMeses->getMes1(),
-            'mes2' => $usuariosMeses->getMes2(),
-        ];
-
-        return new JsonResponse($data, 200);
-    }
-}
->>>>>>> 122f687ff0b73ddd8643654b50a7037511a5a849
