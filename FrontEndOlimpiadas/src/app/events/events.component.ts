@@ -5,9 +5,11 @@ import { ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { NgModel } from '@angular/forms';
-import { text } from 'ionicons/icons';
+import { location, text } from 'ionicons/icons';
 import { AuthService } from '@auth0/auth0-angular';
 import { ServiceService } from '../service.service';
+import { Location } from '@angular/common';
+
 
 type Evento = {
   id: string;
@@ -23,10 +25,11 @@ type Evento = {
 })
 export class EventsComponent implements OnInit {
   
-  constructor() {}
+  constructor(private location:Location) {}
   auth!: AuthService;
   service = new ServiceService(this.auth);
   listadeportes: any;
+  listaeventos: any;
   ngOnInit() {
     this.deportes();
   }
@@ -52,6 +55,17 @@ export class EventsComponent implements OnInit {
       console.error('Error al obtener o procesar los deportes:', error);
     }
   }
+  async eventos(id:string) {
+    try {
+      this.listadeportes = await this.service.getEventosPorIdDeporte(id);
+      // Verifica la estructura de los datos devueltos
+      console.log(this.listadeportes);
+      // Realiza operaciones con los datos
+      // Por ejemplo, itera sobre los datos
+    } catch (error) {
+      console.error('Error al obtener o procesar los deportes:', error);
+    }
+  }
   confirm() {
     this.modal.dismiss(this.name, 'confirm');
   }
@@ -62,51 +76,16 @@ export class EventsComponent implements OnInit {
       this.message = `Hello, ${ev.detail.data}!`;
     }
   }
-  // listaDeEventos: Evento[] = [
-  // {
-  // id: '1',
-  // description: 'La Kinli',
-  // eventos:
-  // [
-  // {
-  // id: '1',
-  // ronda: 'Final'
-  // },
-  // {
-  // id: '2',
-  // ronda: 'Semifinal-1'
-  // },
-  // {
-  // id: '3',
-  // ronda: 'Semifinal-2'
-  // },
-  // {
-  // id: '4',
-  // ronda: 'Cuartos de final'
-  // }
-  // ]
-  // },
-  // {
-  // id: '2',
-  // description: 'Baloncesto',
-  // eventos: {
-
-  // }
-  // },
-  // {
-  // id: '3',
-  // description: 'Hokey',
-  // eventos: {
-
-  // }
-  // },
-  // ];
   buy() {}
 
   isModalOpen = false;
   id: string | undefined;
 
   setOpen(isOpen: boolean, item: string) {
+    if(isOpen ===false){
+    }else{
+      this.location.replaceState(this.location.path()+"/" +item);
+    }
     console.log(item);
     this.id = item;
     this.isModalOpen = isOpen;

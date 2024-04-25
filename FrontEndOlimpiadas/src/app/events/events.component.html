@@ -1,10 +1,9 @@
 @for (item of listadeportes; track item.id;){
 <ion-card>
   <ion-card-header>
-    <ion-card-title>{{ item.nombre_deporte }}</ion-card-title>
+    <ion-card-title>{{ item.nombre }}</ion-card-title>
   </ion-card-header>
   <ion-card-content>
-    <p>{{ item.id }}</p>
   </ion-card-content>
   <ion-button id="open-modal" expand="block" (click)="setOpen(true, item.id)"
     >Compra manin</ion-button

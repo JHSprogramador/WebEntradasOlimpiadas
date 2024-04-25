@@ -80,6 +80,16 @@ export class ServiceService {
       throw error;
     }
   }
+  async getEventosPorIdDeporte(id:string) {
+    try {
+      const response = await $.get(apiURL + '/eventosPorIdDeporte/'+id);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error('Error al obtener los eventos:', error);
+      throw error;
+    }
+  }
   
   // Llamada a la función getDeportes
   
