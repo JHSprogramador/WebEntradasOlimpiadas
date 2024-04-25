@@ -43,9 +43,9 @@ export class EventsComponent implements OnInit {
 
   async deportes() {
     try {
-      const deportes = await this.service.getDeportes();
+      this.listadeportes = await this.service.getDeportes();
       // Verifica la estructura de los datos devueltos
-      console.log(deportes);
+      console.log(this.listadeportes);
       // Realiza operaciones con los datos
       // Por ejemplo, itera sobre los datos
     } catch (error) {
