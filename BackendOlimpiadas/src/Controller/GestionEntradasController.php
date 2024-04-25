@@ -17,9 +17,27 @@ class GestionEntradasController extends AbstractController
     #[Route('/api/olimpiadas/evento', name: 'get_eventos', methods: ['GET'])]
     public function getEvento(EntityManagerInterface $entityManager): JsonResponse
     {
-        return $this->render('gestion_entradas/index.html.twig', [
-            'controller_name' => 'GestionEntradasController',
-        ]);
+        $periodo = $this->ComprobarPeriodo();
+        if($periodo == 0){
+            return new JsonResponse(['error' => 'No hay eventos en este periodo'], Response::HTTP_NOT_FOUND);
+        }
+        $query = $entityManager->createQuery('SELECT e FROM App\Entity\Eventos e WHERE e.periodo = :periodo'); // la e es de evento (se usa e para abreviar el nombre de la tabla)
+        $query->setParameter('periodo', $periodo);
+        $eventos = $query->getResult();
+        $data = [];
+        foreach ($eventos as $evento){
+            $data[] = [
+                'id' => $evento->getId(),
+                'nombre' => $evento->getNombre(),
+                'fecha' => $evento->getFecha(),
+                'hora' => $evento->getHora(),
+                'periodo' => $evento->getPeriodo(),
+                'deporte' => $evento->getDeporte()->getNombre(),
+                'seccion' => $evento->getSeccion()->getNombre(),
+                'estadio' => $evento->getEstadio()->getNombre()
+            ];
+        }
+        return new JsonResponse($data, Response::HTTP_OK);
     }
 
     //GET ENTRA URL(CON PARAMETRO ID DEPORTE)    de eventos por id deporte    Sale JSON
@@ -27,20 +45,64 @@ class GestionEntradasController extends AbstractController
     #[Route('/api/olimpiadas/deporte', name: 'get_deportes', methods: ['GET'])]
     public function getDeportes(EntityManagerInterface $entityManager): JsonResponse
     {
-        return $this->render('gestion_entradas/index.html.twig', [
-            'controller_name' => 'GestionEntradasController',
-        ]);
+        //saamos los posibles deportes para el ecento actual
+        $periodo = $this->ComprobarPeriodo();
+        if($periodo == 0){
+            return new JsonResponse(['error' => 'No hay eventos en este periodo'], Response::HTTP_NOT_FOUND);
+        }
+        $query = $entityManager->createQuery('SELECT d FROM App\Entity\Deportes d WHERE d.periodo = :periodo'); // la d es de deporte (se usa d para abreviar el nombre de la tabla)
+        $query->setParameter('periodo', $periodo);
+        $deportes = $query->getResult();
+        $data = [];
+        foreach ($deportes as $deporte){
+            $data[] = [
+                'id' => $deporte->getId(),
+                'nombre' => $deporte->getNombre(),
+                'periodo' => $deporte->getPeriodo()
+            ];
+        }
+        return new JsonResponse($data, Response::HTTP_OK);        
     }
-    //GET ENTRA URL(CON PARAMETRO ID USUARIO) Get_ de todö (Evento, deporte, seccion, estadio)
+    //GET ENTRA URL(CON PARAMETRO ID USUARIO) Get_ de todo (Evento, deporte, seccion, estadio)
     //segun una id solo si la semana es la del usuario y
     // solo se regresan las del periodo correcto
     //RUTA: /api/olimpiadas/actividades
     #[Route('/api/olimpiadas/actividades', name: 'get_actividades', methods: ['GET'])]
     public function getActividades(EntityManagerInterface $entityManager): JsonResponse
     {
-        return $this->render('gestion_entradas/index.html.twig', [
-            'controller_name' => 'GestionEntradasController',
-        ]);
+        //sacamos el periodo actual
+        $periodo = $this->ComprobarPeriodo();
+        if($periodo == 0){
+            return new JsonResponse(['error' => 'No hay eventos en este periodo'], Response::HTTP_NOT_FOUND);
+        }
+        //sacamos el id del usuario
+        $id_usuario = $_GET['id_usuario'];
+        $usuario = $entityManager->getRepository(UsuariosMeses::class)->find($id_usuario);
+        if($usuario == null){
+            return new JsonResponse(['error' => 'Usuario no encontrado'], Response::HTTP_NOT_FOUND);
+        }
+        //comprobamos si la semana es la correcta
+        if(!$this->ComprobarSemana($usuario)){
+            return new JsonResponse(['error' => 'No es la semana correcta para el usuario'], Response::HTTP_NOT_FOUND);
+        }
+        //sacamos los eventos del periodo actual
+        $query = $entityManager->createQuery('SELECT e FROM App\Entity\Eventos e WHERE e.periodo = :periodo'); // la e es de evento (se usa e para abreviar el nombre de la tabla)
+        $query->setParameter('periodo', $periodo);
+        $eventos = $query->getResult();
+        $data = [];
+        foreach ($eventos as $evento){
+            $data[] = [
+                'id' => $evento->getId(),
+                'nombre' => $evento->getNombre(),
+                'fecha' => $evento->getFecha(),
+                'hora' => $evento->getHora(),
+                'periodo' => $evento->getPeriodo(),
+                'deporte' => $evento->getDeporte()->getNombre(),
+                'seccion' => $evento->getSeccion()->getNombre(),
+                'estadio' => $evento->getEstadio()->getNombre()
+            ];
+        }
+        return new JsonResponse($data, Response::HTTP_OK);
     }
     //Metodo Comprobar el periodo actual
     public function ComprobarPeriodo(): int{

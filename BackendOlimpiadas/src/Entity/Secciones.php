@@ -21,11 +21,13 @@ class Secciones
     #[ORM\Column(length: 255)]
     private ?string $nombreSeccion = null;
 
-    #[ORM\ManyToOne]
-    private ?Estadios $id_estadio = null;
+   
 
     #[ORM\OneToMany(targetEntity: SeccionEvento::class, mappedBy: 'id_seccion')]
     private Collection $secciones;
+
+    #[ORM\ManyToOne(inversedBy: 'Secciones')]
+    private ?Estadios $id_estadio = null;
 
     public function __construct()
     {
@@ -61,17 +63,7 @@ class Secciones
         return $this;
     }
 
-    public function getIdEstadio(): ?Estadios
-    {
-        return $this->id_estadio;
-    }
 
-    public function setIdEstadio(?Estadios $id_estadio): static
-    {
-        $this->id_estadio = $id_estadio;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, SeccionEvento>
@@ -99,6 +91,18 @@ class Secciones
                 $seccione->setIdSeccion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdEstadio(): ?Estadios
+    {
+        return $this->id_estadio;
+    }
+
+    public function setIdEstadio(?Estadios $id_estadio): static
+    {
+        $this->id_estadio = $id_estadio;
 
         return $this;
     }
