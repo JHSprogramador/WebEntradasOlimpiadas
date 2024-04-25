@@ -21,9 +21,16 @@ class Deportes
     #[ORM\ManyToMany(targetEntity: Eventos::class, mappedBy: 'id_deporte')]
     private Collection $eventos;
 
+    #[ORM\Column]
+    private ?int $Periodo = null;
+
+    #[ORM\OneToMany(targetEntity: DeportesEventos::class, mappedBy: 'id_deporte')]
+    private Collection $deportes;
+
     public function __construct()
     {
         $this->eventos = new ArrayCollection();
+        $this->deportes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -65,6 +72,48 @@ class Deportes
     {
         if ($this->eventos->removeElement($evento)) {
             $evento->removeIdDeporte($this);
+        }
+
+        return $this;
+    }
+
+    public function getPeriodo(): ?int
+    {
+        return $this->Periodo;
+    }
+
+    public function setPeriodo(int $Periodo): static
+    {
+        $this->Periodo = $Periodo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DeportesEventos>
+     */
+    public function getDeportes(): Collection
+    {
+        return $this->deportes;
+    }
+
+    public function addDeporte(DeportesEventos $deporte): static
+    {
+        if (!$this->deportes->contains($deporte)) {
+            $this->deportes->add($deporte);
+            $deporte->setIdDeporte($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDeporte(DeportesEventos $deporte): static
+    {
+        if ($this->deportes->removeElement($deporte)) {
+            // set the owning side to null (unless already changed)
+            if ($deporte->getIdDeporte() === $this) {
+                $deporte->setIdDeporte(null);
+            }
         }
 
         return $this;

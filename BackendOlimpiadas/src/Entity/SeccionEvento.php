@@ -27,6 +27,12 @@ class SeccionEvento
     #[ORM\OneToMany(targetEntity: Entrada::class, mappedBy: 'id_SeccionEvento')]
     private Collection $seccionesEventos;
 
+    #[ORM\ManyToOne(inversedBy: 'seccionesEventos')]
+    private ?DeportesEventos $id_deporteEvento = null;
+
+    #[ORM\ManyToOne(inversedBy: 'deportesEventos')]
+    private ?DeportesEventos $id_deporte_Evento = null;
+
     public function __construct()
     {
         $this->seccionesEventos = new ArrayCollection();
@@ -99,6 +105,18 @@ class SeccionEvento
                 $seccionesEvento->setIdSeccionEvento(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdDeporteEvento(): ?DeportesEventos
+    {
+        return $this->id_deporteEvento;
+    }
+
+    public function setIdDeporteEvento(?DeportesEventos $id_deporteEvento): static
+    {
+        $this->id_deporteEvento = $id_deporteEvento;
 
         return $this;
     }

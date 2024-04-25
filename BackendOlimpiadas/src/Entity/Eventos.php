@@ -18,19 +18,16 @@ class Eventos
     #[ORM\Column(length: 255)]
     private ?string $nombreEvento = null;
 
-    #[ORM\Column]
-    private ?int $periodo = null;
+    #[ORM\OneToMany(targetEntity: DeportesEventos::class, mappedBy: 'id_evento')]
+    private Collection $eventos;
 
-    #[ORM\ManyToMany(targetEntity: Deportes::class, inversedBy: 'eventos')]
-    private Collection $id_deporte;
 
-    #[ORM\OneToMany(targetEntity: SeccionEvento::class, mappedBy: 'id_evento')]
-    private Collection $Eventos;
+
+
 
     public function __construct()
     {
-        $this->id_deporte = new ArrayCollection();
-        $this->Eventos = new ArrayCollection();
+        $this->eventos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -50,63 +47,27 @@ class Eventos
         return $this;
     }
 
-    public function getPeriodo(): ?int
-    {
-        return $this->periodo;
-    }
-
-    public function setPeriodo(int $periodo): static
-    {
-        $this->periodo = $periodo;
-
-        return $this;
-    }
-
     /**
-     * @return Collection<int, Deportes>
-     */
-    public function getIdDeporte(): Collection
-    {
-        return $this->id_deporte;
-    }
-
-    public function addIdDeporte(Deportes $idDeporte): static
-    {
-        if (!$this->id_deporte->contains($idDeporte)) {
-            $this->id_deporte->add($idDeporte);
-        }
-
-        return $this;
-    }
-
-    public function removeIdDeporte(Deportes $idDeporte): static
-    {
-        $this->id_deporte->removeElement($idDeporte);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, SeccionEvento>
+     * @return Collection<int, DeportesEventos>
      */
     public function getEventos(): Collection
     {
-        return $this->Eventos;
+        return $this->eventos;
     }
 
-    public function addEvento(SeccionEvento $evento): static
+    public function addEvento(DeportesEventos $evento): static
     {
-        if (!$this->Eventos->contains($evento)) {
-            $this->Eventos->add($evento);
+        if (!$this->eventos->contains($evento)) {
+            $this->eventos->add($evento);
             $evento->setIdEvento($this);
         }
 
         return $this;
     }
 
-    public function removeEvento(SeccionEvento $evento): static
+    public function removeEvento(DeportesEventos $evento): static
     {
-        if ($this->Eventos->removeElement($evento)) {
+        if ($this->eventos->removeElement($evento)) {
             // set the owning side to null (unless already changed)
             if ($evento->getIdEvento() === $this) {
                 $evento->setIdEvento(null);
@@ -115,4 +76,10 @@ class Eventos
 
         return $this;
     }
+
+   
+
+    
+
+
 }
