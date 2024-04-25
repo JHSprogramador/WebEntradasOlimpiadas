@@ -18,18 +18,17 @@ class GestionEntradasController extends AbstractController
     //RUTA: /api/olimpiadas/evento
 
     #[Route('/eventosPorIdDeporte/{id}', name: 'get_eventos', methods: ['GET'])]
-    public function getEventos(EntityManagerInterface $entityManager): JsonResponse
+    public function getEventos($id, EntityManagerInterface $entityManager): JsonResponse
     {
-        //recibimo id de deporte por url un valor (1 o 2)
-        $id_deporte = $_GET['id_deporte'];
-        // devovemos todos los eventos de ese deporte por json
-        $eventos = $entityManager->getRepository(Eventos::class)->findBy(['id_deporte' => $id_deporte]);
+        // $id is directly injected from the route parameter
+        $id_deporte = $id;
+        $eventos = $entityManager->getRepository(Eventos::class)->findBy(['id' => $id_deporte]);
         $data = [];
 
         foreach ($eventos as $evento) {
             $data[] = [
                 'id' => $evento->getId(),
-                'nombre' => $evento->getNombreDeporte(),
+                'nombre' => $evento->getNombreEvento(),
             ];
         }
 
@@ -61,16 +60,48 @@ class GestionEntradasController extends AbstractController
 
         return new JsonResponse($data, Response::HTTP_OK);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //GET ENTRA URL(CON PARAMETRO ID AUTH0) Get_ de todo (Evento, deporte, seccion, estadio)
     //segun una id solo si la semana es la del usuario y
     // solo se regresan las del periodo correcto
     //RUTA: /actividades
     #[Route('/actividades', name: 'get_actividades', methods: ['GET'])]
-    public function getActividades(EntityManagerInterface $entityManager): JsonResponse
+    public function getActividades(EntityManagerInterface $entityManager): JsonResponse //TODO Por hacer
     {
-
         return new JsonResponse(['message' => 'Implement GET method'], Response::HTTP_OK);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //Metodo Comprobar el periodo actual
     public function ComprobarPeriodo(): int
     {
