@@ -73,7 +73,6 @@ class GestionUsuariosController extends AbstractController
     }
 
     //devolvemos al usuario con el id y sus semanas 
-   
     #[Route('/usuario/auth0/{idAuth0}', name: 'get_usuario_by_auth0', methods: ['GET'])]
     public function getByAuth0(string $idAuth0, EntityManagerInterface $entityManager): JsonResponse
     {
