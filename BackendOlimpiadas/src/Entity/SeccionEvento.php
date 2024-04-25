@@ -18,9 +18,6 @@ class SeccionEvento
     #[ORM\ManyToOne(inversedBy: 'Secciones')]
     private ?Secciones $id_seccion = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Eventos')]
-    private ?Eventos $id_evento = null;
-
     #[ORM\Column]
     private ?float $Precio = null;
 
@@ -29,9 +26,6 @@ class SeccionEvento
 
     #[ORM\ManyToOne(inversedBy: 'seccionesEventos')]
     private ?DeportesEventos $id_deporteEvento = null;
-
-    #[ORM\ManyToOne(inversedBy: 'deportesEventos')]
-    private ?DeportesEventos $id_deporte_Evento = null;
 
     public function __construct()
     {
@@ -55,17 +49,7 @@ class SeccionEvento
         return $this;
     }
 
-    public function getIdEvento(): ?Eventos
-    {
-        return $this->id_evento;
-    }
-
-    public function setIdEvento(?Eventos $id_evento): static
-    {
-        $this->id_evento = $id_evento;
-
-        return $this;
-    }
+    
 
     public function getPrecio(): ?float
     {

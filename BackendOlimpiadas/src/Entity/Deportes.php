@@ -18,9 +18,6 @@ class Deportes
     #[ORM\Column(length: 255)]
     private ?string $nombreDeporte = null;
 
-    #[ORM\ManyToMany(targetEntity: Eventos::class, mappedBy: 'id_deporte')]
-    private Collection $eventos;
-
     #[ORM\Column]
     private ?int $Periodo = null;
 
@@ -29,7 +26,6 @@ class Deportes
 
     public function __construct()
     {
-        $this->eventos = new ArrayCollection();
         $this->deportes = new ArrayCollection();
     }
 
@@ -46,33 +42,6 @@ class Deportes
     public function setNombreDeporte(string $nombreDeporte): static
     {
         $this->nombreDeporte = $nombreDeporte;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Eventos>
-     */
-    public function getEventos(): Collection
-    {
-        return $this->eventos;
-    }
-
-    public function addEvento(Eventos $evento): static
-    {
-        if (!$this->eventos->contains($evento)) {
-            $this->eventos->add($evento);
-            $evento->addIdDeporte($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEvento(Eventos $evento): static
-    {
-        if ($this->eventos->removeElement($evento)) {
-            $evento->removeIdDeporte($this);
-        }
 
         return $this;
     }
