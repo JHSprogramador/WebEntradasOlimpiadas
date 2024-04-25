@@ -20,6 +20,11 @@ type Evento = {
   imports: [CommonModule, IonicModule, EventsComponent],
 })
 export class EventsComponent implements OnInit {
+
+  ngOnInit() {
+    
+  }
+
   constructor() {}
   @ViewChild(IonModal)
   modal!: IonModal;
@@ -84,7 +89,7 @@ export class EventsComponent implements OnInit {
   ];
   buy() {}
 
-  ngOnInit() {}
+  
   isModalOpen = false;
   id:string | undefined;
 
@@ -93,9 +98,33 @@ export class EventsComponent implements OnInit {
     this.id = item
     this.isModalOpen = isOpen;
   }
-  public alertButtons = ['OK'];
-  public alertInputs = [
-    (<HTMLSelectElement>document.getElementById('zona'))
-  ];
+  public alertButtons = [{
+    text: 'Cancel',
+    role: 'cancel',
+    handler: () => {
+      console.log('Alert canceled');
+    },
+  },
+  {
+    text: 'OK',
+    role: 'confirm',
+    handler: () => {
+      console.log('Alert confirmed');
+    },
+  },
+];
+  public alertInputs: string[] | undefined;
+  confirmar(){
+    var a = document.getElementById('zona') as HTMLSelectElement
+    var b = document.getElementById('cantidad') as HTMLIonRangeElement
+    console.log(a.value)
+    console.log(b.value)
+    if(parseInt(b.value.toString())>1){
+      this.alertInputs = ["Confirmas la compra de " + b.value + " entradas en la zona " + a.value];
+    }else{
+      this.alertInputs = ["Confirmas la compra de " + b.value + " entrada en la zona " + a.value];
+    }
+    
+  }
 }
   
