@@ -43,6 +43,11 @@ class GestionUsuariosController extends AbstractController
         // }
 
         $data = json_decode(file_get_contents('php://input'), true);
+
+        if (!isset($data['idAuth0'])) {
+            return new JsonResponse(['error' => 'Falta el idAuth0'], 400);
+        }
+
         $usuario = new Usuario();
         $usuario->setIdAuth0($data['idAuth0']);
         $usuario->setName($data['name']);
