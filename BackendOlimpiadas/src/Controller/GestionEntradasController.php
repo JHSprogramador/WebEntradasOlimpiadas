@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\DeportesEventos;
 use App\Entity\Eventos;
 use App\Entity\UsuariosMeses;
 use phpDocumentor\Reflection\Types\Integer;
@@ -74,26 +75,74 @@ class GestionEntradasController extends AbstractController
 
 
 
+        //nos pasan un id deporte
+        //tambien nos pasan una id evento
+        //necesitamos saber las secciones y toda su informacion y el estdio al que pertenece donde en deportes eventos coincidan la id deporte y la id evento
+        //recibimos la id del deporte y la id del evento por un json
 
 
-    //GET ENTRA URL(CON PARAMETRO ID AUTH0) Get_ de todo (Evento, deporte, seccion, estadio)
-    //segun una id solo si la semana es la del usuario y
-    // solo se regresan las del periodo correcto
-    //RUTA: /actividades
+
+
+
+        
+        // $deporteId = $deporte->getId();
+        // $deportesEventos = $manager->getRepository(DeportesEventos::class)->findBy(['id_deporte' => $deporteId]);
+        
     #[Route('/actividades', name: 'get_actividades', methods: ['GET'])]
-    public function getActividades(EntityManagerInterface $entityManager): JsonResponse //TODO Por hacer
-    {
-        return new JsonResponse(['message' => 'Implement GET method'], Response::HTTP_OK);
+    public function getActividades(EntityManagerInterface $entityManager): JsonResponse {+
+
+         
+
+
+        $data = json_decode(file_get_contents('php://input'), true);
+        
+        if (!isset($data['idAuth0'])) {
+            return new JsonResponse(['error' => 'Falta el idAuth0'], 400);
+        }
+
+        if (!isset($data['id_deporte'], $data['id_evento'])) {
+            return new JsonResponse(['error' => 'Falta id_deporte o id_evento'], 400);
+        }
+
+        $id_deporte = $data['id_deporte'];
+        $id_evento = $data['id_evento'];
+
+        // Find DeportesEventos entity where id_deporte and id_evento match
+        $deportesEventos = $entityManager->getRepository(DeportesEventos::class)->findOneBy([
+            'id_deporte' => $id_deporte,
+            'id_evento' => $id_evento
+        ]);
+
+        if (!$deportesEventos) {
+            return new JsonResponse(['error' => 'No se encontró DeportesEventos con id_deporte e id_evento dados'], 404);
+        }
+
+        // Get related Secciones and Estadio
+        $secciones = $deportesEventos->getSecciones();
+        $estadio = $deportesEventos->getEstadio();
+
+        // Prepare data for response
+        $responseData = [
+            'secciones' => [],
+            'estadio' => null
+        ];
+
+        foreach ($secciones as $seccion) {
+            $responseData['secciones'][] = [
+                'id' => $seccion->getId(),
+                // Add other fields of Seccion entity that you want to include in the response
+            ];
+        }
+
+        if ($estadio) {
+            $responseData['estadio'] = [
+                'id' => $estadio->getId(),
+                // Add other fields of Estadio entity that you want to include in the response
+            ];
+        }
+
+        return new JsonResponse($responseData, 200);
     }
-
-
-
-
-
-
-
-
-
 
 
 
