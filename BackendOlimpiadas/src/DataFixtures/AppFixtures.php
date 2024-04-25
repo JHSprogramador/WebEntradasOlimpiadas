@@ -63,6 +63,7 @@ class AppFixtures extends Fixture
         foreach ($nombresEventos as $nombreEvento) {
             $eventos = new Eventos();
             $eventos->setNombreEvento($nombreEvento);
+            $manager->persist($eventos);
         }
 
         $manager->flush(); //correcto
@@ -98,7 +99,7 @@ class AppFixtures extends Fixture
             $indicesAleatorios = array_rand($eventos, 3);
             $eventosAleatorios = [];
             foreach ($indicesAleatorios as $indice) {
-                $eventosAleatorios[] = $deportes[$indice];
+                $eventosAleatorios[] = $eventos[$indice]; //array de eventos
             }
 
             foreach($eventosAleatorios as $eventoAleatorio){
@@ -106,6 +107,7 @@ class AppFixtures extends Fixture
                 $deporteEvento =  new DeportesEventos();
                 $deporteEvento->setIdDeporte($deporte);
                 $deporteEvento->setIdEvento($eventoAleatorio);
+                $manager->persist($deporteEvento);
                 
             }
 
