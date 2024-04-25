@@ -46,7 +46,6 @@ class GestionEntradasController extends AbstractController
     #[Route('/deporte', name: 'get_deportes', methods: ['GET'])]
     public function getDeportes(EntityManagerInterface $entityManager): JsonResponse
     {
-        // TODO: Implementar este método
         $periodo = $this->ComprobarPeriodo();
         if ($periodo == 0) {
             return new JsonResponse(['error' => 'No hay deportes en este periodo'], Response::HTTP_NOT_FOUND);
