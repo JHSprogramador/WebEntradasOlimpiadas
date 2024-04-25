@@ -6,7 +6,7 @@ use App\Entity\Estadios;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
+/** 
  * @extends ServiceEntityRepository<Estadios>
  *
  * @method Estadios|null find($id, $lockMode = null, $lockVersion = null)

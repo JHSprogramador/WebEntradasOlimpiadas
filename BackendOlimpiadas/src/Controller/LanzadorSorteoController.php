@@ -39,22 +39,22 @@ class LanzadorSorteoController extends AbstractController
 
         $usuariosMesMezclados1 = $listaUsuarios;
         shuffle($usuariosMesMezclados1);
-        //primera parte
+        //primera parte segundo mes
         for ($contador; $contador < $cantidadPorParteSegundoMes; $contador++) {
             $usuarioATratar = $usuariosMesMezclados1[$contador];
             $usuarioATratar->setMes2(23);
         }
-        //segunda parte
+        //segunda parte segundo mes
         for ($contador; $contador < $cantidadPorParteSegundoMes * 2; $contador++) {
             $usuarioATratar = $usuariosMesMezclados1[$contador];
             $usuarioATratar->setMes2(24);
         }
-        //tercera parte
+        //tercera parte segundo mes
         for ($contador; $contador < $cantidadPorParteSegundoMes * 3; $contador++) {
             $usuarioATratar = $usuariosMesMezclados1[$contador];
             $usuarioATratar->setMes2(25);
         }
-        //cuarta parte
+        //cuarta parte segundo mes
         for ($contador; $contador < count($listaUsuarios); $contador++) {
             $usuarioATratar = $usuariosMesMezclados1[$contador];
             $usuarioATratar->setMes2(26);
