@@ -113,6 +113,8 @@ class AppFixtures extends Fixture
 
         }
 
+
+        $manager->flush();
         //END DEPORTES_EVENTOS
 
 
@@ -123,10 +125,17 @@ class AppFixtures extends Fixture
         // Iterar sobre cada deporte y asignar sus eventos a todas las secciones del estadio aleatorio
         foreach ($deportes as $deporte) {
             
-            $estadioAleatorio = $estadios[array_rand($estadios)];// Obtener un estadio aleatorio
-
-            $secciones = $estadioAleatorio->getSecciones();// Obtener todas las secciones del estadio aleatorio
-            $deportesEventos = $deporte->getDeportes();
+            $estadioAleatorioIndice = array_rand($estadios, 1);
+            $estadioAleatorio = $estadios[$estadioAleatorioIndice];// Obtener un estadio aleatorio
+            
+            $estadioId = $estadioAleatorio->getId();
+            $secciones = $manager->getRepository(Secciones::class)->findBy(['id_estadio' => $estadioId]);// Obtener todas las secciones del estadio aleatorio
+            
+            $deporteId = $deporte->getId();
+            $deportesEventos = $manager->getRepository(DeportesEventos::class)->findBy(['id_deporte' => $deporteId]);
+            //$deportesEventos = $deporte->getDeportes();
+            $x = count($deportesEventos);
+            echo "$x";
             foreach ($deportesEventos as $deporteEvento) {
                 foreach ($secciones as $seccion) {
                     $seccionEvento = new SeccionEvento();
