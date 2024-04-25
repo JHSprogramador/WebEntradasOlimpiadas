@@ -110,7 +110,7 @@ class GestionEntradasController extends AbstractController
                 $estadio = $entityManager->getRepository('App\Entity\Estadios')->findBy(['id' => reset($seccion)->getIdEstadio()]);
                 $data[] = [
                     'id' => $seccionEvento->getId(),
-                    'nombre' => $seccion[0]->getNombreSeccion(),
+                    'seccion' => $seccion[0]->getNombreSeccion(),
                     'precio' => $seccionEvento->getPrecio(),
                     'estadio' => $estadio[0]->getNombreEstadio(),
                 ];
