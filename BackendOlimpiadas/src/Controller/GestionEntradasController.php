@@ -91,11 +91,17 @@ class GestionEntradasController extends AbstractController
             return 0;
         }
     }
-    //Metodo Recivo una id de usuario, compruebo si la semana actual es correcta para el usuario
-    public function ComprobarSemana(UsuariosMeses $usuario): bool
-    {
-        //TODO: Comprobar si la semana actual es la correcta para el usuario
-
-        return false;
-    }
+     //Metodo Recivo una id de usuario, compruebo si la semana actual es correcta para el usuario
+     public function ComprobarSemana(UsuariosMeses $usuario): bool
+     {
+         $fecha_actual = new \DateTime();
+ 
+         $numero_semana = $fecha_actual->format("W");
+ 
+         if($usuario->getMes1() == $numero_semana || $usuario->getMes2() == $numero_semana ){
+             return true;
+         }
+ 
+         return false;
+     }
 }

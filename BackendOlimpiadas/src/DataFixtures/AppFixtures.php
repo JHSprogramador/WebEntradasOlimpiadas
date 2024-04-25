@@ -125,7 +125,7 @@ class AppFixtures extends Fixture
             foreach ($eventos as $evento) {
                 foreach ($secciones as $seccion) {
                     $seccionEvento = new SeccionEvento();
-                    $seccionEvento->setIdEvento($evento);
+                    //$seccionEvento->setIdEvento($evento);
                     $seccionEvento->setIdSeccion($seccion);
                     $seccionEvento->setPrecio(mt_rand(100, 1000) / 10); //precio random entre 10 y 100 con un decimal
                     $manager->persist($seccionEvento);
