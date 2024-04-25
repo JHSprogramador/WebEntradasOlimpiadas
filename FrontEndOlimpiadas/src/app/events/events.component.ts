@@ -20,6 +20,11 @@ type Evento = {
   imports: [CommonModule, IonicModule, EventsComponent],
 })
 export class EventsComponent implements OnInit {
+
+  ngOnInit() {
+    
+  }
+
   constructor() {}
   @ViewChild(IonModal)
   modal!: IonModal;
@@ -84,7 +89,7 @@ export class EventsComponent implements OnInit {
   ];
   buy() {}
 
-  ngOnInit() {}
+  
   isModalOpen = false;
   id:string | undefined;
 
