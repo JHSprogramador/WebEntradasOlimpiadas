@@ -107,6 +107,7 @@ class AppFixtures extends Fixture
                 $deporteEvento =  new DeportesEventos();
                 $deporteEvento->setIdDeporte($deporte);
                 $deporteEvento->setIdEvento($eventoAleatorio);
+                $manager->persist($deporteEvento);
                 
             }
 
