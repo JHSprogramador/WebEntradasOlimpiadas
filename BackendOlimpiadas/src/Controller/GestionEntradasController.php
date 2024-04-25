@@ -17,7 +17,7 @@ class GestionEntradasController extends AbstractController
     //GET ENTRA URL(SIN PARAMETRO)   Deportes en periodo correcto    Sale JSON
     //RUTA: /api/olimpiadas/evento
     
-    #[Route('/evento/{id}', name: 'get_eventos', methods: ['GET'])]
+    #[Route('/eventosPorIdDeporte/{id}', name: 'get_eventos', methods: ['GET'])]
     public function getEventos(EntityManagerInterface $entityManager): JsonResponse
     {
         //recibimo id de deporte por url un valor (1 o 2)
@@ -29,7 +29,7 @@ class GestionEntradasController extends AbstractController
         foreach ($eventos as $evento) {
             $data[] = [
             'id' => $evento->getId(),
-            'nombre' => $evento->getNombre(),
+            'nombre' => $evento->getNombreDeporte(),
             ];
         }
 
@@ -43,29 +43,8 @@ class GestionEntradasController extends AbstractController
     #[Route('/deporte', name: 'get_deportes', methods: ['GET'])]
     public function getDeportes(EntityManagerInterface $entityManager): JsonResponse
     {
-<<<<<<< HEAD
 
-        
-=======
-        $periodo = $this->ComprobarPeriodo();
-        if ($periodo == 0) {
-            return new JsonResponse(['error' => 'No hay deportes en este periodo'], Response::HTTP_NOT_FOUND);
-        }
-
-        // Devuelve los deportes que coincidan con el periodo
-        $deporteCoincidePeriodo = $entityManager->getRepository('App\Entity\Deportes')->findBy(['periodo' => $periodo]);
-
-        $data = [];
-        foreach ($deporteCoincidePeriodo as $deporte) {
-            $data[] = [
-                'id' => $deporte->getId(),
-                'nombre' => $deporte->getNombre(),
-                'periodo' => $deporte->getPeriodo()
-            ];
-        }
-
-        return new JsonResponse($data, Response::HTTP_OK);
->>>>>>> 04f0f54f5611bc0db35a633ce72a3eecd6d72c99
+        return new JsonResponse(['message' => 'Implement GET method'], Response::HTTP_OK);
     }
     //GET ENTRA URL(CON PARAMETRO ID AUTH0) Get_ de todo (Evento, deporte, seccion, estadio)
     //segun una id solo si la semana es la del usuario y
@@ -75,7 +54,7 @@ class GestionEntradasController extends AbstractController
     public function getActividades(EntityManagerInterface $entityManager): JsonResponse
     {
 
-        
+        return new JsonResponse(['message' => 'Implement GET method'], Response::HTTP_OK);
 
 
     }
