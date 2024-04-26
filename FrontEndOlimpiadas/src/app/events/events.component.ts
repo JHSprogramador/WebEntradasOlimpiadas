@@ -97,17 +97,26 @@ export class EventsComponent implements OnInit {
   confirmar(id_evento: string) {
     var a = document.getElementById('zona') as HTMLSelectElement;
     var b = document.getElementById('cantidad') as HTMLIonRangeElement;
+    var precio=2;
     console.log(a.value);
     console.log(b.value);
+    console.log(this.listasecciones);
+    this.listasecciones.forEach((s: any) => {
+      if (s.seccion === a.value) {
+        precio = s.precio;
+        precio = precio*parseInt(b.value.toString());
+      }
+    });
     if (parseInt(b.value.toString()) > 1) {
       this.alertInputs = [
-        'Confirmas la compra de ' + b.value + ' entradas en la zona ' + a.value,
+        'Confirmas la compra de ' + b.value + ' entradas en la zona ' + a.value + " con un valor de " + precio + "€",
       ];
     } else {
       this.alertInputs = [
-        'Confirmas la compra de ' + b.value + ' entrada en la zona ' + a.value,
+        'Confirmas la compra de ' + b.value + ' entrada en la zona ' + a.value + " con un valor de " + precio + "€",
       ];
     }
+
     this.pushEntrada(id_evento, b.value.toString());
   }
   async deportes() {
@@ -125,7 +134,6 @@ export class EventsComponent implements OnInit {
   async eventos() {
     try {
       this.id_deporte = this.location.path().split('/').pop();
-      alert(this.id_deporte);
       this.listaeventos = await this.service.getEventosPorIdDeporte(
         this.id_deporte
       );
@@ -146,6 +154,7 @@ export class EventsComponent implements OnInit {
         this.id_deporte,
         this.id_evento
       );
+      console.log(this.listasecciones);
       // Verifica la estructura de los datos devueltos
       // Realiza operaciones con los datos
       // Por ejemplo, itera sobre los datos
