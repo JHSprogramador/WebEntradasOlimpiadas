@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Usuario;
 use App\Entity\Entrada;
+use App\Entity\Secciones;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -70,9 +71,28 @@ class GestionVentasComprasController extends AbstractController
     //              si esa cantidad mas la cantidad dada no supera el aforo de esa seccion regresara true
 
     public function comprobarAforo(ObjectManager $manager, int $idSeccion, int $cantidad): bool{
-        
+        $entradaRepository = $manager->getRepository(Entrada::class);
 
+        $query = $entradaRepository->createQueryBuilder('e')
+        ->innerJoin('e.id_seccionEvento', 'se')
+        ->andWhere('se.id_seccion = :seccion')
+        ->serParameter('seccion', $idSeccion)
+        ->getQuery()
+        ->getResult();
 
-        return false;
+        $cantidadEntradasEnSeccion = count($entradaRepository);
+
+        $cantidadEntradasEnSeccionMasCompra = $cantidad + $cantidadEntradasEnSeccion;
+
+        $seccion = $manager->getRepository(Secciones::class)->find($idSeccion);
+
+        // Obtener el aforo de la sección
+        $aforo = $seccion->getAforo();
+
+        if($aforo < $cantidadEntradasEnSeccionMasCompra){
+            return false;
+        }
+
+        return true;
     }
 }
