@@ -101,7 +101,26 @@ export class ServiceService {
       throw error;
     }
   }
-  
+  async pushEntrada(id_deporte:string, id_evento:string,id_secciones:string,cantidad:number) {
+    const idAuth0 = await firstValueFrom(this.auth.user$.pipe(map(user => user?.sub)));
+
+    const body = JSON.stringify({
+      id_deporte,
+      id_evento,
+      id_secciones,
+      idAuth0,
+      cantidad
+    });
+    try {
+      await $.post(apiURL + '/usuario/register', body);
+    } catch (error: any) {
+      if (error.status === 400) {
+        console.error("An error occurred while registering the user.");
+      } else if (error.status === 409) {
+        console.info("User already registered!");
+      }
+    }
+  }
   // Llamada a la función getDeportes
   
 }

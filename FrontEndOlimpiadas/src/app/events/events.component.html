@@ -5,8 +5,7 @@
   </ion-card-header>
   <ion-card-content> </ion-card-content>
   <ion-button id="open-modal" expand="block" (click)="setOpen(true, item.id)"
-    >Compra</ion-button
-  >
+    >Compra</ion-button>
 </ion-card>
 <ion-content class="ion-padding">
   @if(id == item.id){
@@ -23,12 +22,10 @@
       <ion-content class="ion-padding">
         @for (eventos of listaeventos; track eventos.id) {
         <ion-card class="ion-padding">
-
           <ion-card-header>
             <ion-card-title>{{ eventos.nombre }}</ion-card-title>
             <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
           </ion-card-header>
-
           <ion-card-content>
             Here's a small text description for the card content. Nothing more,
             nothing less.
@@ -36,7 +33,7 @@
           <ion-accordion-group>
             <ion-accordion value="first">
               <ion-item slot="header" color="light">
-                <ion-label>Comprar</ion-label>
+                <ion-label (click)="secciones(eventos.id)">Comprar</ion-label>
               </ion-item>
               <div class="ion-padding" slot="content">
                 <ion-range
@@ -52,8 +49,8 @@
                   [snaps]="true"
                 >
                 </ion-range>
-                <ion-list>
-                  <ion-item>
+                <ion-list >
+                  <ion-item >
                     <ion-select
                       id="zona"
                       label="Selecciona la zona"
@@ -66,7 +63,7 @@
                   </ion-item>
                 </ion-list>
                 <div class="ion-padding">
-                  <ion-button id="Comprar{{ eventos.id }}" (click)="confirmar(eventos.id)"
+                  <ion-button id="Comprar{{ eventos.id }}" (click)="confirmar()"
                     >Comprar</ion-button
                   >
                 </div>

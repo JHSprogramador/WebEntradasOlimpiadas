@@ -10,7 +10,6 @@ import { AuthService } from '@auth0/auth0-angular';
 import { ServiceService } from '../service.service';
 import { Location } from '@angular/common';
 
-
 type Evento = {
   id: string;
   description: string;
@@ -24,15 +23,14 @@ type Evento = {
   imports: [CommonModule, IonicModule, EventsComponent],
 })
 export class EventsComponent implements OnInit {
-  
-  constructor(private location:Location) {}
+  constructor(private location: Location) {}
   auth!: AuthService;
   service = new ServiceService(this.auth);
   listadeportes: any;
   listaeventos: any;
   listasecciones: any;
-  id_deporte:any;
-  id_evento:any;
+  id_deporte: any;
+  id_evento: any;
 
   ngOnInit() {
     this.deportes();
@@ -63,10 +61,11 @@ export class EventsComponent implements OnInit {
   id: string | undefined;
 
   setOpen(isOpen: boolean, item: string) {
-    if(isOpen ===false){
-    }else{
-      this.location.go(this.location.path()+"/" +item);
+    if (isOpen === false) {
+    } else {
+      this.location.go(this.location.path() + '/' + item);
       this.eventos();
+      //this.secciones();
     }
     console.log(item);
     this.id = item;
@@ -91,8 +90,7 @@ export class EventsComponent implements OnInit {
   ];
 
   public alertInputs: string[] | undefined;
-  confirmar(id:string) {
-    this.secciones(id);
+  confirmar() {
     var a = document.getElementById('zona') as HTMLSelectElement;
     var b = document.getElementById('cantidad') as HTMLIonRangeElement;
     console.log(a.value);
@@ -107,7 +105,6 @@ export class EventsComponent implements OnInit {
       ];
     }
   }
-
   async deportes() {
     try {
       this.listadeportes = await this.service.getDeportes();
@@ -122,9 +119,11 @@ export class EventsComponent implements OnInit {
 
   async eventos() {
     try {
-      this.id_deporte = this.location.path().split("/").pop();
+      this.id_deporte = this.location.path().split('/').pop();
       alert(this.id_deporte);
-      this.listaeventos = await this.service.getEventosPorIdDeporte(this.id_deporte);
+      this.listaeventos = await this.service.getEventosPorIdDeporte(
+        this.id_deporte
+      );
       // Verifica la estructura de los datos devueltos
       console.log(this.listaeventos);
       // Realiza operaciones con los datos
@@ -134,12 +133,14 @@ export class EventsComponent implements OnInit {
     }
   }
 
-  async secciones(id:string) {
+  async secciones(id: string) {
     try {
-      this.id_deporte = this.location.path().split("/").pop();
+      this.id_deporte = this.location.path().split('/').pop();
       this.id_evento = id;
-      this.listasecciones = await this.service.getSecciones(this.id_deporte, this.id_evento);
-      alert(this.listasecciones);
+      this.listasecciones = await this.service.getSecciones(
+        this.id_deporte,
+        this.id_evento
+      );
       // Verifica la estructura de los datos devueltos
       // Realiza operaciones con los datos
       // Por ejemplo, itera sobre los datos
