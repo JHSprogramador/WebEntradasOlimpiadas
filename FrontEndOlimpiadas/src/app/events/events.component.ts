@@ -30,6 +30,7 @@ export class EventsComponent implements OnInit {
   listaeventos: any;
   listasecciones: any;
   id_deporte: any;
+  id_seccion: any;
   id_evento: any;
 
   ngOnInit() {
@@ -88,9 +89,12 @@ export class EventsComponent implements OnInit {
       },
     },
   ];
-
+  path(id: string) {
+    alert();
+    this.location.go(this.location.path() + '/' + id);
+  }
   public alertInputs: string[] | undefined;
-  confirmar() {
+  confirmar(id_evento: string) {
     var a = document.getElementById('zona') as HTMLSelectElement;
     var b = document.getElementById('cantidad') as HTMLIonRangeElement;
     console.log(a.value);
@@ -104,6 +108,7 @@ export class EventsComponent implements OnInit {
         'Confirmas la compra de ' + b.value + ' entrada en la zona ' + a.value,
       ];
     }
+    this.pushEntrada(id_evento, b.value.toString());
   }
   async deportes() {
     try {
@@ -140,6 +145,24 @@ export class EventsComponent implements OnInit {
       this.listasecciones = await this.service.getSecciones(
         this.id_deporte,
         this.id_evento
+      );
+      // Verifica la estructura de los datos devueltos
+      // Realiza operaciones con los datos
+      // Por ejemplo, itera sobre los datos
+    } catch (error) {
+      console.error('Error al obtener o procesar los deportes:', error);
+    }
+  }
+  async pushEntrada(id_evento: string, cantidad: string) {
+    try {
+      this.id_seccion = this.location.path().split('/').pop();
+      this.id_deporte = this.location.path().split('/').pop();
+      this.id_evento = id_evento;
+      this.listasecciones = await this.service.pushEntrada(
+        this.id_deporte,
+        this.id_evento,
+        this.id_seccion,
+        cantidad
       );
       // Verifica la estructura de los datos devueltos
       // Realiza operaciones con los datos

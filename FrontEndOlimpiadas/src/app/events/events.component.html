@@ -5,7 +5,8 @@
   </ion-card-header>
   <ion-card-content> </ion-card-content>
   <ion-button id="open-modal" expand="block" (click)="setOpen(true, item.id)"
-    >Compra</ion-button>
+    >Compra</ion-button
+  >
 </ion-card>
 <ion-content class="ion-padding">
   @if(id == item.id){
@@ -49,21 +50,27 @@
                   [snaps]="true"
                 >
                 </ion-range>
-                <ion-list >
-                  <ion-item >
+                <ion-list>
+                  <ion-item>
                     <ion-select
                       id="zona"
                       label="Selecciona la zona"
                       label-placement="floating"
                     >
-                    @for (seccion of listasecciones; track seccion.id;){
-                      <ion-select-option value="{{seccion.seccion}}">{{seccion.seccion}}</ion-select-option>
-                    }
+                      @for (seccion of listasecciones; track seccion.id;){
+                      <ion-select-option
+                        value="{{ seccion.seccion }}"
+                        (click)="path(seccion.id)"
+                        >{{ seccion.seccion }}</ion-select-option
+                      >
+                      }
                     </ion-select>
                   </ion-item>
                 </ion-list>
                 <div class="ion-padding">
-                  <ion-button id="Comprar{{ eventos.id }}" (click)="confirmar()"
+                  <ion-button
+                    id="Comprar{{ eventos.id }}"
+                    (click)="confirmar(eventos.id)"
                     >Comprar</ion-button
                   >
                 </div>

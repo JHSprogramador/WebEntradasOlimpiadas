@@ -14,30 +14,35 @@ export interface User {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ServiceService {
-  constructor(public auth: AuthService) {
-  }
+  constructor(public auth: AuthService) {}
 
   async pushUser() {
-    const idAuth0 = await firstValueFrom(this.auth.user$.pipe(map(user => user?.sub)));
-    const name = await firstValueFrom(this.auth.user$.pipe(map(user => user?.name)));
-    const mail = await firstValueFrom(this.auth.user$.pipe(map(user => user?.email)));
+    const idAuth0 = await firstValueFrom(
+      this.auth.user$.pipe(map((user) => user?.sub))
+    );
+    const name = await firstValueFrom(
+      this.auth.user$.pipe(map((user) => user?.name))
+    );
+    const mail = await firstValueFrom(
+      this.auth.user$.pipe(map((user) => user?.email))
+    );
 
     const body = JSON.stringify({
       idAuth0,
       name,
-      mail
+      mail,
     });
 
     try {
       await $.post(apiURL + '/usuario/register', body);
     } catch (error: any) {
       if (error.status === 400) {
-        console.error("An error occurred while registering the user.");
+        console.error('An error occurred while registering the user.');
       } else if (error.status === 409) {
-        console.info("User already registered!");
+        console.info('User already registered!');
       }
     }
   }
@@ -45,20 +50,22 @@ export class ServiceService {
   async getUser(): Promise<User | undefined> {
     // Verificar si el usuario está autenticado
     if (!this.auth.isAuthenticated$) {
-      console.error("El usuario no está autenticado.");
+      console.error('El usuario no está autenticado.');
       return undefined;
     }
 
     try {
       // Obtener el idAuth0 del usuario autenticado
-      const idAuth0 = await firstValueFrom(this.auth.user$.pipe(map(user => user?.sub)));
+      const idAuth0 = await firstValueFrom(
+        this.auth.user$.pipe(map((user) => user?.sub))
+      );
 
       // Realizar la solicitud a la API para obtener el usuario completo
       const response = await $.get(apiURL + '/usuario/auth0/' + idAuth0);
 
       // Manejar el caso en que el usuario no se encuentra
       if (response.status === 404) {
-        console.error("Usuario no encontrado.");
+        console.error('Usuario no encontrado.');
         return undefined;
       }
 
@@ -66,11 +73,11 @@ export class ServiceService {
       const user: User = response as User;
       return user;
     } catch (error: any) {
-      console.error("Error al obtener el usuario:", error);
+      console.error('Error al obtener el usuario:', error);
       return undefined;
     }
   }
-   async getDeportes() {
+  async getDeportes() {
     try {
       const response = await $.get(apiURL + '/olimpiadas/deporte');
       console.log(response);
@@ -80,9 +87,11 @@ export class ServiceService {
       throw error;
     }
   }
-  async getEventosPorIdDeporte(id:string) {
+  async getEventosPorIdDeporte(id: string) {
     try {
-      const response = await $.get(apiURL + '/olimpiadas/eventosPorIdDeporte/'+id);
+      const response = await $.get(
+        apiURL + '/olimpiadas/eventosPorIdDeporte/' + id
+      );
       console.log(response);
       return response;
     } catch (error) {
@@ -91,9 +100,11 @@ export class ServiceService {
     }
   }
 
-  async getSecciones(id_deporte:string, id_evento:string) {
+  async getSecciones(id_deporte: string, id_evento: string) {
     try {
-      const response = await $.get(apiURL + '/olimpiadas/secciones/'+id_deporte+'/'+id_evento);
+      const response = await $.get(
+        apiURL + '/olimpiadas/secciones/' + id_deporte + '/' + id_evento
+      );
       console.log(response);
       return response;
     } catch (error) {
@@ -101,28 +112,31 @@ export class ServiceService {
       throw error;
     }
   }
-  async pushEntrada(id_deporte:string, id_evento:string,id_secciones:string,cantidad:number) {
-    const idAuth0 = await firstValueFrom(this.auth.user$.pipe(map(user => user?.sub)));
-
+  async pushEntrada(
+    id_deporte: string,
+    id_evento: string,
+    id_secciones: string,
+    cantidad: string
+  ) {
+    const idAuth0 = await firstValueFrom(
+      this.auth.user$.pipe(map((user) => user?.sub))
+    );
     const body = JSON.stringify({
       id_deporte,
       id_evento,
       id_secciones,
       idAuth0,
-      cantidad
+      cantidad,
     });
     try {
-      await $.post(apiURL + '/usuario/register', body);
+      await $.post(apiURL + '/olimpiadas/ventas/compras/', body);
     } catch (error: any) {
       if (error.status === 400) {
-        console.error("An error occurred while registering the user.");
+        console.error('An error occurred while pushing.');
       } else if (error.status === 409) {
-        console.info("User already registered!");
+        console.info('error');
       }
     }
   }
   // Llamada a la función getDeportes
-  
 }
-
-
