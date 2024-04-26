@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Usuario;
+use App\Entity\Entrada;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,9 +33,32 @@ class GestionVentasComprasController extends AbstractController
     //Descripcion: el usuario no puede comprar mas de 5 entradas se un mismo deporte
     public function comprobarCantidadComprada(Usuario $usuario, ObjectManager $manager, int $cantidad, int $idDeporte): bool{
         
+        // Obtener el repositorio de Entrada
+        $entradaRepository = $manager->getRepository(Entrada::class);
 
+        // Obtener todas las entradas del usuario para el deporte dado
+        $entradasDelUsuarioPorDeporte = $entradaRepository->createQueryBuilder('e')
+        ->innerJoin('e.id_seccionEvento', 'se')
+        ->innerJoin('se.id_deporteEvento', 'de')
+        ->andWhere('e.id_usuario = :usuario')
+        ->andWhere('de.id = :idDeporte')
+        ->setParameter('usuario', $usuario)
+        ->setParameter('idDeporte', $idDeporte)
+        ->getQuery()
+        ->getResult();
 
-        return false;
+        // Contar el número total de entradas para ese deporte
+        $cantidadTotal = count($entradasDelUsuarioPorDeporte);
+
+        // Sumar la cantidad que el usuario está tratando de comprar
+        $cantidadTotal += $cantidad;
+
+        // Verificar si la cantidad total supera 5
+        if ($cantidadTotal > 5) {
+        return false; // El usuario no puede comprar más de 5 entradas para el mismo deporte
+        }
+
+        return true;
     }
 
     //Parametros:
