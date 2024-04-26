@@ -93,6 +93,7 @@ class GestionVentasComprasController extends AbstractController
             return false;
         }
 
+        
         return true;
     }
 }

@@ -24,13 +24,13 @@ class GestionEntradasController extends AbstractController
     {
         // $id is directly injected from the route parameter
         $id_deporte = $id;
-        $eventos = $entityManager->getRepository(Eventos::class)->findBy(['id' => $id_deporte]);
+        $deportesEventos = $entityManager->getRepository(DeportesEventos::class)->findBy(['id_deporte' => $id_deporte]);
         $data = [];
 
-        foreach ($eventos as $evento) {
+        foreach ($deportesEventos as $deporteEvento) {
             $data[] = [
-                'id' => $evento->getId(),
-                'nombre' => $evento->getNombreEvento(),
+                'id' => $deporteEvento->getIdEvento()->getId(),
+                'nombre' => $deporteEvento->getIdEvento()->getNombreEvento(),
             ];
         }
 
