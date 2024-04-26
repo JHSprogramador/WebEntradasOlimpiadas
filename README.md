@@ -10,6 +10,25 @@ Para ejecutar el backend, primero es necesario instalar las dependencias con el 
 ```bash
 composer install
 ```
+
+Creamos la base de datos con el siguiente comando:
+```bash
+php bin/console doctrine:database:create
+```
+Creamos la migración con el siguiente comando:
+```bash
+php bin/console make:migration
+```
+Creamos las tablas con el siguiente comando:
+```bash
+php bin/console doctrine:migrations:migrate
+```
+Y cargamos los datos de prueba con el siguiente comando:
+```bash
+php bin/console doctrine:fixtures:load
+```
+Cuando pregunte si queremos continuar, escribimos `yes` y pulsamos `Enter`.
+
 Una vez instaladas las dependencias, se puede ejecutar el backend con el siguiente comando:
 ```bash
 symfony server:start
