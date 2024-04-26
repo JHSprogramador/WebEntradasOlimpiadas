@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Usuario;
 use App\Entity\Entrada;
 use App\Entity\Secciones;
+use App\Entity\Transaxxiones;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -15,15 +17,74 @@ class GestionVentasComprasController extends AbstractController
 
     //Nos mandan la IdDeporte , la IdEvento , la idauth0 y la idSecciones y creamos una entrada con un IDtreansaccion aleatoria
 
+// Recibimos un json:
+        // id deporte
+        // id evento
+        // id secciones
+        // id auth0
+        // cantidad
 
+    //genatamos una transacccion con id aleatoria
+        //la trasaaccion cuenta con :
+        //id
+        //fecha
+
+        //guaramos la entraa y la transaccion en la base de datos
+        //retornamos un mensaje de exito
 
     #[Route('/gestion/ventas/compras', name: 'app_gestion_ventas_compras')]
-    public function index(): Response
-    {
-        return $this->render('gestion_ventas_compras/index.html.twig', [
-            'controller_name' => 'GestionVentasComprasController',
-        ]);
-    }
+    #[Route('/gestion/ventas/compras', name: 'app_gestion_ventas_compras')]
+        public function index(Request $request, ObjectManager $manager): Response
+        {
+            // Obtener el contenido del JSON
+            $content = $request->getContent();
+            $data = json_decode($content, true);
+    
+            // Obtener los datos del JSON
+            $idDeporte = $data['idDeporte'];
+            $idEvento = $data['idEvento'];
+            $idSecciones = $data['idSecciones'];
+            $idAuth0 = $data['idAuth0'];
+            $cantidad = $data['cantidad'];
+    
+            // Obtener el usuario a partir del idAuth0
+            $usuarioRepository = $manager->getRepository(Usuario::class);
+            $usuario = $usuarioRepository->findOneBy(['idAuth0' => $idAuth0]);
+    
+            // Comprobar si el usuario puede comprar más entradas para el deporte dado
+            if (!$this->comprobarCantidadComprada($usuario, $manager, $cantidad, $idDeporte)) {
+                return $this->json(['error' => 'El usuario no puede comprar más de 5 entradas para el mismo deporte'], 400);
+            }
+    
+            // Obtener la sección a partir del idSecciones
+            $seccionesRepository = $manager->getRepository(Secciones::class);
+            $seccion = $seccionesRepository->find($idSecciones);
+    
+            // Comprobar si hay suficientes plazas en la sección
+            if (!$this->comprobarAforo($manager, $idSecciones, $cantidad)) {
+                return $this->json(['error' => 'No hay suficientes plazas disponibles en la sección'], 400);
+            }
+    
+            // Generar una transacción con id aleatorio
+            $transaccion = new Transaxxiones();
+            $transaccion->setId(uniqid());
+            $transaccion->setFechaTransaccion(new \DateTime());
+    
+            // Crear una nueva entrada
+            $entrada = new Entrada();
+            $entrada->setIdUsuario($usuario);
+            $entrada->setIdSeccionEvento($seccion);
+            $entrada->setIdTransaccion($transaccion);
+    
+            // Guardar la entrada y la transacción en la base de datos
+            $manager->persist($entrada);
+            $manager->persist($transaccion);
+            $manager->flush();
+    
+            // Retornar un mensaje de éxito
+            return $this->json(['success' => 'Entrada creada correctamente'], 200);
+        }
+    
 
     //Parametros: 
     //  Usuario a comprobar
