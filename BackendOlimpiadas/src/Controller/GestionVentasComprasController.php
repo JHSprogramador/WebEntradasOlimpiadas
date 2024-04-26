@@ -20,4 +20,6 @@ class GestionVentasComprasController extends AbstractController
             'controller_name' => 'GestionVentasComprasController',
         ]);
     }
+
+    
 }
