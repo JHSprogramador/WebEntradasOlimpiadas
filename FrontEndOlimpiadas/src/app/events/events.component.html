@@ -4,11 +4,10 @@
     <ion-card-title>{{ item.nombre }}</ion-card-title>
   </ion-card-header>
   <ion-card-content> </ion-card-content>
-  <ion-button id="open-modal" expand="block" (click)="setOpen(true, item.id)"
-    >Compra</ion-button>
+  <ion-button id="open-modal" expand="block" (click)="setOpen(true, item.id)">Compra</ion-button>
 </ion-card>
 <ion-content class="ion-padding">
-  @if(id == item.id){
+  @if(id === item.id){
   <ion-modal [isOpen]="isModalOpen">
     <ng-template>
       <ion-header>
@@ -19,7 +18,7 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding">
+      <ion-content class="ion-padding" color="light">
         @for (eventos of listaeventos; track eventos.id) {
         <ion-card class="ion-padding">
           <ion-card-header>
@@ -56,16 +55,14 @@
                       label="Selecciona la zona"
                       label-placement="floating"
                     >
-                    @for (seccion of listasecciones; track seccion.id;){
+                      @for (seccion of listasecciones; track seccion.id;){
                       <ion-select-option value="{{seccion.seccion}}">{{seccion.seccion}}</ion-select-option>
-                    }
+                      }
                     </ion-select>
                   </ion-item>
                 </ion-list>
                 <div class="ion-padding">
-                  <ion-button id="Comprar{{ eventos.id }}" (click)="confirmar()"
-                    >Comprar</ion-button
-                  >
+                  <ion-button id="Comprar{{ eventos.id }}" (click)="confirmar()">Comprar</ion-button>
                 </div>
               </div>
             </ion-accordion>
