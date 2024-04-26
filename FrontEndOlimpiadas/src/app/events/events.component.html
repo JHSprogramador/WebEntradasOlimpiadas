@@ -9,7 +9,7 @@
   >
 </ion-card>
 <ion-content class="ion-padding">
-  @if(id == item.id){
+  @if(id === item.id){
   <ion-modal [isOpen]="isModalOpen">
     <ng-template>
       <ion-header>
@@ -20,7 +20,7 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding">
+      <ion-content class="ion-padding" color="light">
         @for (eventos of listaeventos; track eventos.id) {
         <ion-card class="ion-padding">
           <ion-card-header>
