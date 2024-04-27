@@ -1,19 +1,21 @@
 openapi: 3.0.3
 info:
-  title: API de Gestión de Usuarios y Sorteo 1.0
+  title: API de Gestión de Usuarios, Sorteo y Olimpiadas 1.0
   description: |
-    API Specification for GestionUsuariosController and LanzadorSorteoController.
-    The purpose is to manage users and perform a lottery.
-  version: 1.0.0
+    API Specification for GestionUsuariosController, LanzadorSorteoController, and GestionEntradasController.
+    The purpose is to manage users, perform a lottery, and handle Olympic events.
+  version: 1.0.4
 servers:
-  - url: http://localhost:8000
+  - url: http://localhost:8000/api
 tags:
   - name: usuarios
     description: Operaciones relacionadas con usuarios
   - name: sorteo
     description: Operaciones relacionadas con el sorteo
+  - name: olimpiadas
+    description: Operaciones relacionadas con las olimpiadas
 paths:
-  /api/usuario/register:
+  /usuario/register:
     post:
       tags:
         - usuarios
@@ -39,7 +41,7 @@ paths:
           description: Datos de usuario inválidos
         '409':
           description: Usuario ya registrado
-  /api/usuario/{id}:
+  /usuario/{id}:
     get:
       tags:
         - usuarios
@@ -62,8 +64,30 @@ paths:
                 $ref: '#/components/schemas/UsuarioResponse'
         '404':
           description: Usuario no encontrado
-  /api/lanzador/sorteo:
+  /usuario/auth0/{idAuth0}:
     get:
+      tags:
+        - usuarios
+      summary: Obtener información de un usuario por ID de Auth0
+      operationId: getUsuarioByAuth0
+      parameters:
+        - name: idAuth0
+          in: path
+          required: true
+          description: ID de Auth0 del usuario a obtener
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Información del usuario obtenida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioResponse'
+        '404':
+          description: Usuario no encontrado
+  /lanzador/sorteo:
+    post:
       tags:
         - sorteo
       summary: Realizar sorteo
@@ -71,6 +95,78 @@ paths:
       responses:
         '200':
           description: Sorteo realizado con éxito
+  /olimpiadas/secciones/{deporteId}/{eventoId}:  # New endpoint for sections
+    get:
+      tags:
+        - olimpiadas
+      summary: Obtener secciones y estadio para un deporte y evento específicos
+      operationId: getSecciones
+      description: Obtiene información de las secciones y el estadio asociado a un deporte y evento específicos.
+      parameters:
+        - name: deporteId
+          in: path
+          required: true
+          description: ID del deporte.
+          schema:
+            type: integer
+            format: int64
+        - name: eventoId
+          in: path
+          required: true
+          description: ID del evento.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Lista de secciones con información del estadio.
+        '400':
+          description: ID de deporte o evento inválido.
+        '404':
+          description: No se encontraron secciones para el deporte y evento especificados.
+  /olimpiadas/eventosPorIdDeporte/{id}:
+    get:
+      tags:
+        - olimpiadas
+      summary: Obtener eventos para un deporte en el periodo correcto
+      operationId: getEventos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del deporte.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Lista de eventos para el deporte en el periodo correcto.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventoResponse'  # Assuming a schema exists
+        '404':
+          description: No se encontraron eventos para el deporte en el periodo correcto.
+  /olimpiadas/deporte:
+    get:
+      tags:
+        - olimpiadas
+      summary: Obtener la lista de deportes disponibles en las olimpiadas
+      operationId: getDeportes
+      responses:
+        '200':
+          description: Lista de deportes obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeporteResponse'
+        '404':
+          description: No hay deportes en este periodo
+ 
 components:
   schemas:
     UsuarioResponse:
@@ -85,7 +181,57 @@ components:
           type: string
         name:
           type: string
-        mes1:
+    EventoResponse:
+      type: object
+      properties:
+        id:
           type: integer
-        mes2:
+          format: int64
+        nombre:
+          type: string
+        fecha:
+          type: string
+          format: date
+        hora:
+          type: string
+          format: time
+        periodo:
           type: integer
+        deporte:
+          type: string
+        seccion:
+          type: string
+        estadio:
+          type: string
+    DeporteResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        nombre:
+          type: string
+        periodo:
+          type: integer
+    ActividadResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        nombre:
+          type: string
+        fecha:
+          type: string
+          format: date
+        hora:
+          type: string
+          format: time
+        periodo:
+          type: integer
+        deporte:
+          type: string
+        seccion:
+          type: string
+        estadio:
+          type: string
