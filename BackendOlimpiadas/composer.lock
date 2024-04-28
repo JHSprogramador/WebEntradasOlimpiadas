@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d1789f37f354f405cf89be1dca5d785d",
+    "content-hash": "82e7f1200cfa8b3d7478eab5ca49c100",
     "packages": [
         {
             "name": "auth0/auth0-php",
@@ -106,7 +106,7 @@
             "time": "2024-01-11T15:28:10+00:00"
         },
         {
-            "name": "auth0/jwt-auth-bundle",
+            "name": "auth0/symfony",
             "version": "5.2.3",
             "source": {
                 "type": "git",
@@ -202,7 +202,6 @@
                 "issues": "https://github.com/auth0/symfony/issues",
                 "source": "https://github.com/auth0/symfony/tree/5.2.3"
             },
-            "abandoned": "auth0/symfony",
             "time": "2024-01-09T15:26:05+00:00"
         },
         {
@@ -6133,16 +6132,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.58.0",
+            "version": "v1.59.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "c4f8d2c5d55950e1a49e822efc83a8511bee8a36"
+                "reference": "1f02b59b98003b2c1f51bc8f178aee5cbf36779c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/c4f8d2c5d55950e1a49e822efc83a8511bee8a36",
-                "reference": "c4f8d2c5d55950e1a49e822efc83a8511bee8a36",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/1f02b59b98003b2c1f51bc8f178aee5cbf36779c",
+                "reference": "1f02b59b98003b2c1f51bc8f178aee5cbf36779c",
                 "shasum": ""
             },
             "require": {
@@ -6205,7 +6204,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
-                "source": "https://github.com/symfony/maker-bundle/tree/v1.58.0"
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.59.0"
             },
             "funding": [
                 {
@@ -6221,7 +6220,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-06T15:08:12+00:00"
+            "time": "2024-04-27T21:12:25+00:00"
         },
         {
             "name": "symfony/messenger",
