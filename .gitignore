@@ -54,3 +54,6 @@
 
 # Migrations
 /BackendOlimpiadas/migrations/*
+
+# Metadata
+/BackendOlimpiadas/.metadata
