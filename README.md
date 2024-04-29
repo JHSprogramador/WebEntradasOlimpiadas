@@ -48,6 +48,11 @@ ionic serve
 ```
 Esto abrirá una ventana en el navegador con la aplicación web.
 
+Si no tienes ionic instalado, puedes instalarlo con el siguiente comando:
+```bash
+npm install -g @ionic/cli
+```
+
 ## Pruebas
 
 Para probar la API, puedes usar la colección Postman proporcionada en el archivo `EntradasOlimpiadas.postman_collection.json`.
