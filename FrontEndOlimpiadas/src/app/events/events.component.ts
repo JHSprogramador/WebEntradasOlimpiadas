@@ -56,8 +56,8 @@ export class EventsComponent implements OnInit {
     }
   }
 
-  trackByFn(index: number, item: any): number {
-    return item.id; // Suponiendo que 'id' es la propiedad única para cada elemento en tu lista
+  trackByFn(index: number, seccion: any): string {
+    return seccion.id; // Utilizamos seccion.seccion como identificador único
   }
 
   buy() {}
@@ -89,35 +89,48 @@ export class EventsComponent implements OnInit {
       text: 'OK',
       role: 'confirm',
       handler: () => {
+        this.confirmar(this.id_evento)
         console.log('Alert confirmed');
       },
     },
   ];
   path(id: string) {
-    alert();
     this.location.go(this.location.path() + '/' + id);
   }
   public alertInputs: string[] | undefined;
   confirmar(id_evento: string) {
+    
     var a = document.getElementById('zona') as HTMLSelectElement;
     var b = document.getElementById('cantidad') as HTMLIonRangeElement;
-    var precio=2;
+    var precio = 2;
     console.log(a.value);
     console.log(b.value);
     console.log(this.listasecciones);
     this.listasecciones.forEach((s: any) => {
       if (s.seccion === a.value) {
         precio = s.precio;
-        precio = precio*parseInt(b.value.toString());
+        precio = precio * parseInt(b.value.toString());
       }
     });
     if (parseInt(b.value.toString()) > 1) {
       this.alertInputs = [
-        'Confirmas la compra de ' + b.value + ' entradas en la zona ' + a.value + " con un valor de " + precio + "€",
+        'Confirmas la compra de ' +
+          b.value +
+          ' entradas en la zona ' +
+          a.value +
+          ' con un valor de ' +
+          precio +
+          '€',
       ];
     } else {
       this.alertInputs = [
-        'Confirmas la compra de ' + b.value + ' entrada en la zona ' + a.value + " con un valor de " + precio + "€",
+        'Confirmas la compra de ' +
+          b.value +
+          ' entrada en la zona ' +
+          a.value +
+          ' con un valor de ' +
+          precio +
+          '€',
       ];
     }
 
@@ -167,28 +180,26 @@ export class EventsComponent implements OnInit {
     }
   }
   selectedOption: any;
-  
-onOptionSelect(event: any) {
-  if (event.detail.value !== this.selectedOption) {
-    this.path(event.detail.value);
-    this.selectedOption = event.detail.value;
+
+  onOptionSelect(event: any) {
+    if (event.detail.value !== this.selectedOption) {
+      this.path(event.detail.value);
+      this.selectedOption = event.detail.value;
+    }
   }
-}
 
   //TODO Es posiblw que la cantidad haya que pasarla como int
   async pushEntrada(id_evento: string, cantidad: string) {
     try {
       let path = this.location.path().split('/');
       this.id_seccion = path.pop();
-      alert(this.id_seccion);
       this.id_deporte = path.pop();
-      alert(this.id_deporte);
       this.id_evento = id_evento;
       this.listasecciones = await this.service.pushEntrada(
         this.id_deporte,
         this.id_evento,
         this.id_seccion,
-        cantidad,
+        cantidad
       );
       // Verifica la estructura de los datos devueltos
       // Realiza operaciones con los datos

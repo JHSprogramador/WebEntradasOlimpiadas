@@ -14,7 +14,7 @@
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title>Modal</ion-title>
+          <ion-title></ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="setOpen(false, item.id)">Close</ion-button>
           </ion-buttons>
@@ -55,18 +55,23 @@
                       (ionChange)="onOptionSelect($event)"
                       label-placement="floating"
                     >
-                    <ion-select (ionChange)="path($event.detail.value)">
-                      <ion-select-option *ngFor="let seccion of listasecciones; trackBy: trackByFn" [value]="seccion.id">
-                        {{ seccion.seccion }}
-                      </ion-select-option>
-                    </ion-select>
+                      <ion-select (ionChange)="path($event.detail.value)">
+                        <ion-select-option
+                          *ngFor="
+                            let seccion of listasecciones;
+                            trackBy: trackByFn
+                          "
+                          [value]="seccion.id"
+                        >
+                          {{ seccion.seccion }}
+                        </ion-select-option>
+                      </ion-select>
                     </ion-select>
                   </ion-item>
                 </ion-list>
                 <div class="ion-padding">
                   <ion-button
                     id="Comprar{{ eventos.id }}"
-                    (click)="confirmar(eventos.id)"
                     >Comprar</ion-button
                   >
                 </div>
