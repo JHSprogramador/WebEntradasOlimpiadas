@@ -166,7 +166,53 @@ paths:
                   $ref: '#/components/schemas/DeporteResponse'
         '404':
           description: No hay deportes en este periodo
- 
+          
+  /gestion/ventas/compras:
+    post:
+      tags:
+        - gestion
+      summary: Realizar una compra de entradas para un evento deportivo
+      operationId: realizarCompra
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cantidad:
+                  type: integer
+                  description: Cantidad de entradas a comprar
+                idDeporte:
+                  type: integer
+                  description: ID del deporte del evento
+                idAuth0:
+                  type: string
+                  description: ID de autenticación del usuario
+                idEvento:
+                  type: integer
+                  description: ID del evento deportivo
+                idSeccion:
+                  type: integer
+                  description: ID de la sección del estadio
+            examples:
+              example-1:
+                summary: Ejemplo de solicitud de compra de entradas
+                value:
+                  cantidad: 5
+                  idDeporte: 1
+                  idAuth0: "google-oauth2|111801980350955553"
+                  idEvento: 2
+                  idSeccion: 1
+
+      responses:
+        '200':
+          description: Operación completada correctamente
+        '400':
+          description: La solicitud no pudo ser procesada debido a datos inválidos
+        '404':
+          description: No se encontraron datos para procesar la solicitud
+
 components:
   schemas:
     UsuarioResponse:
