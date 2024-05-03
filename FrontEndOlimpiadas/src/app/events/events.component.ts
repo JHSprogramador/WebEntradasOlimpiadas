@@ -89,7 +89,6 @@ export class EventsComponent implements OnInit {
       text: 'OK',
       role: 'confirm',
       handler: () => {
-        this.confirmar(this.id_evento)
         console.log('Alert confirmed');
       },
     },
@@ -188,7 +187,6 @@ export class EventsComponent implements OnInit {
     }
   }
 
-  //TODO Es posiblw que la cantidad haya que pasarla como int
   async pushEntrada(id_evento: string, cantidad: string) {
     try {
       let path = this.location.path().split('/');
