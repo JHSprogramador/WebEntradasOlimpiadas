@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "21e41c3b-8e11-4c7e-88db-77cef89ba4a3",
+		"name": "OlimpiadasProyecto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31332159"
+	},
+	"item": [
+		{
+			"name": "usuarios",
+			"item": [
+				{
+					"name": "Registrar Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idAuth0\": \"google-oauth2|111801980350955553\",\r\n    \"name\": \"usuarioPrueba1\",\r\n    \"mail\": \"user@test.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/usuario/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"usuario",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GerUsuario by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idAuth0\": \"google-oauth2|111801699804509519755\",\r\n    \"name\": \"Mikel Echeverria\",\r\n    \"mail\": \"mikel.e.g.2004@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/usuario/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GerUsuario by Auth0Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idAuth0\": \"google-oauth2|111801699804509519755\",\r\n    \"name\": \"Mikel Echeverria\",\r\n    \"mail\": \"mikel.e.g.2004@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/usuario/auth0/prueba",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"usuario",
+								"auth0",
+								"prueba"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sorteo",
+			"item": [
+				{
+					"name": "Realizar Sorteo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/lanzador/sorteo",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"lanzador",
+								"sorteo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "olimpiadas",
+			"item": [
+				{
+					"name": "GetSecciones y estadio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/olimpiadas/secciones/1/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"olimpiadas",
+								"secciones",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetEventosPorIdDeporte",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/olimpiadas/eventosPorIdDeporte/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"olimpiadas",
+								"eventosPorIdDeporte",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDeportes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/olimpiadas/deporte",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"olimpiadas",
+								"deporte"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "gestion",
+			"item": [
+				{
+					"name": "Realizar Compra Venta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cantidad\": \"5\",\r\n    \"idDeporte\": \"1\",\r\n    \"idAuth0\": \"google-oauth2|111801980350955553\",\r\n    \"idEvento\": \"2\",\r\n    \"idSeccion\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/gestion/ventas/compras",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"gestion",
+								"ventas",
+								"compras"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
