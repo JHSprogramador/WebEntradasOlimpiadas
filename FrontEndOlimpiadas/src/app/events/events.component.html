@@ -52,15 +52,14 @@
                     <ion-select
                       id="zona"
                       label="Selecciona la zona"
+                      (ionChange)="onOptionSelect($event)"
                       label-placement="floating"
                     >
-                      @for (seccion of listasecciones; track seccion.id;){
-                      <ion-select-option
-                        value="{{ seccion.seccion }}"
-                        (click)="path(seccion.id)"
-                        >{{ seccion.seccion }}</ion-select-option
-                      >
-                      }
+                    <ion-select (ionChange)="path($event.detail.value)">
+                      <ion-select-option *ngFor="let seccion of listasecciones; trackBy: trackByFn" [value]="seccion.id">
+                        {{ seccion.seccion }}
+                      </ion-select-option>
+                    </ion-select>
                     </ion-select>
                   </ion-item>
                 </ion-list>
@@ -76,8 +75,11 @@
           </ion-accordion-group>
           <div class="ion-padding">
             <ion-alert
-              trigger="Comprar{{ eventos.id }}" header="Confirmación"
-              [message]="alertInputs" [buttons]="alertButtons">
+              trigger="Comprar{{ eventos.id }}"
+              header="Confirmación"
+              [message]="alertInputs"
+              [buttons]="alertButtons"
+            >
             </ion-alert>
           </div>
         </ion-card>
