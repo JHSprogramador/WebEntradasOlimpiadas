@@ -113,9 +113,9 @@ export class ServiceService {
     }
   }
   async pushEntrada(
-    id_deporte: string,
-    id_evento: string,
-    id_secciones: string,
+    idDeporte: string,
+    idEvento: string,
+    idSeccion: string,
     cantidad: string
   ) {
     // const idAuth0 = await firstValueFrom(
@@ -124,9 +124,9 @@ export class ServiceService {
     // const idAuth0 = this.auth.user$.subscribe((user)=>{user?.sub});
     let idAuth0 = 1;
     const body = JSON.stringify({
-      id_deporte,
-      id_evento,
-      id_secciones,
+      idDeporte,
+      idEvento,
+      idSeccion,
       idAuth0,
       cantidad,
     });
