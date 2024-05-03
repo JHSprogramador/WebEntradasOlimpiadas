@@ -8,16 +8,21 @@ use App\Entity\Entrada;
 use App\Entity\Secciones;
 use App\Entity\SeccionEvento;
 use App\Entity\Transaxxiones;
+use Auth0\SDK\Utility\HttpResponse;
+use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ObjectManager;
+use LDAP\Result;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/api')]
 class GestionVentasComprasController extends AbstractController
 {
 
-    //Nos mandan la IdDeporte , la IdEvento , la idauth0 y la idSecciones y creamos una entrada con un IDtreansaccion aleatoria
+    //Nos mandan la IdDeporte , la IdEvento , la idauth0 y la idSecciones y creamos una entrada con un IDtransaccion aleatoria
 
     // Recibimos un json:
     // id deporte
@@ -26,13 +31,13 @@ class GestionVentasComprasController extends AbstractController
     // id auth0
     // cantidad
 
-    //genatamos una transacccion con id aleatoria
+    //genaramos una transacción con id aleatoria
     //la trasaaccion cuenta con :
     //id
     //fecha
 
-    //guaramos la entraa y la transaccion en la base de datos
-    //retornamos un mensaje de exito
+    //guardamos la entraa y la transaccion en la base de datos
+    //retornamos un mensaje de éxito
 
 
     #[Route('/gestion/ventas/compras', name: 'app_gestion_ventas_compras')]
@@ -43,13 +48,15 @@ class GestionVentasComprasController extends AbstractController
         //recibimo cantidad 
         $cantidad = $data['cantidad'];
         //generamos la idTransaccion
-        
+
 
         // Obtener el id del deporte
         $idDeporte = $data['idDeporte'];
         //obtenemos al usuario por su aut0
-        // $usuario = $manager->getRepository(Usuario::class)->findOneBy(['idAuth0' => $data['idAuth0']]);
-        $usuario = $data['idAuth0'];
+        $usuario = $manager->getRepository(Usuario::class)->findOneBy(['idAuth0' => $data['idAuth0']]);
+        // Obtenemos al usuario por su aut0
+        $auth0Id = $data['idAuth0'];
+
 
         // Obtener el id del evento
         $idEvento = $data['idEvento'];
@@ -67,7 +74,7 @@ class GestionVentasComprasController extends AbstractController
         //creamos la transaccion
         $transaccion = new Transaxxiones();
         $transaccion->setId($idTrasaccion);
-        $transaccion->getFechaTransaccion(new \DateTime());
+        $transaccion->setFechaTransaccion(new \DateTime());
 
         //persist y flush
         $manager->persist($transaccion);
@@ -75,8 +82,20 @@ class GestionVentasComprasController extends AbstractController
 
         $deportesEventos = $manager->getRepository(DeportesEventos::class)->findBy(['id_deporte' => $idDeporte, 'id_evento' => $idEvento]);
         $seccionSacada = $manager->getRepository(Secciones::class)->findBy(['id' => $idSeccion]);
-        $SeccionEventos = $manager->getRepository(SeccionEvento::class)->findBy(['id_deporteEvento' => Reset($deportesEventos)->getId(), 'id_seccion' => $seccionSacada]);
-        $UsuarioAuth0 = $manager->getRepository(Usuario::class)->findBy(['id_auth0' =>  $usuario]);
+        if (isset($deportesEventos[0])) {
+            // Acceder al primer elemento del array
+            $deporteEvento = $deportesEventos[0];
+            $SeccionEventos = $manager->getRepository(SeccionEvento::class)->findBy([
+                'id_deporteEvento' => $deporteEvento->getId(),
+                'id_seccion' => $seccionSacada
+            ]);
+        } else {
+            // El array está vacío o no contiene elementos
+            // Manejar este caso de acuerdo a tus necesidades
+            return new Response("El array deportesEventos esta vacio o no contiene elementos", 400);
+        }
+
+        $UsuarioAuth0 = $manager->getRepository(Usuario::class)->findBy(['idAuth0' =>  $auth0Id]);
 
 
         //separado
@@ -87,9 +106,11 @@ class GestionVentasComprasController extends AbstractController
             $entrada->setIdTransaccion($transaccion);
             //persist y flush
             $manager->persist($entrada);
-            
         }
         $manager->flush();
+
+        // Devolver una respuesta para cumplir con la firma del método
+        return new Response('Operación completada correctamente', 200);
     }
 
 
@@ -100,11 +121,16 @@ class GestionVentasComprasController extends AbstractController
     //Salida:
     //  Booleano que indica si puede o no realizar la compra
     //Descripcion: el usuario no puede comprar mas de 5 entradas se un mismo deporte
-    public function comprobarCantidadComprada(Usuario $usuario, ObjectManager $manager, int $cantidad, int $idDeporte): bool
+    public function comprobarCantidadComprada(Usuario $usuario, EntityManager $entityManager, int $cantidad, int $idDeporte): bool
     {
 
         // Obtener el repositorio de Entrada
-        $entradaRepository = $manager->getRepository(Entrada::class);
+        $entradaRepository = $entityManager->getRepository(Entrada::class);
+        $queryBuilder = $entradaRepository->createQueryBuilder('entrada');
+        $queryBuilder->select('COUNT(entrada.id)');
+
+        $result = $queryBuilder->getQuery()->getSingleScalarResult();
+
 
         // Obtener todas las entradas del usuario para el deporte dado
         $entradasDelUsuarioPorDeporte = $entradaRepository->createQueryBuilder('e')
@@ -146,11 +172,11 @@ class GestionVentasComprasController extends AbstractController
         $query = $entradaRepository->createQueryBuilder('e')
             ->innerJoin('e.id_seccionEvento', 'se')
             ->andWhere('se.id_seccion = :seccion')
-            ->serParameter('seccion', $idSeccion)
+            ->setParameter('seccion', $idSeccion)
             ->getQuery()
             ->getResult();
 
-        $cantidadEntradasEnSeccion = count($entradaRepository);
+        $cantidadEntradasEnSeccion = $entradaRepository->count([]);
 
         $cantidadEntradasEnSeccionMasCompra = $cantidad + $cantidadEntradasEnSeccion;
 
@@ -163,7 +189,7 @@ class GestionVentasComprasController extends AbstractController
             return false;
         }
 
-        
+
         return true;
     }
 }
