@@ -89,6 +89,7 @@ export class EventsComponent implements OnInit {
       text: 'OK',
       role: 'confirm',
       handler: () => {
+        this.confirmar(this.id_evento)
         console.log('Alert confirmed');
       },
     },
@@ -98,6 +99,7 @@ export class EventsComponent implements OnInit {
   }
   public alertInputs: string[] | undefined;
   confirmar(id_evento: string) {
+    
     var a = document.getElementById('zona') as HTMLSelectElement;
     var b = document.getElementById('cantidad') as HTMLIonRangeElement;
     var precio = 2;
