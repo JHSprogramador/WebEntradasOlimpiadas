@@ -112,31 +112,40 @@ export class ServiceService {
       throw error;
     }
   }
+
   async pushEntrada(
     idDeporte: string,
     idEvento: string,
     idSeccion: string,
     cantidad: string
   ) {
-     const idAuth0 = await firstValueFrom(
-      this.auth.user$.pipe(map((user) => user?.sub))
-     );
-    const body = JSON.stringify({
-      idDeporte,
-      idEvento,
-      idSeccion,
-      idAuth0,
-      cantidad,
-    });
     try {
+      const idAuth0 = await firstValueFrom(
+        this.auth.user$.pipe(map((user) => user ? user.sub : null))
+      );
+
+      console.log(idAuth0);
+
+      const body = JSON.stringify({
+        idDeporte,
+        idEvento,
+        idSeccion,
+        idAuth0,
+        cantidad,
+      });
+
       await $.post(apiURL + '/gestion/ventas/compras', body);
     } catch (error: any) {
+      console.error('Error al enviar los datos:', error);
+      // Manejo de errores específicos
       if (error.status === 400) {
-        console.error('An error occurred while pushing.');
+        console.error('Error 400: Solicitud incorrecta.');
       } else if (error.status === 409) {
-        console.info('error');
+        console.info('Error 409: Conflicto detectado.');
+      } else {
+        // Manejo de otros errores
+        console.error('Error inesperado:', error);
       }
     }
   }
-  // Llamada a la función getDeportes
 }
