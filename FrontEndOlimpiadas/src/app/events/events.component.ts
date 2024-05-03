@@ -56,6 +56,10 @@ export class EventsComponent implements OnInit {
     }
   }
 
+  trackByFn(index: number, item: any): number {
+    return item.id; // Suponiendo que 'id' es la propiedad única para cada elemento en tu lista
+  }
+
   buy() {}
 
   isModalOpen = false;
@@ -162,16 +166,29 @@ export class EventsComponent implements OnInit {
       console.error('Error al obtener o procesar los deportes:', error);
     }
   }
+  selectedOption: any;
+  
+onOptionSelect(event: any) {
+  if (event.detail.value !== this.selectedOption) {
+    this.path(event.detail.value);
+    this.selectedOption = event.detail.value;
+  }
+}
+
+  //TODO Es posiblw que la cantidad haya que pasarla como int
   async pushEntrada(id_evento: string, cantidad: string) {
     try {
-      this.id_seccion = this.location.path().split('/').pop();
-      this.id_deporte = this.location.path().split('/').pop();
+      let path = this.location.path().split('/');
+      this.id_seccion = path.pop();
+      alert(this.id_seccion);
+      this.id_deporte = path.pop();
+      alert(this.id_deporte);
       this.id_evento = id_evento;
       this.listasecciones = await this.service.pushEntrada(
         this.id_deporte,
         this.id_evento,
         this.id_seccion,
-        cantidad
+        cantidad,
       );
       // Verifica la estructura de los datos devueltos
       // Realiza operaciones con los datos

@@ -118,9 +118,11 @@ export class ServiceService {
     id_secciones: string,
     cantidad: string
   ) {
-    const idAuth0 = await firstValueFrom(
-      this.auth.user$.pipe(map((user) => user?.sub))
-    );
+    // const idAuth0 = await firstValueFrom(
+    //   this.auth.user$.pipe(map((user) => user?.sub))
+    // );
+    // const idAuth0 = this.auth.user$.subscribe((user)=>{user?.sub});
+    let idAuth0 = 1;
     const body = JSON.stringify({
       id_deporte,
       id_evento,
@@ -129,7 +131,7 @@ export class ServiceService {
       cantidad,
     });
     try {
-      await $.post(apiURL + '/olimpiadas/ventas/compras/', body);
+      await $.post(apiURL + '/gestion/ventas/compras', body);
     } catch (error: any) {
       if (error.status === 400) {
         console.error('An error occurred while pushing.');
