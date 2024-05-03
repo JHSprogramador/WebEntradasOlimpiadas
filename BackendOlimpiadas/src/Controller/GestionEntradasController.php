@@ -119,13 +119,6 @@ class GestionEntradasController extends AbstractController
         return new JsonResponse($data, 200);
     }
 
-
-
-
-
-
-
-
     //Metodo Comprobar el periodo actual
     public function ComprobarPeriodo(): int
     {

@@ -162,8 +162,11 @@ export class EventsComponent implements OnInit {
       console.error('Error al obtener o procesar los deportes:', error);
     }
   }
+
+  //TODO Es posiblw que la cantidad haya que pasarla como int
   async pushEntrada(id_evento: string, cantidad: string) {
     try {
+      //Number.parseInt(cantidad);
       this.id_seccion = this.location.path().split('/').pop();
       this.id_deporte = this.location.path().split('/').pop();
       this.id_evento = id_evento;
