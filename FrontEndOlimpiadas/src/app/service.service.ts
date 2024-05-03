@@ -118,11 +118,9 @@ export class ServiceService {
     idSeccion: string,
     cantidad: string
   ) {
-    // const idAuth0 = await firstValueFrom(
-    //   this.auth.user$.pipe(map((user) => user?.sub))
-    // );
-    // const idAuth0 = this.auth.user$.subscribe((user)=>{user?.sub});
-    let idAuth0 = 1;
+     const idAuth0 = await firstValueFrom(
+      this.auth.user$.pipe(map((user) => user?.sub))
+     );
     const body = JSON.stringify({
       idDeporte,
       idEvento,
